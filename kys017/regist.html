@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>注册</title>
+<meta charset="utf-8"/>
+<meta name="author" content="yy">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK"/>
+<meta name="author" content="yy"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+<meta name="format-detection" content="telephone=no"/>
+<meta http-equiv="Expires" content="-1"/>
+<meta http-equiv="Cache-Control" content="no-cache"/>
+<meta http-equiv="Pragma" content="no-cache"/>
+<meta name="description" content="" />
+<meta name="Keywords" content="" />
+<link rel="stylesheet" href="css/swiper.min.css"/>
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+<link rel="stylesheet" type="text/css" href="fonts/iconfont.css"/>
+<link rel="stylesheet" href="css/lf_style.css"/>
+<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="js/swiper.min.js"></script>
+<script type="text/javascript" src="js/new_cookie.js"></script>
+
+<style type="text/css">
+	body{
+		  background: -webkit-linear-gradient(left, #2747ee,#7f4cf8 50%); 
+          background: -o-linear-gradient(left, #2747ee,#7f4cf8 50%); 
+          background: -moz-linear-gradient(left, #2747ee,#7f4cf8 50%); 
+          background: linear-gradient(to left, #2747ee,#7f4cf8 50%);
+	}
+	::-webkit-input-placeholder {
+		color: #666;
+	} 
+	:-moz-placeholder {
+		color: #666; 
+	} 
+	::-moz-placeholder {
+		color: #666; 
+	} 
+	:-ms-input-placeholder {
+		color: #666; 
+	} 
+	.l_input {
+		position:relative;
+	}
+	.head_login{ position: relative; }
+	.head_login a{ display: block; position: absolute; left: 10px; top: 0; font-size: 22px; color: #FFF; }
+	.login input[type="button"].yzm{ width: 32%; position: static; margin-top: 1px; float: left; font-size: 12px; height: 33px; border-radius: 15px; }
+</style>
+</head>
+<body>
+<div class="head_login">
+	<h3>注册</h3>
+	<a href="login.html" class="iconfont icon-back"></a>
+</div>
+<div class="login" style="padding-top: 15px; padding-bottom: 38px;">
+	<img class="lf_logo" src="images/tu2.png"/>
+	<form>
+		<div class="l_input">
+			<i class="iconfont icon-phone"></i>
+			<input type="text" name="phone" id="phone" placeholder="手机号/Phone number" />
+		</div>
+		<div class="l_input">
+			<i class="iconfont icon-ditu"></i>
+			<input type="text" id="service_num" name="number" placeholder="健康服务中心/Health service" />
+		</div>
+		<div class="l_input">
+			<i class="iconfont icon-password"></i>
+			<input type="password" id="pwd" name="pwd" placeholder="登录密码/The login password" />
+		</div>
+		<div class="l_input">
+			<i class="iconfont icon-password"></i>
+			<input type="password" id="rpwd" name="pwd" placeholder="确认登录密码/Confirm login password" />
+		</div>
+		<div class="l_input">
+			<i class="iconfont icon-password"></i>
+			<input type="password" id="dealpwd" name="pwd" placeholder="交易密码/Trade password" />
+		</div>
+		<div class="l_input">
+			<i class="iconfont icon-p-check"></i>
+			<input type="text" id="code" name="vCode" placeholder="验证码/Get Code" />
+			<input class="yzm" type="button" id="btnyzm" value="获取验证码"/>
+		</div>
+		<p class="lf_tongyi">
+			<i class="iconfont icon-fangkuang_gouxuan"></i>
+			<a href="javascript:void(0);" class="lf_xieyi">同意用户注册协议</a>
+		</p>
+		<input id="regist" type="button" value="注册/SIGN UP ▶" />
+	</form>
+</div>
+<script type="text/javascript">
+function checkPhone(){ 
+    var phone = $("#phone").val();
+    if(!(/^1[34578]\d{9}$/.test(phone))){ 
+        alert("手机号码有误");  
+        return false; 
+    };
+    var dealpwd = $("#dealpwd").val();  
+    if(!(/^\d{6}&/.test(dealpwd))){
+        alert("交易密码 必须为6位纯数字");  
+        return false; 
+    }
+}
+function checkPwd(){ 
+    var pwd = $("#pwd").val().length;
+    if(pwd<6){ 
+        alert("密码长度有误");  
+        return false; 
+    } 
+}
+/*验证码验证及倒计时*/
+var wait=60;
+function time(o) {
+    if (wait == 0) {
+            o.removeAttribute("disabled");
+            o.value="获取验证码";
+            wait = 60;
+        } else {
+            o.setAttribute("disabled", true);
+            o.value="重新发送(" + wait + ")";
+            wait--;
+            setTimeout(function() {
+            time(o)
+        }, 1000)
+    }
+}
+
+$('#btnyzm').on("click",function() {
+    var phone = $("#phone").val();
+    $.ajax({
+        url : 'http://api.icpkys.com/user/get_phone_code',
+        type:'get',
+        data:{
+            phone:phone,
+        },
+        success : function(req){
+            console.log(req);
+            if (req.status == 'success') {
+                time(btnyzm);
+            } else {
+                alert(req.massage);
+            }
+        }
+    });   
+});
+$("#regist").on("click",function(){
+    /*var pid = location.search.split('=')[1];*/
+    var phone = $("#phone").val();
+    var password = $("#pwd").val();
+    var rpassword = $("#rpwd").val();
+    var code = $("#code").val();
+    var pid = $.cookie('pid');
+    var dealpwd = $("#dealpwd").val();
+    var service_num = $("#service_num").val();
+    if(!(/^1[34578]\d{9}$/.test(phone))){ 
+        alert("手机号码有误!");  
+        return;
+    } 
+    if(password.length<6){ 
+        alert("密码长度有误!");  
+        return; 
+    } 
+    if(password != rpassword){
+        alert("两次密码不一样!")
+        return;
+    }
+    $.ajax({
+        url : 'http://api.icpkys.com/user/register',
+        dataType:'json',
+        type:'post',
+        data:{
+            phone:phone,
+            password:password,
+            repassword:rpassword,
+            code:code,
+          	pid:pid,
+            deal_password:dealpwd,
+            service_num:service_num,
+        },
+        success : function(req){
+            if(req.status=='success'){
+                alert(req.message);
+                window.location.href = 'login.html';
+            }else{
+                alert(req.massage);
+            }
+        },
+        error:function(req){
+        	alert(req.massage);
+        }
+    })
+})
+</script>
+</body>
+</html>

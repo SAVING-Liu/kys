@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>发布信息</title>
+<meta charset="utf-8">
+<meta name="author" content="yy">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="author" content="yy">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<meta http-equiv="Expires" content="-1">
+<meta http-equiv="Cache-Control" content="no-cache">
+<meta http-equiv="Pragma" content="no-cache">
+<meta name="description" content="" />
+<meta name="Keywords" content="" />
+<link rel="stylesheet" href="css/swiper.min.css">
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" href="css/lf_style.css"/>
+<link rel="stylesheet" type="text/css" href="fonts/iconfont.css">
+<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="js/swiper.min.js"></script>
+<script type="text/javascript" src="js/jquery.cookie.js"></script>
+<style>
+	.lf_meiyuan{
+		font-size:12px;
+		color:#666;
+	}
+	body{
+		background-color:#f5f5f5;
+		padding-bottom:50px;
+	}
+	.usable_balance{
+		background-color:#fff;
+	}
+	::-webkit-input-placeholder{color:#333;}
+	::-moz-placeholder{color:#333;}
+	:-moz-placeholder{color:#333;}
+</style>
+</head>
+<body>
+<div class="public_head">
+	<h3>发布信息<br/><span>Post message</span></h3>
+	<a href="javascript:history.go(-1);" class="iconfont icon-back"></a>
+</div>
+<div class="usable_balance lf_clearFloat">
+	<div class="usable_title">卖家<br/><span style="margin-left:0">Seller</span></div>
+	<div style="line-height:42px" class="usable_tatol" id="username"></div>
+</div>
+<div class="usable_balance lf_clearFloat">
+	<div class="usable_title">手机号码<br/><span style="margin-left:0">Cell-phone number</span></div>
+	<div style="line-height:42px" class="usable_tatol" id="phone"></div>
+</div>
+<div class="usable_balance lf_clearFloat">
+	<div class="usable_title">激励健康金<br/><span style="margin-left:0">Encourage healthy gold</span></div>
+	<input style="line-height:42px;width: 100px;font-size: 16px;" type="text" class="usable_tatol" id="price" placeholder="0.00" />
+</div>
+<div class="usable_balance">
+	<div class="usable_title">卖出金额<br/><span style="margin-left:0">Sell amount</span></div>
+	<div class="usable_tatol">RMB<input type="text/" style="width: 100px;font-size: 16px;text-align: right;" id="count"  placeholder="请输入金额"/><span style="display:block;" class="lf_meiyuan"></span></div>
+</div>
+<div style="height:50px" class="lf_footer">
+	<button id="purchase" type="button" class="lf_purchase">确定<br/><span>Confirm</span></button>
+</div>
+</body>
+<script>
+    $("#count").bind('input propertychange', function() { 
+    	var c= $("#count").val();
+    	var a=$(".lf_meiyuan").text('$' +(c / 7).toFixed(2));
+    })
+	var _token = $.cookie('the_cookie');
+	$.ajax({
+       url:'http://api.icpkys.com/user/add_message?token='+_token,
+       type:'post',
+       data:{
+    		type:1
+    	},
+    	success:function(req){
+             console.log(req);
+             if(req.status=='success'){
+             	var data = req.data;
+             	$("#username").text(data.nickname);
+             	$("#phone").text(data.phone);
+             }
+    	},
+    	error:function(res){
+    		if(res.status!=undefined){
+        		if(res.status==404){
+	        		alert('接口不存在');
+	        	}
+	        	if(res.status==401 && res.responseText=='{"error":"token_expired"}'){
+	        		alert('请重新登录');
+	        		window.location.href='login.html';
+	        	}
+        	}else{
+        		console.log(res);
+        		alert('未知错误');
+        	} 
+    	}
+	})
+	$('#purchase').on('click',function(){
+		var _token = $.cookie('the_cookie');
+		var nickname = $("#username").text();
+        var phone = $("#phone").text();
+		var count=parseInt($("#price").val());
+		var price= parseInt($("#count").val());
+		console.log(price);
+		console.log(count);
+		console.log(phone);
+		console.log(nickname);
+		if(price=='' && count==''){
+			alert('请填写金额');
+			return;
+		};
+	    $.ajax({
+	    	url:'http://api.icpkys.com/user/add_message?token='+_token,
+	    	type:'post',
+	    	data:{
+	    		type:2,
+	    		amount:count,
+	    		price:price,
+	    		mobile:phone,
+	    		name:nickname
+
+	    	},
+	    	success:function(req){
+	    		console.log(req);
+	    		if(req.status=='success'){
+	    			alert(req.message);
+	    		    window.location.href='messageList.html';
+	    		}else{
+	    			alert(req.massage);
+	    			window.location.reload();
+	    		}
+
+	    	},
+	    	error:function(res){
+	    	    if(res.status!=undefined){
+	        		if(res.status==404){
+		        		alert('接口不存在');
+		        	}
+		        	if(res.status==401 && res.responseText=='{"error":"token_expired"}'){
+		        		alert('请重新登录');
+		        		window.location.href='login.html';
+		        	}
+	        	}else{
+	        		console.log(res);
+	        		alert('未知错误');
+	        	}   		
+	    	}
+	    })
+	})
+	
+</script>
+</html>

@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>我的订单</title>
+<meta charset="utf-8">
+<meta name="author" content="yy">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="author" content="yy">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<meta http-equiv="Expires" content="-1">
+<meta http-equiv="Cache-Control" content="no-cache">
+<meta http-equiv="Pragma" content="no-cache">
+<meta name="description" content="" />
+<meta name="Keywords" content="" />
+<link rel="stylesheet" href="css/swiper.min.css">
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" type="text/css" href="fonts/iconfont.css">
+<script type="text/javascript" src="js/jquery-1.10.1.min.js"></script>
+<script type="text/javascript" src="js/swiper.min.js"></script>
+<script type="text/javascript" src="js/jquery.cookie.js"></script>
+<script src="https://cdn.bootcss.com/handlebars.js/4.0.10/handlebars.min.js"></script>
+<style type="text/css">
+	.kll_free {
+		height: 5px;
+	}
+</style>
+</head>
+<body>
+<div class="public_head">
+	<h3>我的订单<br/><span>My order</span></h3>
+	<a href="javascript:history.go(-1);" class="iconfont icon-back"></a>
+</div>
+<div class="t"></div>
+<div class="My_Order">
+	<ul>
+		<li class="My_Order_hover">待付款<span>Obligation</span></li>
+		<li>待发货<span>wait for</span></li>
+		<li>待收货<span>wait goods</span></li>
+		<li>已完成<span>finish</span></li>
+	</ul>
+</div>
+<div class="My_Order_con" style="display: block;">
+	<!--1-->
+	<!--<div class="My_Order_list">
+		<div class="My_Order_1">
+			<img src="images/tu13.png">
+			<p class="My_Order_t">气垫BB<span>Air cushion BB</span></p>
+			<p class="My_Order_x">待付款<span>Obligation</span></p>
+		</div>
+		<div class="My_Order_2">
+			<img src="images/tu13.png">
+			<h3>Faywish菲伊之心气垫BB粉底，感知馥郁的女性柔美</h3>
+			<div class="My_Order_ysj">￥36.00</div>
+			<div class="My_Order_xj">￥49.00   $7.00</div>
+			<div class="My_Order_num">×8</div>
+		</div>
+		<div class="My_Order_3">
+			<input type="button" name="" value="去付款 Payment">
+		</div>
+	</div>-->
+</div>
+<div class="My_Order_con">
+	<!--2-->
+	<!--<div class="My_Order_list">
+		<div class="My_Order_1">
+			<img src="images/tu13.png">
+			<p class="My_Order_t">气垫BB<span>Air cushion BB</span></p>
+			<p class="My_Order_x">待发货<span>Waiting for</span></p>
+		</div>
+		<div class="My_Order_2">
+			<img src="images/tu13.png">
+			<h3>Faywish菲伊之心气垫BB粉底，感知馥郁的女性柔美</h3>
+			<div class="My_Order_ysj">￥36.00</div>
+			<div class="My_Order_xj">￥49.00   $7.00</div>
+			<div class="My_Order_num">×8</div>
+		</div>
+		<div class="My_Order_3">
+			<input type="button" name="" value="联系客服 Service">
+		</div>
+	</div>-->
+</div>
+<div class="My_Order_con">
+	<!--3-->
+	<!--<div class="My_Order_list">
+		<div class="My_Order_1">
+			<img src="images/tu13.png">
+			<p class="My_Order_t">气垫BB<span>Air cushion BB</span></p>
+			<p class="My_Order_x">待收货<span>For the goods</span></p>
+		</div>
+		<div class="My_Order_2">
+			<img src="images/tu13.png">
+			<h3>Faywish菲伊之心气垫BB粉底，感知馥郁的女性柔美</h3>
+			<div class="My_Order_ysj">￥36.00</div>
+			<div class="My_Order_xj">￥49.00   $7.00</div>
+			<div class="My_Order_num">×8</div>
+		</div>
+		<div class="My_Order_3">
+			<input type="button" name="" value="确认收货 Received">
+		</div>
+	</div>-->
+</div>
+<div class="My_Order_con">
+	<!--4-->
+	<!--<div class="My_Order_list">
+		<div class="My_Order_1">
+			<img src="images/tu13.png">
+			<p class="My_Order_t">气垫BB<span>Air cushion BB</span></p>
+			<p class="My_Order_x">已完成<span>Off the stocks</span></p>
+		</div>
+		<div class="My_Order_2">
+			<img src="images/tu13.png">
+			<h3>Faywish菲伊之心气垫BB粉底，感知馥郁的女性柔美</h3>
+			<div class="My_Order_ysj">￥36.00</div>
+			<div class="My_Order_xj">￥49.00   $7.00</div>
+			<div class="My_Order_num">×8</div>
+		</div>
+		<div class="My_Order_3">
+			<input type="button" name="" value="再来一单 One more">
+		</div>
+	</div>-->
+</div>
+
+
+<script type="text/x-handlebars-template" id="oneList">
+	{{#each this}}
+		<div class="My_Order_list" data-id="{{id}}">
+			<div class="My_Order_1">
+				<img src="http://api.icpkys.com{{shop_logo}}">
+				<p class="My_Order_t">{{shop_name}}</p>
+				<p class="My_Order_x">待付款<span>Obligation</span></p>
+			</div>
+			{{#each goods}}
+				<div class="My_Order_2">
+					<img src="http://api.icpkys.com{{image}}">
+					<h3>{{name}}</h3>
+					<div class="My_Order_ysj"></div>
+					<div class="My_Order_xj">￥{{price}}   ${{price1}}</div>
+					<div class="My_Order_num">×{{num}}</div>
+				</div>
+				<div class="kll_free"></div>
+			{{/each}}
+			<div class="My_Order_3">
+				<a href="./goodsCar.html"><input type="button" name="" value="去付款 Payment"></a>
+			</div>
+		</div>
+	{{/each}}
+</script>
+<script type="text/x-handlebars-template" id="twoList">
+	{{#each this}}
+		<div class="My_Order_list" data-id="{{id}}">
+			<div class="My_Order_1">
+				<img src="http://api.icpkys.com{{shop_logo}}">
+				<p class="My_Order_t">{{shop_name}}</p>
+				<p class="My_Order_x">待发货<span>Waiting for</span></p>
+			</div>
+			{{#each goods}}
+				<div class="My_Order_2">
+					<img src="http://api.icpkys.com{{image}}">
+					<h3>{{name}}</h3>
+					<div class="My_Order_ysj"></div>
+					<div class="My_Order_xj">￥{{price}}   ${{price1}}</div>
+					<div class="My_Order_num">×{{num}}</div>
+				</div>
+				<div class="kll_free"></div>
+			{{/each}}
+			<div class="My_Order_3">
+				<a href="./customerCenter.html"><input type="button" name="" value="联系客服 Service"></a>
+			</div>
+		</div>
+	{{/each}}
+</script>
+<script type="text/x-handlebars-template" id="threeList">
+	{{#each this}}
+		<div class="My_Order_list" data-id="{{id}}">
+			<div class="My_Order_1">
+				<img src="http://api.icpkys.com{{shop_logo}}">
+				<p class="My_Order_t">{{shop_name}}</p>
+				<p class="My_Order_x">待收货<span>For the goods</span></p>
+			</div>
+			{{#each goods}}
+				<div class="My_Order_2">
+					<img src="http://api.icpkys.com{{image}}">
+					<h3>{{name}}</h3>
+					<div class="My_Order_ysj"></div>
+					<div class="My_Order_xj">￥{{price}}   ${{price1}}</div>
+					<div class="My_Order_num">×{{num}}</div>
+				</div>
+				<div class="kll_free"></div>
+			{{/each}}
+			<div class="My_Order_3">
+				<input class="kll-shop-ok" type="button" name="" value="确认收货 Received">
+			</div>
+		</div>
+	{{/each}}
+</script>
+<script type="text/x-handlebars-template" id="fourList">
+	{{#each this}}
+		<div class="My_Order_list" data-id="{{id}}">
+			<div class="My_Order_1">
+				<img src="http://api.icpkys.com{{shop_logo}}">
+				<p class="My_Order_t">{{shop_name}}</p>
+				<p class="My_Order_x">已完成<span>Off the stocks</span></p>
+			</div>
+			{{#each goods}}
+				<div class="My_Order_2">
+					<img src="http://api.icpkys.com{{image}}">
+					<h3>{{name}}</h3>
+					<div class="My_Order_ysj"></div>
+					<div class="My_Order_xj">￥{{price}}   ${{price1}}</div>
+					<div class="My_Order_num">×{{num}}</div>
+				</div>
+				<div class="kll_free"></div>
+			{{/each}}
+			<div class="My_Order_3">
+				<a href="./index.html"><input type="button" name="" value="再来一单 One more"></a>
+			</div>
+		</div>
+	{{/each}}
+</script>
+
+
+<script type="text/javascript">
+	$(".My_Order ul li").click(function() {
+		var index = $(this).index();
+		$(this).addClass('My_Order_hover').siblings().removeClass('My_Order_hover');
+		$(".My_Order_con").eq(index).show().siblings(".My_Order_con").hide();
+	});
+</script>
+
+<script>
+	$.ajax({
+		type:"POST",
+		url:"http://api.icpkys.com/shop/order/list?token=" + $.cookie("the_cookie"),
+		async:false,
+        crossDomain:true,
+        datatype: "json",
+        xhrFields: {  withCredentials: true  },
+    	crossDomain: true,
+    	data: {
+    		status: 0
+    	},
+		success: function (msg) {
+			var arr = msg.data;
+			for (var i = 0; i < arr.length; i++) {
+				for (var j = 0; j < arr[i].goods.length; j++) {
+					arr[i].goods[j].price1 = (arr[i].goods[j].price / 7).toFixed(2);
+					arr[i].goods[j].price = arr[i].goods[j].price.toFixed(2);
+				}
+			}
+			var leftTemplate = Handlebars.compile($("#oneList").html());
+			$(".My_Order_con").eq(0).html(leftTemplate(arr));
+		}
+	});
+	$.ajax({
+		type:"POST",
+		url:"http://api.icpkys.com/shop/order/list?token=" + $.cookie("the_cookie"),
+		async:false,
+        crossDomain:true,
+        datatype: "json",
+        xhrFields: {  withCredentials: true  },
+    	crossDomain: true,
+    	data: {
+    		status: 1
+    	},
+		success: function (msg) {
+			var arr = msg.data;
+			for (var i = 0; i < arr.length; i++) {
+				for (var j = 0; j < arr[i].goods.length; j++) {
+					arr[i].goods[j].price1 = (arr[i].goods[j].price / 7).toFixed(2);
+					arr[i].goods[j].price = arr[i].goods[j].price.toFixed(2);
+				}
+			}
+			var leftTemplate = Handlebars.compile($("#twoList").html());
+			$(".My_Order_con").eq(1).html(leftTemplate(arr));
+		}
+	});
+	$.ajax({
+		type:"POST",
+		url:"http://api.icpkys.com/shop/order/list?token=" + $.cookie("the_cookie"),
+		async:false,
+        crossDomain:true,
+        datatype: "json",
+        xhrFields: {  withCredentials: true  },
+    	crossDomain: true,
+    	data: {
+    		status: 2
+    	},
+		success: function (msg) {
+			var arr = msg.data;
+			console.log(arr);
+			for (var i = 0; i < arr.length; i++) {
+				for (var j = 0; j < arr[i].goods.length; j++) {
+					arr[i].goods[j].price1 = (arr[i].goods[j].price / 7).toFixed(2);
+					arr[i].goods[j].price = arr[i].goods[j].price.toFixed(2);
+				}
+			}
+			var leftTemplate = Handlebars.compile($("#threeList").html());
+			$(".My_Order_con").eq(2).html(leftTemplate(arr));
+			
+			$(".kll-shop-ok").on("touchend", function () {
+				if (!confirm("是否已收到货?")) {
+					return false;
+				}
+				var id = $(this).parent().parent()[0].dataset.id;
+				$.ajax({
+					type:"POST",
+					url:"http://api.icpkys.com/shop/order/recieve?token=" + $.cookie("the_cookie"),
+					async:false,
+			        crossDomain:true,
+			        datatype: "json",
+			        xhrFields: {  withCredentials: true  },
+			    	crossDomain: true,
+			    	data: {
+			    		order_id: id
+			    	},
+			    	success: function (msg) {
+			    		if (msg.status == "success" && msg.message == "Ok") {
+			    			alert("收货确认");
+			    		} else {
+			    			alert("请刷新重试");
+			    		}
+			    	}
+			  	});
+			});
+		}
+	});
+	$.ajax({
+		type:"POST",
+		url:"http://api.icpkys.com/shop/order/list?token=" + $.cookie("the_cookie"),
+		async:false,
+        crossDomain:true,
+        datatype: "json",
+        xhrFields: {  withCredentials: true  },
+    	crossDomain: true,
+    	data: {
+    		status: 3
+    	},
+		success: function (msg) {
+			var arr = msg.data;
+			for (var i = 0; i < arr.length; i++) {
+				for (var j = 0; j < arr[i].goods.length; j++) {
+					arr[i].goods[j].price1 = (arr[i].goods[j].price / 7).toFixed(2);
+					arr[i].goods[j].price = arr[i].goods[j].price.toFixed(2);
+				}
+			}
+			var leftTemplate = Handlebars.compile($("#fourList").html());
+			$(".My_Order_con").eq(3).html(leftTemplate(arr));
+		}
+	});
+</script>
+</body>
+</html>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>抢购详情</title>
+<meta charset="utf-8">
+<meta name="author" content="yy">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="author" content="yy">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<meta http-equiv="Expires" content="-1">
+<meta http-equiv="Cache-Control" content="no-cache">
+<meta http-equiv="Pragma" content="no-cache">
+<meta name="description" content="" />
+<meta name="Keywords" content="" />
+<link rel="stylesheet" href="css/swiper.min.css">
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" type="text/css" href="fonts/iconfont.css"/>
+<link rel="stylesheet" href="css/lf_style.css"/>
+<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="js/jquery.cookie.js"></script>
+<script type="text/javascript" src="js/swiper.min.js"></script>
+<style type="text/css">
+	.carImg{
+		height:212px;
+	}
+	.lf_footer{
+		height:50px;
+	}
+</style>
+</head>
+<body>
+<div class="public_head">
+	<h3>抢购详情<br/><span>For the details</span></h3>
+	<a href="javascript:history.go(-1);" class="iconfont icon-back"></a>
+</div>
+<div class="run_on">
+	<img class="carImg" src=""/>
+	<h3 id="title"><span>vw's 2015 model  1.6 l auto comfort</span></h3>
+	<div class="bar"><span class="spanWidth"></span></div>
+	<div class="bar_num"></div>
+	<div class="monetary">
+		<p class="m_p1">每单需消耗： <span id="price"></span></p>
+		<p class="m_p2">Cost per unit: <span id="price-m"></span></p>
+	</div>
+</div>
+<div class="Rules">
+  <div class="Rules_c">
+	<h3>规则说明：<span>Rules</span></h3>
+	<p class="rule_z"></p>
+	<p class="rule_e"></p>
+  </div>	
+</div>
+<div class="click1">立即夺宝<br/><span>Immediately Indiana</span></div>
+<!-- 夺宝弹窗 -->
+<div class="lf_duobaoBox">
+	<div class="lf_duobao">
+		<div class="public_head" style="height:55px;overflow:hidden">
+			<h3 style="font-size:14px">选择参与次数<br/><span>Choice of participation</span></h3>
+			<a style="height:55px;width:40px;line-height:55px;font-size:14px;color:#666" class="iconfont icon-cha"></a>
+		</div>
+		<div class="lf_duobaoNum">
+			<div class="lf_duobaoOperate">
+				<i class="iconfont icon-jian lf_jian"></i>
+				<span class="lf_left lf_borderBox">1</span>
+				<i class="iconfont icon-jia lf_jia"></i>
+			</div>
+			<div class="lf_selectNumber lf_displayFlex">
+				<button type="button">5</button>
+				<button type="button">10</button>
+				<button type="button">15</button>
+				<button type="button">20</button>
+				<button type="button">25</button>
+			</div>
+		</div>
+		<button type="button" class="lf_duobaoPay">￥<span class="lf_duobaoCN"></span>(<span class="lf_duobaoEN"></span>)</button>
+	</div>
+</div>
+<script type="text/javascript">
+	$(".bar span").css({
+		width:'0',
+		height: '10px'
+	});
+	//接口调用
+	var _token = $.cookie('the_cookie');
+	var _id = (window.location.href).split('?id=')[1];
+	console.log(_id);
+	console.log(_token);
+	$.ajax({
+		url:'http://api.icpkys.com/activity/info?token='+_token,
+		type:'post',
+		data:{
+			id:_id
+		},
+		success:function(req){
+			console.log(req);
+			if(req.status=='success'){
+				var data = req.data;
+				var _span = "<span>vw's 2015 model  1.6 l auto comfort</span>";
+				$('#title').text(data.title);
+				$('#title').append(_span);
+				$('.bar_num').text((data.user_num/data.user_limit*100).toFixed(2)+'%');
+				var _width = $('.bar').width();
+				    _width *= data.user_num/data.user_limit;
+				$('.spanWidth').css('width',_width);
+				var _src = 'http://admin.icpkys.com' + data.img;
+				$('.carImg').attr('src',_src);
+				$('#price').text('￥ '+data.price);
+				$('#price-m').text('$ '+(data.price/7).toFixed(2));
+				$('.rule_z').text(data.description);
+				$('.rule_e').text(data.description);
+				$('.lf_duobaoCN').text(data.price);
+				$('.lf_duobaoPay .lf_duobaoEN').text('$'+((data.price)/7).toFixed(2));
+				//立即夺宝
+				/*弹窗*/
+				$('.click1').on('click',function(){
+					$('.lf_duobaoBox').css('display','block');
+					$('.icon-cha').on('click',function(){
+						$('.lf_duobaoBox').css('display','none');
+					})
+				})
+				//点击按钮替换数据
+				var _danjia = data.price;
+				var _num = 1;
+				$('.lf_selectNumber button').on('click',function(){
+					var txt = $(this).text();
+					$('.lf_duobaoOperate').find('span').text(txt);
+					_num = parseInt($('.lf_duobaoOperate').find('span').text());
+					var yuan = $('.lf_duobaoPay .lf_duobaoCN').text((_num*_danjia)+'.00');
+					$('.lf_duobaoPay .lf_duobaoEN').text('$'+((_num*_danjia)/7).toFixed(2));
+				})
+				//加减
+				$('.lf_duobaoOperate').find('.icon-jia').on('click',function(){
+					var a = parseInt($(this).siblings('span').text());
+					a++;
+					$(this).siblings('span').text(a);
+					_num = parseInt($('.lf_duobaoOperate').find('span').text());
+					var yuan = $('.lf_duobaoPay .lf_duobaoCN').text((_num*_danjia)+'.00');
+					$('.lf_duobaoPay .lf_duobaoEN').text('$'+((_num*_danjia)/7).toFixed(2));
+				});
+				$('.lf_duobaoOperate').find('.icon-jian').on('click',function(){
+					var b = parseInt($(this).siblings('span').text());
+					if(b>1){
+						b--;
+						$(this).siblings('span').text(b);
+						_num = parseInt($('.lf_duobaoOperate').find('span').text());
+						var yuan = $('.lf_duobaoPay .lf_duobaoCN').text((_num*_danjia)+'.00');
+						$('.lf_duobaoPay .lf_duobaoEN').text('$'+((_num*_danjia)/7).toFixed(2));
+					}else{
+						$(this).parent().find('span').text('1');
+						_num = parseInt($('.lf_duobaoOperate').find('span').text());
+						var yuan = $('.lf_duobaoPay .lf_duobaoCN').text((_num*_danjia)+'.00');
+						$('.lf_duobaoPay .lf_duobaoEN').text('$'+((_num*_danjia)/7).toFixed(2));
+					}
+					
+				});
+				//点击跳转支付页面
+				$('.lf_duobaoPay').on('click',function(){
+					window.location.href = "snapupPay.html?id="+_id+"?num="+_num;
+				})
+			}
+		},
+		error:function(){
+			alert("您的账号已过期，请重新登录");
+			window.location.href  = 'login.html';
+		}
+	});
+</script>
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>分享二维码-我要助力</title>
+<meta charset="utf-8">
+<meta name="author" content="yy">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="author" content="yy">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<meta http-equiv="Expires" content="-1">
+<meta http-equiv="Cache-Control" content="no-cache">
+<meta http-equiv="Pragma" content="no-cache">
+<meta name="description" content="" />
+<meta name="Keywords" content="" />
+<link rel="stylesheet" href="css/swiper.min.css">
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+<link rel="stylesheet" type="text/css" href="fonts/iconfont.css"/>
+<link rel="stylesheet" href="css/lf_style.css"/>
+<script type="text/javascript" src="js/jquery-1.10.1.min.js"></script>
+<script type="text/javascript" src="js/swiper.min.js"></script>
+<script type="text/javascript" src="js/jquery.cookie.js"></script>
+<script type="text/javascript" src="js/new_cookie.js"></script>
+<script src="https://cdn.bootcss.com/handlebars.js/4.0.10/handlebars.min.js"></script>
+<style type="text/css">
+	.lf_content{
+		width:100%;
+		height:1000px;
+		background:url("images/lf_codebg.png") no-repeat center top;
+		background-size:100% 1000px;
+	}
+	.lf_word{
+		width:25%;
+   	    margin: 50px auto 0px;
+	}
+	.lf_codeName {
+	    margin-top: 14px;
+	}
+	.lf_codeNum>.lf_yuan {
+	    font-size: 30px;
+	    display:block;
+	    width:90%;
+	    margin:0 auto;
+	}
+	.lf_codeNum{
+		height:96px;
+	}
+</style>
+</head>
+<body>
+<div class="lf_content">
+	<div class="lf_header lf_clearFloat">
+		<a href="javascript:history.go(-1);" class="lf_jump lf_left">
+			<img src="images/lf_kys.png" alt=""/>
+		</a>
+		<a href="javascript:void(0);" class="lf_jump lf_right iconfont icon-fenxiang">
+			
+		</a>
+	</div>
+	<div class="lf_codeCon">
+		<h2 class="lf_codeTitle">我要助力</h2>
+		<p class="lf_word" style="text-align: center;font-size: 20px;min-width: 25%;color: #a92;">洲际卡</p>
+		<p class="lf_codeName">
+			<a href="javascript:void(0);" class="lf_jump lf_jump_name"></a>
+		</p>
+		<h3 class="lf_codeNum"><span class="lf_yuan">请求小伙伴来助
+			<br/>一臂之力</span></h3>
+		<a href="interactiveZone.html" class="lf_jump lf_intoGame"></a>
+	</div>
+	<div class="lf_codeBox lf_clearFloat lf_borderBox">
+		<div class="lf_left lf_codebox-left">
+			<div class="lf_codeImg lf_borderBox">
+				<img class="kll_show_code" src="images/lf_codeimg.png" alt=""/>
+			</div>
+			<p>长按识别二维码 · 关注康益身</p>
+		</div>
+		<div class="lf_left lf_function">
+			<p>下载“康益身”手机应用</p>
+			<a href="javascript:void(0);" class="lf_jump lf_iphone">
+				
+			</a>
+			<a href="javascript:void(0);" class="lf_jump lf_android">
+				
+			</a>
+		</div>
+	</div>
+</div>
+
+<script>
+	$.ajax({
+        url:'http://api.icpkys.com/user/get_code?token='+$.cookie('the_cookie'),
+        type:'get',
+        async: false,
+        success: function (msg) {
+			$(".lf_jump_name").html(msg.data.nickname);
+            $(".kll_show_code").attr("src",'/http.php?url='+msg.data.code_url+'?token='+$.cookie('the_cookie'));
+            if (msg.data.level == 1) {
+            	$(".lf_word").html("银卡");
+            } else if (msg.data.level == 2) {
+            	$(".lf_word").html("金卡");
+            } else if (msg.data.level == 3) {
+            	$(".lf_word").html("钻石卡");
+            } else if (msg.data.level == 4) {
+            	$(".lf_word").html("洲际卡");
+            } else if (msg.data.level == 5) {
+            	$(".lf_word").html("全球卡");
+            }
+        }
+    })
+</script>
+</body>
+</html>

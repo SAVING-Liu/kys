@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>流通健康金</title>
+<meta charset="utf-8">
+<meta name="author" content="yy">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="author" content="yy">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<meta http-equiv="Expires" content="-1">
+<meta http-equiv="Cache-Control" content="no-cache">
+<meta http-equiv="Pragma" content="no-cache">
+<meta name="description" content="" />
+<meta name="Keywords" content="" />
+<link rel="stylesheet" href="css/swiper.min.css">
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" type="text/css" href="fonts/iconfont.css">
+<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="js/swiper.min.js"></script>
+<script type="text/javascript" src="js/jquery.cookie.js"></script>
+<style type="text/css">
+	body{ background: #f5f5f5; }
+</style>
+</head>
+<body>
+<div class="public_head">
+	<h3>流通健康金<br/><span>Circulation health fund</span></h3>
+	<a href="javascript:history.go(-1)" class="iconfont icon-back"></a>
+	<!-- <i class="iconfont icon-form"></i> -->
+</div>
+<div class="circulate_money">
+	<span>金额</span>
+	<span>Amount of money</span>
+	<span class="circulate_money-span">0.00</span>
+</div>
+<ul class="list1">
+	<li>
+		<a href="health_exchange.html">
+			<span class="iconfont icon-duihuan"></span>
+			<span>兑换<strong>Exchange</strong></span>
+			<i class="iconfont icon-more"></i>
+		</a>
+	</li>
+	<li>
+		<a href="health_transfer.html">
+			<span class="iconfont icon-zhuanzhang"></span>
+			<span>转账<strong>Transfer accounts</strong></span>
+			<i class="iconfont icon-more"></i>
+		</a>
+	</li>
+</ul>
+
+<script>
+	$.ajax({
+		url: "http://api.icpkys.com/user/home/my_health",
+		data: {
+			token: $.cookie('the_cookie')
+		},
+		success: function (msg) {
+			$(".circulate_money-span").html(msg.data.toFixed(2));
+		}
+	});
+</script>
+</body>
+</html>

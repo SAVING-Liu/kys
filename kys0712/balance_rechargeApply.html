@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>余额充值申请</title>
+<meta charset="utf-8">
+<meta name="author" content="yy">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="author" content="yy">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<meta http-equiv="Expires" content="-1">
+<meta http-equiv="Cache-Control" content="no-cache">
+<meta http-equiv="Pragma" content="no-cache">
+<meta name="description" content="" />
+<meta name="Keywords" content="" />
+<link rel="stylesheet" href="layui/layui.css"/>
+<link rel="stylesheet" href="css/swiper.min.css">
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" href="css/lf_style.css"/>
+<link rel="stylesheet" type="text/css" href="fonts/iconfont.css"/>
+<link rel="stylesheet" href="css/lf_style.css"/>
+<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="js/swiper.min.js"></script>
+<script type="text/javascript" src="js/jquery.cookie.js"></script>
+<style>
+	.lf_meiyuan{
+		font-size:12px;
+		color:#666;
+	}
+	.lf_arrowXia{
+		margin-right: 10px;
+	    color: #999;
+	    margin-top: 3px;
+	}
+	.skm{
+		display:none;
+	}
+	.lf_redTips{
+		padding:15px 5%;
+		font-size:14px;
+		color:#ff4b4b;
+	}
+	.lf_redTipsEn{
+		font-size:12px;
+	}
+	.skm>img{
+		display:block;
+		width:80%;
+		margin:0 auto;
+	}
+	.upload{
+		font-size:12px;
+		color:#fff;
+		background-color: #4bd475;
+		border-radius:5px;
+		display:block;
+		margin-top: 30px;
+		padding: 2px 22px;
+	}
+	.skm_m>img{
+		display:block;
+		width:100%;
+		height:100%;
+	}
+	.layui-upload-icon{
+		display:none;
+	}
+	.layui-upload-button{
+		display: block;
+	    min-width: 108%;
+	    height: 30px;
+	    line-height: 30px;
+	    opacity: 0;
+	    left: 85px;
+	    top: -56px;
+	}
+</style>
+</head>
+<body>
+<div class="public_head">
+	<h3>余额充值申请<br/><span>Prepaid recharge application</span></h3>
+	<a href="javascript:history.go(-1);" class="iconfont icon-back"></a>
+	<i class="iconfont icon-form"></i>
+</div>
+<div class="input_price">
+	<div class="dhje" contenteditable="true">请输入充值金额<br/><span>Please enter the prepaid amount</span></div>
+</div>
+<div class="usable_balance">
+	<div class="usable_title">我的余额<span>My balance</span></div>
+	<div class="usable_tatol">RMB <span>0.00</span><br/><span class="lf_meiyuan">$0.00</span></div>
+</div>
+<div class="currency lf_clearFloat">
+	<div>付款方式<span>Payment method</span></div>
+	<span class="iconfont lf_right lf_arrowXia icon-xia"></span>
+</div>
+<div class="currency_select currency_select2">
+	<i class="iconfont icon-weixinzhifu"></i>
+	<label for="currency1">微信支付<span>WeChat payment</span></label>
+	<input type="radio" name="currency" id="currency1" checked="true" data-number="0" />
+</div>
+<div class="currency_select currency_select2">
+	<i class="iconfont icon-zhifu"></i>
+	<label for="currency2">支付宝支付<span>Alipay to pay</span></label>
+	<input type="radio" name="currency" id="currency2" data-number="1" />
+</div>
+<div class="currency_select currency_select2">
+	<i class="iconfont icon-zhifuqudao-yinhangqia"></i>
+	<label for="currency3">银行卡支付<span>Bank card payment</span></label>
+	<input type="radio" name="currency" id="currency3" data-number="2" />
+</div>
+<div class="transaction_number">
+	<div>付款凭证<br/><span>Proof of payment</span></div>
+	<div class="skm_m">
+		<img id="imgurl" name="imgurl" src=""/>
+        <input type="file" name="picname" id="picname"/>
+        <input type="hidden" name="headimg" id="headimg"/>
+	</div>
+	<button class="upload" type="button" name="upload">上传<br/> UPLOAD</button>
+</div>
+<div class="transaction_number jiaoyihao" style="display:none">
+	<div class="lf_change">交易号<br/><span>Transaction number</span></div>
+	<input type="text" name="t_num"/>
+</div>
+<input type="button" name="exchange" value="充值 Recharge" class="exchange">
+<div class="skm" style="display: block">
+	<div class="lf_redTips">
+		<p class="lf_redTipsCn">注：以下为付款凭证的截图。</p>
+		<p class="lf_redTipsEn">Note: The following is a screenshot of the payment voucher.</p>
+	</div>
+	<img src="images/lf_weixin.png" alt=""/>
+</div>
+<div class="skm">
+	<div class="lf_redTips">
+		<p class="lf_redTipsCn">注：以下为付款凭证的截图。</p>
+		<p class="lf_redTipsEn">Note: The following is a screenshot of the payment voucher.</p>
+	</div>
+	<img src="images/lf_zhifubao.png" alt=""/>
+</div>
+<div class="skm">
+	<div class="lf_redTips">
+		<p class="lf_redTipsCn">注：红框内是交易号所需填写的串号。</p>
+		<p class="lf_redTipsEn">Note: the red box is required to fill in the serial number of the transaction number.</p>
+	</div>
+	<img src="images/lf_yinhang.png" alt=""/>
+</div>
+<script type="text/javascript" src="layui/layui.js"></script>
+<script type="text/javascript">
+	// 点击切换图片不同
+	var onImage1 = "";
+	var onImage2 = "";
+	var onImage3 = "";
+	// 点击交易号不同
+	var onShow1 = "";
+	var onShow2 = "";
+	var onShow3 = "";
+
+
+
+
+    var head_url = '';
+    $(document).ready(function(){
+        layui.use('upload', function(){
+            layui.upload({
+              elem:'#picname',
+              url: '/upload.php',
+              success: function(res){
+                if(res.status==0){
+                    console.log(res.message);
+                }
+                if(res.status==1){
+                    $('#imgurl').attr('src',res.url);
+                    $('#headimg').attr('value',res.url);
+                    $("#imgurl")[0].src = res.url;
+                    head_url = res.url;
+	              	if (inMoneyType == 0) {
+	              		onImage1 = res.url;
+	              	} else if (inMoneyType == 1) {
+	              		onImage2 = res.url;
+	              	} else if (inMoneyType == 2) {
+	              		onImage2 = res.url;
+	              	}
+                }
+              }
+            });
+        });
+    });
+</script>
+<script type="text/javascript">
+	$("input[type='radio']").click(function(){
+		$(".skm").hide();
+	    var id= $(this).attr("data-number");
+	    $(".skm").eq(id).show();
+	    if(id==0){
+	    	$('.jiaoyihao').css('display','none');
+	    }else{
+	    	$('.jiaoyihao').css('display','block');
+	    }
+	}).on("change", function () {
+		if (inMoneyType == 0) {
+			
+		} else if (inMoneyType == 1) {
+			onShow2 = $("input[name=t_num]").val();
+		} else if (inMoneyType == 2) {
+			onShow3 = $("input[name=t_num]").val();
+		}
+		setTimeout(function () {
+			if (inMoneyType == 0) {
+				$("#imgurl")[0].src=onImage1;
+			} else if (inMoneyType == 1) {
+				$("#imgurl")[0].src=onImage2;
+				$("input[name=t_num]").val(onShow2);
+			} else if (inMoneyType == 2) {
+				$("#imgurl")[0].src=onImage3;
+				$("input[name=t_num]").val(onShow3);
+			}
+		}, 10)
+		
+	});
+</script>
+<script type="text/javascript">
+	$(".dhje").click(function() {
+		if ($(this).html() != "请输入充值金额<br><span>Please enter the prepaid amount</span>") {
+			return false;
+		}
+		$(this).text(" ").css({
+			height: '36px',
+			lineHeight: '36px',
+			fontSize: '20px'
+		});
+	}).on("keydown", function (e) {
+		if ((e.keyCode < 58 && e.keyCode > 46) || e.keyCode == 190 || e.keyCode == 110 || (e.keyCode < 106 && e.keyCode > 95) || e.keyCode == 8) {
+			var box = $(this);
+			setTimeout(function () {
+				moneyNumber = box.html();
+			}, 10);
+		} else {
+			e.preventDefault();
+		}
+	}).on("keyup", function (e) {
+		if (e.keyCode == 32) {
+			moneyNumber = parseFloat(this.innerHTML);
+			if (!moneyNumber) {
+				moneyNumber = "";
+			}
+			this.innerHTML = moneyNumber;
+		}
+		if($(this).text()==""){
+			$(this).on("blur", function () {
+				moneyNumber = null;
+				$(this).html("请输入充值金额<br><span>Please enter the prepaid amount</span>").css({
+					height: '36px',
+					lineHeight: '18px'
+				});
+			});
+		}
+	}).on("blur", function () {
+		if(!parseFloat($(this).html())){
+			moneyNumber = null;
+			$(this).html("请输入充值金额<br><span>Please enter the prepaid amount</span>").css({
+			height: '36px',
+			lineHeight: '18px'
+			});
+		}
+	});
+</script>
+
+<script>
+	var moneyNumber = null;
+	var inMoneyType = 0;//微信
+	//支付方式选择
+	$("input[name=currency]").on("change", function () {
+		inMoneyType = this.attributes["data-number"].value;
+	});
+	$(".exchange").on("touchend", function () {
+		// window.location.href='余额_充值记录.html'
+		if (!moneyNumber) {
+			return alert("请输入充值金额");
+		}
+		var order_num = "";
+		if (inMoneyType == 0) {
+			if (!onImage1) {
+				return alert("请上传微信凭证");
+			}
+			order_num = ""
+		} else if (inMoneyType == 1) {
+			order_num = $("input[name=t_num]").val();
+			if (!onImage2) {
+				return alert("请上传支付宝付款凭证");
+			}
+			if (!order_num) {
+				return alert("请填写支付宝交易号");
+			}
+		} else if (inMoneyType == 2) {
+			order_num = $("input[name=t_num]").val();
+			if (!onImage3) {
+				return alert("请上传银行卡付款凭证");
+			}
+			if (!order_num) {
+				return alert("请填写银行卡交易号");
+			}
+		}
+		$.ajax({
+			url: "http://api.icpkys.com/user/home/recharge_balance?token=" + $.cookie('the_cookie'),
+			data: {
+				type: 1,
+				money: moneyNumber,
+				pay_type: inMoneyType,
+				order_num: order_num,
+				deal_pic: $("#imgurl")[0].src
+			},
+			success: function (msg) {
+				if (msg.status == "success" && msg.message) {
+					alert("申请成功,请等待兑换");
+					// window.location.pathname = "accountBalance.html";
+				} else {
+					alert("申请失败,请重试");
+				}
+			},
+			error: function (err) {
+				console.log(err);
+			}
+		});
+	});
+	$.ajax({
+		url: "http://api.icpkys.com/user/home/balance?token=" + $.cookie('the_cookie'),
+		data: {
+			token: $.cookie('the_cookie')
+		},
+		success: function (msg) {
+			$(".usable_tatol").children("span").eq(0).text(msg.data.toFixed(2));
+			$(".usable_tatol").children("span").eq(1).text("$" + (msg.data / 7).toFixed(2));
+		},
+		error: function (msg) {
+			console.log(msg);
+		}
+	});
+	
+</script>
+</body>
+</html>

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>余额提现</title>
+<meta charset="utf-8">
+<meta name="author" content="yy">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="author" content="yy">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<meta http-equiv="Expires" content="-1">
+<meta http-equiv="Cache-Control" content="no-cache">
+<meta http-equiv="Pragma" content="no-cache">
+<meta name="description" content="" />
+<meta name="Keywords" content="" />
+<link rel="stylesheet" href="layui/layui.css"/>
+<link rel="stylesheet" href="css/swiper.min.css">
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" href="css/lf_style.css"/>
+<link rel="stylesheet" type="text/css" href="fonts/iconfont.css">
+<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="js/swiper.min.js"></script>
+<script type="text/javascript" src="js/jquery.cookie.js"></script>
+<!-- <script type="text/javascript" src="js/jquery.uploadView.js"></script> -->
+<style>
+	.lf_meiyuan{
+		font-size:12px;
+		color:#666;
+	}
+	.lf_arrowXia{
+		margin-right: 10px;
+	    color: #999;
+	    margin-top: 3px;
+	}
+	.click1{
+		margin-top:30px;
+	}
+	.layui-upload-icon{
+		display:none;
+	}
+	.layui-upload-button{
+		display:block;
+	    min-width: 35%;
+	    height: 30px;
+	    line-height: 30px;
+	    top: 405px;
+	    opacity: 0;
+	    left:175px;
+	    float:right;
+	    position:absolute;
+	}
+	.skm_t{
+		width:70px;
+	}
+	.skm_m{
+		margin-right:2%;
+	}
+</style>
+</head>
+<body>
+<div class="public_head">
+	<h3>余额提现<br/><span>Balance withdrawal</span></h3>
+	<a href="javascript:history.go(-1);" class="iconfont icon-back"></a>
+	<i onclick="window.location.pathname='balance_withdrawalRecord.html'" class="iconfont icon-form"></i>
+</div>
+<div class="input_price">
+	<div class="dhje" contenteditable="true">请输入提现金额<br/><span>Please enter the cash amount</span></div>
+</div>
+<div class="usable_balance lf_clearFloat">
+	<div class="usable_title">可用余额<br/><span style="margin-left:0">Available balance</span></div>
+	<div class="usable_tatol">RMB <span>0.00</span><br/><span class="lf_meiyuan">$0.00</span></div>
+</div>
+<div class="currency lf_clearFloat">
+	<div>提现方式<span>Cash withdrawal</span></div>
+	<span class="iconfont lf_right lf_arrowXia icon-xia"></span>
+</div>
+<div class="inputbox">
+	<div class="currency_select currency_select2 lf_clearFloat">
+		<label style="margin-left:10px" for="currency1">线上提现<span>Online withdrawal</span></label>
+		<input class="lf_radio lf_checkd" type="radio" name="currency" id="currency1" value="on" checked="checked"/>
+	</div>
+	<div class="currency_select currency_select2 lf_clearFloat">
+		<label style="margin-left:10px" for="currency2">线下提现<span>Offline withdrawal</span></label>
+		<input class="lf_radio" type="radio" name="currency" value="off" id="currency2" />
+	</div>
+</div>
+<div class="skm" style="display:none">
+	<div class="skm_t">收 款 码<br/><span>Collection<br/>code</span></div>
+	<div class="skm_m" style="overflow:hidden">
+		<img id="imgurl" name="imgurl" src="" class="js_logoBox" style="width:100%;height:100%" />
+		<input type="button" name="upload" value="上传头像 Upload"/>
+        <input type="file" name="picname" id="picname"/>
+        <input type="hidden" name="headimg" id="headimg"/>
+	</div>
+	<div class="skm_sc">
+		<label for="skm_good_files" style="width: 80%; height: 28px; background: #4bd475; border: 0; border-radius: 5px; color: #FFF; display: inline-block; text-align: center; line-height: 28px;">上传</label>
+		<p>注：请上传您的微信收款码<span>Note: please upload your WeChat collection code</span></p>
+	</div>
+	<div class="lf_left" style="font-size:24px;color:#746afc;margin-top:5px">*</div>
+</div>
+<div id="lf_submit" class="click1">提交<br/><span>Submit</span></div>
+<script type="text/javascript" src="layui/layui.js"></script>
+<script type="text/javascript">
+  var head_url = '';
+  $(document).ready(function(){
+        layui.use('upload', function(){
+            layui.upload({
+              elem:'#picname',
+              url: '/upload.php',
+              success: function(res){
+              	console.log(res);
+                if(res.status==0){
+                    console.log(res.message);
+                }
+                if(res.status==1){
+                    $('#imgurl').attr('src',res.url);
+                    $('#headimg').attr('value',res.url);
+                    head_url = res.url;
+                }
+              }
+            });
+        });
+    });
+</script>
+<script type="text/javascript">
+	//头部输入框
+	$(".dhje").click(function() {
+		$(this).text(" ").css({
+			height: '36px',
+			lineHeight: '36px'
+		});
+	});
+	$(".dhje").blur(function() {
+		if($(this).text()==" "){
+			$(this).html("请输入充值金额<br/><span>Please enter the prepaid amount</span>").css({
+			height: '36px',
+			lineHeight: '18px'
+			});
+		}
+	});
+	//选择第二个input[type="radio"]时，div出现
+	$('.lf_radio').on('click',function(){
+		var _state = $(this).attr('value');
+		if(_state=='off'){
+			$('.skm').css('display','block')
+		}else{
+			$('.skm').css('display','none')
+		};
+		$('.inputbox .currency_select input').removeClass('lf_checkd');
+		$('.inputbox .currency_select input').eq($(this).index()).addClass('lf_checkd');
+	})
+	//点击input[type="radio"]给点击的input添加class="lf_checkd";
+	$('.inputbox .currency_select').on('click',function(){
+		upType = $(this).index();
+		$('.inputbox .currency_select').find('.lf_radio').removeClass('lf_checkd');
+		$('.inputbox .currency_select').eq($(this).index()).find('.lf_radio').addClass('lf_checkd');
+	})
+	// $('#lf_submit').on('click',function(){
+	// 	if($('#currency1').hasClass('lf_checkd')){
+	// 		alert("提现成功\nWithdrawal success");
+	// 		window.location.href='balance_withdrawalRecord.html'
+	// 	}else{
+	// 		alert("提现成功\nWithdrawal success");
+	// 		window.location.href='balance_withdrawalRecord.html'
+	// 	}
+		
+	// })
+</script>
+
+<script>
+	$.ajax({
+		url: "http://api.icpkys.com/user/home/balance_fetch",
+		data: {
+			token: $.cookie('the_cookie'),
+			type: 0
+		},
+		success: function (msg) {
+			console.log(msg);
+			$(".usable_tatol").children("span").eq("0").html(msg.data.toFixed(2))
+							  .siblings("span").html("$ " + (msg.data/7).toFixed(2));
+		}
+	});
+	var upType = 0;
+	$('#lf_submit').on("touchend", function () {
+
+		var moneyNumber = parseFloat($(".dhje").html());
+		if (!moneyNumber) {
+			return alert("请输入正确提现金额 ");
+		}
+		if (upType) {//线下提现
+			if (!head_url) {
+				return alert("请上传收款码 ");
+			}
+			$.ajax({
+				url: "http://api.icpkys.com/user/home/balance_fetch",
+				data: {
+					token: $.cookie('the_cookie'),
+					type: 1,
+					money: moneyNumber,
+					fetch_pic: head_url
+				},
+				success: function (msg) {
+
+					console.log(msg);
+					if (msg.status == "success") {
+						alert(msg.message);	
+						window.location.href="accountBalance.html";
+						
+					} else {
+						alert(msg.massage);
+					}
+				}
+			});
+		} else {
+			$.ajax({
+				url: "http://api.icpkys.com/user/home/balance_fetch",
+				data: {
+					token: $.cookie('the_cookie'),
+					type: 2,
+					money: moneyNumber
+				},
+				success: function (msg) {
+					console.log(msg);
+
+				}
+			});
+		}
+
+	});
+
+
+</script>
+</body>
+</html>

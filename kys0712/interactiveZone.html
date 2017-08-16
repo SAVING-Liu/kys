@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>互动专区</title>
+<meta charset="utf-8">
+<meta name="author" content="yy">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="author" content="yy">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<meta http-equiv="Expires" content="-1">
+<meta http-equiv="Cache-Control" content="no-cache">
+<meta http-equiv="Pragma" content="no-cache">
+<meta name="description" content="" />
+<meta name="Keywords" content="" />
+<link rel="stylesheet" href="css/swiper.min.css">
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" type="text/css" href="fonts/iconfont.css">
+<link rel="stylesheet" href="css/lf_style.css"/>
+<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="js/swiper.min.js"></script>
+<script type="text/javascript" src="js/jquery.cookie.js"></script>
+<style type="text/css">
+	body{
+		background-color:#fff;
+	}
+</style>
+</head>
+<body>
+<div class="public_head">
+	<h3>互动专区<br/><span>Interactive Area</span></h3>
+	<a href="javascript:history.go(-1);" class="iconfont icon-back"></a>
+</div>
+<div class="lf_merchant">
+	 <!-- banner图轮播 -->
+	 <div class="swiper-container" style="width:100%;margin:0 auto;height:auto">
+        <div class="swiper-wrapper bannerBox">
+            <!-- <div class="swiper-slide">
+            	<a class="lf_jump" href="javascript:void(0)">
+            		<img class="content-banner" src="images/lf_hudong.png" />
+                    		</a>
+                    	</div>
+            <div class="swiper-slide">
+            	<a class="lf_jump" href="javascript:void(0)">
+            		<img class="content-banner" src="images/lf_hudong.png" />
+                    		</a>
+                    	</div>
+                    	<div class="swiper-slide">
+            	<a class="lf_jump" href="javascript:void(0)">
+            		<img class="content-banner" src="images/lf_hudong.png" />
+                    		</a>
+                    	</div> -->
+        </div>
+        <!-- 如果需要分页器 -->
+        <div class="swiper-pagination lf_page"></div>
+    </div>
+</div>
+<div id="waterfall">
+	 <ul class="piclist" id="container">
+        <!-- <li class="lf_waterlist lf_borderBox">
+        	<div class="lf_carTitle lf_clearFloat">
+        		<h2 class="lf_carName">
+               				宝马7系<br/><span>BMW 7-series</span>
+               			</h2>
+               			<p class="lf_showTime">
+               				2016-09-28 17:30
+               			</p>
+            		</div>
+           		<img class="lf_carimg" src="images/lf_car01.png" alt=""/>
+               			<p class="lf_snapup">
+               				<span>【一元抢购】</span>宝马7系  2016款 Centennial Edition
+               			</p>
+               			<p class="lf_snapup-e">
+               				<span>[One yuan to snap up]</span> The BMW 7 series 2016Centennial Edition
+               			</p>
+               			<div class="lf_progressBar lf_clearFloat">
+               				<p class="lf_left lf_bar">
+               					<span class="lf_colorBar"></span>
+               				</p>
+               				<p class="lf_right lf_barNum">11%</p>
+               			</div>
+               			<button type="button" class="lf_rob">
+               				立即抢<span>Immediately rob</span>
+               			</button>
+        </li> -->
+        
+    </ul>
+</div>
+<footer class="lf_footer">
+	<div class="lf_footerCon lf_displayFlex">
+		<a href="index.html" class="lf_jump lf_borderBox">
+			<i class="iconfont icon-shouye-shouye"></i>
+			<span class="lf_footerlist-cn">首页</span>
+			<span class="lf_footerlist-e">Home</span>
+		</a>
+		<a href="interactiveZone.html" class="lf_jump lf_borderBox lf_footerOn">
+			<i class="iconfont icon-hudong"></i>
+			<span class="lf_footerlist-cn">互动</span>
+			<span class="lf_footerlist-e">Interaction</span>
+		</a>
+		<a href="http://ditu.amap.com/" class="lf_jump lf_borderBox">
+			<i class="iconfont icon-ditu"></i>
+			<span class="lf_footerlist-cn">导航</span>
+			<span class="lf_footerlist-e">Navigation</span>
+		</a>
+		<a href="personalCenter.html" class="lf_jump lf_borderBox">
+			<i class="iconfont icon-wode"></i>
+			<span class="lf_footerlist-cn">我的</span>
+			<span class="lf_footerlist-e">My</span>
+		</a>
+	</div>
+</footer>
+</body>
+<script> 
+	//接口调用
+	var _token = $.cookie('the_cookie');
+	$.ajax({
+		url:'http://api.icpkys.com/activity/index',
+		type:'get',
+		data:{
+			token:_token
+		},
+		success:function(req){
+			console.log(req);
+			if(req.status=='success'){
+				//轮播图TODO
+				var data = req.data.banners;
+				function banner(_arr,divClass){
+					$.each(_arr,function(index,value){
+						var _div = '<div class="swiper-slide">'
+            					 + 		'<a class="lf_jump" href="javascript:void(0)">'
+            					 + 			'<img class="content-banner" src="http://admin.icpkys.com'+value.img+'" />'
+        						 +		'</a>'
+        						 + '</div>';
+        				divClass.append(_div);
+					})
+				};
+				var bannerClass = $('.bannerBox');
+				banner(data,bannerClass);
+				/*轮播图*/
+				$(function () {
+			        var mySwiper = new Swiper ('.swiper-container', {
+			            direction: 'horizontal',
+			            loop: true,
+			            autoplay : 3000, //时间
+			            // 如果需要分页器
+			            pagination: '.swiper-pagination',
+			            autoplayDisableOnInteraction : false,
+			         }) ; 
+			    });
+				//活动
+				var data2 = req.data.activities;
+			    function cars(_array,divClass){
+					$.each(_array,function(index,value){
+						var _li = '<li class="lf_waterlist lf_borderBox">'
+								+ 		'<div class="lf_carTitle lf_clearFloat">'
+								+			'<p class="lf_showTime">' + value.start_at + '</p>'
+								+			'<h2 class="lf_carName">' + value.title + '<span></span></h2>'
+								+		'</div>'
+								+		'<img class="lf_carimg" src="http://admin.icpkys.com/' + value.img +'"/>'
+								+		'<p class="lf_snapup">' + '<span>【' + value.price + '元抢购】</span>' + value.description + '</p>'
+								+		'<p class="lf_snapup-e">' + '<span>['+value.price+' yuan to snap up]</span>' + value.description + '</p>'
+								+		'<div class="lf_progressBar lf_clearFloat">'
+							   	+			'<p class="lf_left lf_bar">'
+							   	+				'<span class="lf_colorBar"></span>'
+							   	+			'</p>'
+							   	+			'<p class="lf_right lf_barNum">12%</p>'
+							   	+		'</div>'
+							   	+		'<button name="'+value.id+'" type="button" class="lf_rob">'
+							   	+			'立即抢<span>Immediately rob</span>'
+							   	+		'</button>'
+							    + '</li>';
+						divClass.append(_li);
+					})
+				}
+				var carBox =  $('.piclist');
+				cars(data2,carBox);
+				//瀑布流
+				var Obj = $("#waterfall"),
+					Ul = Obj.children('.piclist'),
+				    Li = Ul.children('.lf_waterlist');
+					waterfall(Obj,Ul,Li);
+				$(window).resize(function(event) {
+					window.location.reload();
+					waterfall();
+				});
+				$('.lf_rob').on('click',function(){
+					var id = $(this).attr('name')
+					console.log(id);
+					window.location.href='snapupDetail.html?id='+id;
+				})
+			}
+		},
+		error:function(req){
+			if(req.status==undefined){
+				alert(req.massage);
+			}
+		}
+	});
+	//瀑布流
+	var Obj = $("#waterfall"),
+		Ul = Obj.children('.piclist'),
+	    Li = Ul.children('.lf_waterlist');
+	$(window).resize(function(event) {
+		window.location.reload();
+		waterfall();
+	});
+
+	function waterfall(Obj,Ul,Li) {
+		var WinW = $(window).width();
+		var liWidth = $('.lf_waterlist').outerWidth();
+		var Blank = parseInt((WinW - (liWidth*2))/2); // 每个图片之间的间隔留白
+			LiW = liWidth + Blank, // 一个图片距离上一个图片的宽度距离
+			LiCol = parseInt(WinW / LiW), // 计算在当前窗口下，有几列
+			UlW = LiCol * LiW - Blank; // 根据有几列，设定总的宽度（减掉最后一个留白）
+		Ul.width(UlW);
+		var AllLi = []; // 建立一个空数组变量
+		Li.each(function(index, e) {
+			var T = $(this);
+			if(index < LiCol) { // 第一行的处理
+				AllLi[index] = T.outerHeight(); // 给数组添加内容，为当前元素的高度值
+				T.css({
+					top: 0,
+					left: LiW * index + 'px'
+				});
+			} else {
+				var MinH = Math.min.apply(null, AllLi); // 找到数组中，最小的那个值（也就是留白最大的）
+
+				// 通过each 循环数组的方式，找到索引
+				$.each(AllLi, function(index, value) {
+					if(value == MinH) {
+						MinI = index; // 因为 var 局部变量不能被用到下面去，所以用了全局变量
+					};
+				});
+
+				var ThisH = T.outerHeight() + 8; // 自身的高度加上留白
+
+				AllLi[MinI] = parseInt(MinH + ThisH); // 将被占位的数组重新赋值
+
+				T.css({
+					top: MinH + 8 + 'px',
+					left: LiW * MinI + 'px'
+				});
+			};
+		});
+	}
+</script>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>充值记录</title>
+<meta charset="utf-8">
+<meta name="author" content="yy">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="author" content="yy">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<meta http-equiv="Expires" content="-1">
+<meta http-equiv="Cache-Control" content="no-cache">
+<meta http-equiv="Pragma" content="no-cache">
+<meta name="description" content="" />
+<meta name="Keywords" content="" />
+<link rel="stylesheet" href="css/swiper.min.css">
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" type="text/css" href="fonts/iconfont.css">
+<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="js/swiper.min.js"></script>
+<script src="js/jquery.cookie.js"></script>
+<script src="https://cdn.bootcss.com/handlebars.js/4.0.10/handlebars.min.js"></script>
+<style type="text/css">
+	.lf_meiyuan{
+		font-size:12px;
+		color:#666;
+	}
+</style>
+</head>
+<body>
+<div class="public_head">
+	<h3>充值记录<br/><span>Recharge record</span></h3>
+	<a href="javascript:history.go(-1)" class="iconfont icon-back"></a>
+</div>
+<ul class="bills">
+	<!--<li>
+		<div><span>08:33</span><br/>02-16</div>
+		<div>账户充值<span>Account recharge</span></div>
+		<div>+￥ 200.00<br/><span class="lf_meiyuan">$111.00</span></div>
+	</li>-->
+</ul>
+
+<!--列表模板-->
+<script type="text/x-handlebars-template" id="init-list">
+	{{#each this}}
+		<li>
+			<div><span>{{hours}}:{{mintue}}</span><br/>{{month}}-{{day}}</div>
+			<div>账户充值<span>Account recharge</span></div>
+			<div>+￥ {{money}}<br/><span class="lf_meiyuan">$ {{money1}}</span></div>
+		</li>
+	{{/each}}
+</script>
+<script>
+	$.ajax({
+		type:"get",
+		url:"http://api.icpkys.com/user/home/recharge",
+		async:true,
+		data: {
+			token: $.cookie("the_cookie")
+		},
+		success: function (msg) {
+			var arr = msg.data;
+			for (var i = 0; i < arr.length; i++) {
+				arr[i].hours = arr[i].created_at.split(" ")[1].split(":")[0];
+				arr[i].mintue = arr[i].created_at.split(":")[1];
+				arr[i].day = arr[i].created_at.split(" ")[0].split("-")[2];
+				arr[i].month = arr[i].created_at.split("-")[1];
+				arr[i].money1 = (arr[i].money / 7).toFixed(2);
+				arr[i].money = arr[i].money.toFixed(2);
+			}
+			var listTemplate = Handlebars.compile($("#init-list").html());
+			$(".bills").html(listTemplate(arr));
+		}
+	});
+</script>
+</body>
+</html>

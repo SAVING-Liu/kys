@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>购物车</title>
+<meta charset="utf-8"/>
+<meta name="author" content="yy"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK"/>
+<meta name="author" content="yy"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+<meta name="format-detection" content="telephone=no"/>
+<meta http-equiv="Expires" content="-1"/>
+<meta http-equiv="Cache-Control" content="no-cache"/>
+<meta http-equiv="Pragma" content="no-cache"/>
+<meta name="description" content="" />
+<meta name="Keywords" content="" />
+<link rel="stylesheet" href="css/swiper.min.css"/>
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+<link rel="stylesheet" type="text/css" href="fonts/iconfont.css"/>
+<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="js/swiper.min.js"></script>
+<script src="js/jquery.cookie.js"></script>
+<style type="text/css">
+	.picture-top {
+		width: 100%;
+		height: 180px;
+		position: relative;
+		z-index: 10;
+		text-align: center;
+	}
+	#canvas_one {
+		position: absolute;
+		top: 0;
+		left: 0;
+		z-index: -5;
+		width: 100%;
+		height: 180px;
+	}
+	.picture-header {
+		height: 80px;
+		padding-top: 10px;
+		font-weight: normal;
+	}
+	.icon-back {
+		font-size: 25px;
+	    line-height: 30px;
+	    color: #fff;
+	  	width: 60px;
+	  	text-align: center;
+	  	position: absolute;
+	  	top: 0;
+	  	left: 0;
+	  	padding-top: 10px;
+	}
+	.picture-header_span {
+		font-size: 18px;
+		text-align: center;
+		display: block;
+		line-height: 20px;
+		color: #fff;
+	}
+	.picture-header_small {
+		font-size: 12px;
+		line-height: 20px;
+		display: block;
+	}
+	.picture-timer {
+		background: url("images/icon_timer.png") no-repeat left top;
+		background-size: 40px 40px;
+		display: inline-block;
+		padding-left: 50px;
+		color: #fff;
+		height: 50px;
+	}
+	.picture-timer_h4 {
+		font-size: 16px;
+	}
+	.picture-timer_span {
+		font-size: 24px;
+	}
+	.picture-timer_p {
+		font-size: 12px;
+		color: #eee;
+	}
+	.picture-content {
+		padding-top: 10px;
+	}
+</style>
+</head>
+<body>
+	<div class="picture-top">
+		<canvas id="canvas_one"></canvas>
+		<h1 class="picture-header">
+			<a class="iconfont icon-back" href="javascript:history.go(-1);"></a>
+			<span class="picture-header_span">健康指数走势图<small class="picture-header_small">Health index chart</small></span>
+		</h1>
+		<div class="picture-timer">
+			<h4 class="picture-timer_h4"><span class="picture-timer_span"></span> 年 <span class="picture-timer_span"></span> 月</h4>
+			<p class="picture-timer_p"></p>
+		</div>
+	</div>
+	<div class="picture-content">
+		<canvas id="canvas-two">
+			您的浏览设备不支持该功能,请更换浏览器或设备
+		</canvas>
+	</div>
+
+	<script>
+		var canvasData;
+		$.ajax({
+			url: "http://api.icpkys.com/health/index",
+			data: {
+				token: $.cookie("the_cookie")
+			},
+			async: false,
+			success: function (msg) {
+				canvasData = msg.data;
+			}
+		});
+		// 头部背景色
+		(function () {
+			var canvas = $("#canvas_one")[0];
+			var xtr = canvas.getContext("2d");
+			var lineDraw = xtr.createLinearGradient(0, 0, $("#canvas_one").width(), 0);
+			lineDraw.addColorStop(0,'#0092c5');
+			lineDraw.addColorStop(1,'#1bb591');
+			xtr.fillStyle = lineDraw;
+			xtr.fillRect(0, 0, $("#canvas_one").width(), $("#canvas_one").height());
+		})();
+		// 获取当前时间
+		(function () {
+			var timer = new Date();
+			var year = timer.getFullYear();
+			var month = timer.getMonth() < 10 ? "0" + (timer.getMonth() + 1) : (timer.getMonth() + 1);
+			var monthUs = timer.toString().split(" ")[1]
+			$(".picture-timer_span").eq(0).html(year);
+			$(".picture-timer_span").eq(1).html(month);
+			$(".picture-timer_p").eq(0).html(monthUs + " " + year);
+		})();
+		// canvas图表更改
+		(function () {
+			var canvas = $("#canvas-two")[0];
+			// 更改canvas的宽高
+			canvas.width = window.innerWidth;
+			canvas.height = window.innerWidth * 1;
+
+			console.log(canvasData);
+			doDraw({
+				canvas: $("#canvas-two")[0],
+				lineNumY: 10,
+				lineNumX: 15,
+				initXz: 10,
+				initYz: 20,
+				initX: canvasData.fist_index,
+				initY: 0,
+				lastX: canvasData.fist_index * 2,
+				lastY: canvasData.total_money,
+				arr: [
+					{
+						x: canvasData.data.present_index,
+						y: canvasData.data.sum_money,
+					}
+				]
+			});
+			function doDraw(obj) {
+				// obj 绘制图表参数,为对象
+				// obj.canvas = canvas元素
+				// obj.initX = x轴初始值
+				// obj.initY = y轴初始值
+				// obj.lastX = x轴终值
+				// obj.lastY = y轴终值
+				// obj.initXz = x轴初始据元素左侧坐标
+				// obj.initYz = y轴初始据元素下方坐标
+				// obj.lineNumY = 交叉X轴线的数量
+				// obj.lineNumX = 交叉Y轴线的数量
+				// obj.arr = 不同点的坐标组成的数组
+				if (!canvas.getContext("2d")) {
+					return false;
+				}
+				var xtr = canvas.getContext("2d");
+				// 获取canvas元素的宽和高
+				var canWidth = obj.canvas.width;
+				var canHeight = obj.canvas.height;
+				// 创建对象,储存走势图起始点坐标
+				var fristObj = {};
+				
+				// 画纵向背景线
+				var lineNumYSure = parseInt((canWidth - obj.initXz) / obj.lineNumY);//获取背景线间距
+				lineNumYSure = lineNumYSure;
+				console.log(lineNumYSure);
+				// 画横向背景线
+				var lineNumXSure = parseInt((canHeight - obj.initYz) / obj.lineNumX);//获取背景线间距
+				lineNumXSure = lineNumXSure;
+				// 画纵向背景线
+				for (var i = 0; i < obj.lineNumY; i++) {
+					xtr.strokeStyle = "#dcdcdc";
+					var lineNumYX = (i + 1) * lineNumYSure + obj.initXz;
+					var lineNumYY = obj.initYz + (obj.lineNumX - 1) * lineNumXSure;
+					xtr.moveTo(lineNumYX, lineNumYY);
+					if (obj.initYz > 10) {
+						xtr.lineTo(lineNumYX, obj.initYz - 10);
+					} else {
+						xtr.lineTo(lineNumYX, 0);
+					}
+					xtr.stroke();
+				}
+				fristObj.x = lineNumYSure + obj.initXz;
+				var textXInit = 0;//存最后一条线的x坐标,用以写x轴文字
+				// 画横向背景线
+				for (var i = 0; i < obj.lineNumX; i++) {
+					xtr.strokeStyle = "#dcdcdc";
+					var lineNumXX = obj.initYz + i * lineNumXSure;
+					var lineNumXY = obj.initXz + lineNumYSure;
+					xtr.moveTo(lineNumXY, lineNumXX);
+					xtr.lineTo(canWidth, lineNumXX);
+					xtr.stroke();
+					textXInit = lineNumXX;
+					fristObj.y = textXInit;
+				}
+
+				// 写x轴初始值的文字
+				xtr.strokeStyle = "#000";
+				xtr.font = "14px 微软雅黑";
+				xtr.fillText(obj.initX, obj.initXz + lineNumYSure, textXInit + 20);
+				// 写y轴初始值的文字
+				xtr.strokeStyle = "#000";
+				xtr.font = "12px 微软雅黑";
+				// 判定靠右显示
+				xtr.fillText(obj.initY, lineNumYSure + obj.initXz - xtr.measureText(obj.initY).width - 5, canHeight - obj.initYz);
+
+				// 写x轴终值的文字
+				xtr.strokeStyle = "#000";
+				xtr.font = "14px 微软雅黑";
+				xtr.fillText(obj.lastX, canWidth - xtr.measureText(obj.lastX).width, textXInit + 20);
+				// 写y轴终值的文字
+				xtr.strokeStyle = "#000";
+				xtr.font = "12px 微软雅黑";
+				xtr.fillText(obj.lastY, 0, obj.initYz);
+
+				// 转化点的坐标
+				var arrPoint = JSON.parse(JSON.stringify(obj.arr));
+				for (var i = 0; i < obj.arr.length; i++) {
+					// 转换x轴
+					obj.arr[i].x = (obj.arr[i].x - obj.initX) / (obj.lastX - obj.initX) * (obj.lineNumY - 1) * lineNumYSure + obj.initXz + lineNumYSure;
+					// 转换y轴
+					obj.arr[i].y = (obj.lineNumX * lineNumXSure + obj.initXz) - (obj.arr[i].y - obj.initY) / (obj.lastY - obj.initY) * obj.lineNumX * lineNumXSure + obj.initXz;
+				}
+
+
+				// 划线
+				xtr.strokeStyle = "#86b5cc";
+				xtr.moveTo(fristObj.x, fristObj.y);
+				for (var i = 0; i < obj.arr.length; i++) {
+					xtr.lineTo(obj.arr[i].x, obj.arr[i].y);
+					console.log(obj.arr[i]);
+				}
+				xtr.stroke();
+
+				// 画线的背景
+				xtr.fillStyle = "rgba(197,214,223,0.4)";
+				xtr.beginPath();
+				xtr.moveTo(fristObj.x, fristObj.y);
+				for (var i = 0; i < obj.arr.length; i++) {
+					xtr.lineTo(obj.arr[i].x, obj.arr[i].y);
+					if (i == obj.arr.length - 1) {
+						xtr.lineTo(obj.arr[i].x, fristObj.y);
+						xtr.fill();
+						var lastClearX = obj.arr[i].x;
+						var lastClearY = obj.arr[i].y;
+					}
+				}
+				xtr.beginPath();
+				// 画点
+				xtr.fillStyle = "#1bb591";
+				xtr.moveTo(lastClearX, lastClearY);
+				xtr.arc(lastClearX, lastClearY, 3, 0, Math.PI * 2, true);
+				xtr.fill();
+				// 写终点的值
+				xtr.strokeStyle = "#55a9d3";
+				// 写x轴值的文字
+				xtr.strokeStyle = "#000";
+				xtr.font = "14px 微软雅黑";
+				xtr.fillText(arrPoint[obj.arr.length - 1].x,(canWidth - xtr.measureText(obj.lastX).width) / 2, textXInit + 20);
+				// 写y轴值的文字
+				xtr.strokeStyle = "#000";
+				xtr.font = "12px 微软雅黑";
+				xtr.fillText(arrPoint[obj.arr.length - 1].y, 0, obj.initYz + textXInit / 2);
+			}
+		})();
+	</script>
+</body>
+</html>

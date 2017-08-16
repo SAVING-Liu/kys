@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>健康使者升级</title>
+<meta charset="utf-8">
+<meta name="author" content="yy">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="author" content="yy">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<meta http-equiv="Expires" content="-1">
+<meta http-equiv="Cache-Control" content="no-cache">
+<meta http-equiv="Pragma" content="no-cache">
+<meta name="description" content="" />
+<meta name="Keywords" content="" />
+<link rel="stylesheet" href="css/swiper.min.css">
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" type="text/css" href="fonts/iconfont.css">
+<script type="text/javascript" src="js/jquery-1.10.1.min.js"></script>
+<script type="text/javascript" src="js/swiper.min.js"></script>
+<style type="text/css">
+	body{ background: #f6f6f6; }
+</style>
+</head>
+<body>
+<div class="public_head">
+	<h3>健康使者升级<br/><span>Health angel upgrade</span></h3>
+	<a href="javascript:history.go(-1)" class="iconfont icon-back"></a>
+	<!-- <i onclick="window.location.href='购物车.html'" class="iconfont icon-icon-cart"></i> -->
+</div>
+<img src="images/tu19.png" class="res_img">
+<div class="health_envoy">
+	<div class="health_envoy1">
+		<p>升级健康使者<span>Health angel upgrade</span></p>
+		<p>RMB 700-44100<span>$ 100-6300</span></p>
+		<p class="rmb">RMB 700<span class="meiyuan">$ 100</span></p>
+	</div>
+</div>
+<div class="select_star">
+	<div class="select_star_title">选择星级<span>Select the star</span></div>
+	<ul>
+		<li name='1' class="ss_hover">一星<span>One star</span></li>
+		<li name='2'>两星<span>Two stars</span></li>
+		<li name='3'>三星<span>Three stars</span></li>
+		<li name='4'>四星<span>Four stars</span></li>
+		<li name='5'>五星<span>Five stars</span></li>
+		<li name='6'>六星<span>Six stars</span></li>
+	</ul>
+</div>
+<input id="purchase" type="button" class="btn1" value="购买 Purchase" />
+<script type="text/javascript">
+	var name = 1;
+	$('#purchase').on('click',function(){
+		window.location.href='upgradeHealther.html?name='+name;
+	})
+	$(".select_star ul li").click(function() {
+		$(this).addClass('ss_hover').siblings().removeClass('ss_hover');
+		var grade = parseInt($(this).attr('name'));
+			name = parseInt($(this).attr('name'));
+		console.log(grade);
+		$('.rmb').html('');
+		if(grade==2){
+			$('.rmb').append('RMB '+ 2100 + '<span>$ 300</span>');
+		}
+		if(grade==3){
+			$('.rmb').append('RMB '+ 4900 + '<span>$ 700</span>');
+		}
+		if(grade==4){
+			$('.rmb').append('RMB '+ 10500 + '<span>$ 1500</span>');
+		}
+		if(grade==5){
+			$('.rmb').append('RMB '+ 21700 + '<span>$ 3100</span>');
+		}
+		if(grade==6){
+			$('.rmb').append('RMB '+ 44100 + '<span>$ 6300</span>');
+		}
+		if(grade==1){
+			$('.rmb').append('RMB '+ 700 + '<span>$ 100</span>');
+		}
+	});
+</script>
+</body>
+</html>

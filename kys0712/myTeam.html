@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>我的团队</title>
+<meta charset="utf-8">
+<meta name="author" content="yy">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="author" content="yy">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<meta http-equiv="Expires" content="-1">
+<meta http-equiv="Cache-Control" content="no-cache">
+<meta http-equiv="Pragma" content="no-cache">
+<meta name="description" content="" />
+<meta name="Keywords" content="" />
+<link rel="stylesheet" href="css/swiper.min.css">
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" type="text/css" href="fonts/iconfont.css">
+<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="js/swiper.min.js"></script>
+<script type="text/javascript" src="js/jquery.cookie.js"></script>
+<style type="text/css">
+	body{ background: #f5f5f5; }
+	.level_c_phone{
+		margin-right:0;
+	}
+	@media screen and (min-width: 370px){
+		.level_c_phone, .credential_c_phone {
+		    margin-right: 5px;
+		}
+	}
+	body{ background: #f5f5f5; }
+	 .credential_c_phone{
+	 	margin-right:0px;
+	 	margin-top:10px;
+	 	width:30%;
+	 	font-size:14px;
+	 	
+	 }
+	 .level_c_t{
+	 	width:38%;
+	 }
+	 .credential_c_phone>span{
+	 	display:block;
+	 }
+	 .lf_bot{
+	 	color:#49d477;
+	 }
+</style>
+</head>
+<body>
+<div class="public_head">
+	<h3>我的团队<br/><span>My team</span></h3>
+	<a href="javascript:history.go(-1)" class="iconfont icon-back"></a>
+</div>
+<ul class="my_level">
+	<li name="1" class="zhi my_level_hover"><img src="images/tu14.png"><p>健康使者<span>Health angel</span></p></li>
+	<li name="2" class="jian"><img src="images/tu15.png"><p>健康使者<span>Health angel</span></p></li>
+	<li name="3" class="tui"><img src="images/tu16.png"><p>健康使者<span>Health angel</span></p></li>
+</ul>
+<div class="level_con" style="display: block;">
+	<ul class="zhitui level">
+		<!-- <li>
+			<div class="level_c_num">1</div>
+			<img src="images/tu9.png">
+			<div class="level_c_t">Evelyn Fisher<span>2017-03-29  09:55</span></div>
+			<div class="credential_c_phone">
+				<span class="lf_top">13622562104</span>
+				<span class="lf_bot">8888.00</span>
+			</div>
+		</li> -->
+	</ul>
+</div>
+<div class="level_con">
+	<ul class="jiantui level">
+		<!-- <li>
+			<div class="level_c_num">1</div>
+			<img src="images/tu9.png">
+			<div class="level_c_t">2Evelyn Fisher<span>2017-03-29  09:55</span></div>
+			<div class="credential_c_phone">
+				<span class="lf_top">136****2104</span>
+				<span class="lf_bot">8888.00</span>
+			</div>
+		</li> -->
+	</ul>
+</div>
+<div class="level_con">
+	<ul class="level3 level">
+		<!-- <li>
+			<div class="level_c_num">1</div>
+			<img src="images/tu9.png">
+			<div class="level_c_t">3Evelyn Fisher<span>2017-03-29  09:55</span></div>
+			<div class="credential_c_phone">
+				<span class="lf_top">136****2104</span>
+				<span class="lf_bot">8888.00</span>
+			</div>
+		</li> -->
+	</ul>
+</div>
+<script type="text/javascript">
+	$(".my_level li").click(function() {
+		var index = $(this).index();
+		$(this).addClass('my_level_hover').siblings().removeClass('my_level_hover');
+		$(".level_con").eq(index).show().siblings(".level_con").hide();
+		var grade = $(this).attr('name');
+		var _token = $.cookie('the_cookie');
+		var levelBox = $('.level').eq(grade);
+		$.ajax({
+			url:'http://api.icpkys.com/health/performance?token='+_token,
+			type:'get',
+			data:{
+				grade:grade
+			},
+			success:function(req){
+				var _data = req.data.userPerformance;
+				if(_data.length>0){
+					$('.level').html('');
+					$.each(_data,function(index,value){
+						var _li = '<li>'
+								+		'<div class="level_c_num">'+(index+1)+'</div>'
+								+		'<img src="'+value.avatar+'">'
+								+		'<div class="level_c_t">'+value.nickname+'<span>'+value.updated_at+'</span></div>'
+								+		'<div class="credential_c_phone">'
+								+			'<span class="lf_top">'+value.phone+'</span>'
+								+			'<span class="lf_bot">'+value.one_performance+'</span>'
+								+		'</div>'
+								+   '</li>';
+						levelBox.append(_li);
+					})
+				}
+				
+			},
+			error:function(res){
+				if(res.status!=undefined){
+	        		if(res.status==404){
+		        		alert('接口不存在');
+		        	}
+		        	if(res.status==401 && res.responseText=='{"error":"token_expired"}'){
+		        		alert('请重新登录');
+		        		window.location.href='login.html';
+		        	}
+	        	}else{
+	        		console.log(res);
+	        		alert('未知错误');
+	        	}
+			}
+
+		})
+	});
+</script>
+<script type="text/javascript">
+	var _token = $.cookie('the_cookie');
+	$.ajax({
+		url:'http://api.icpkys.com/health/performance?token='+_token,
+		type:'get',
+		data:{grade:1},
+		success:function(req){
+			if(req.status=='success'){
+				var data = req.data.performances;
+				if(data.length>0){
+					for(var i=0; i<data.length; i++){
+						var zhitui =   '<li>'
+									+		'<div class="level_c_num">'+(i+1)+'</div>'
+									+		'<img src="'+data[i].avatar+'">'
+									+		'<div class="level_c_t">'+data[i].nickname+'<span>'+data[i].updated_at+'</span></div>'
+									+		'<div class="credential_c_phone">'
+									+			'<span class="lf_top">'+data[i].phone+'</span>'
+									+			'<span class="lf_bot">'+data[i].one_performance+'</span>'
+									+		'</div>'
+									+   '</li>';
+						$(".zhitui").append(zhitui);
+					}
+				}
+				
+			}else{
+				alert(req.massage);
+			}
+		},
+		error:function(res){
+			if(res.status!=undefined){
+        		if(res.status==404){
+	        		alert('接口不存在');
+	        	}
+	        	if(res.status==401 && res.responseText=='{"error":"token_expired"}'){
+	        		alert('请重新登录');
+	        		window.location.href='login.html';
+	        	}
+        	}else{
+        		console.log(res);
+        		alert('未知错误');
+        	}
+		}
+
+	})
+</script>
+</body>
+</html>

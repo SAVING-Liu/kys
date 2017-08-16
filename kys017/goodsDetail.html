@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>商品详情</title>
+<meta charset="utf-8">
+<meta name="author" content="yy"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+<meta name="format-detection" content="telephone=no"/>
+<meta http-equiv="Expires" content="-1"/>
+<meta http-equiv="Cache-Control" content="no-cache"/>
+<meta http-equiv="Pragma" content="no-cache"/>
+<meta name="description" content="" />
+<meta name="Keywords" content="" />
+<link rel="stylesheet" href="css/swiper.min.css"/>
+<link rel="stylesheet" href="css/lf_style.css"/>
+<link rel="stylesheet" type="text/css" href="fonts/iconfont.css"/>
+<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="js/swiper.min.js"></script>
+<script src="js/jquery.cookie.js"></script>
+<script src="https://cdn.bootcss.com/handlebars.js/4.0.10/handlebars.min.js"></script>
+<style type="text/css">
+	body{ background: #f5f5f5; }
+	.public_head{
+		border:0;
+	}
+	.lf_footer{
+		height:54px;
+	}
+</style>
+</head>
+<body>
+<div class="public_head">
+	<h3>商品详情<br/><span>Goods details</span></h3>
+	<a href="javascript:history.go(-1);" class="iconfont icon-back"></a>
+	<i class="iconfont icon-cart"><a href="/goodsCar.html"></a></i>
+</div>
+<div class="lf_content" style="padding-bottom:60px">
+	 <!-- banner图轮播 -->
+	 <div class="swiper-container lf_banner">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">
+            	<a class="lf_jump" href="javascript:void(0)">
+            		<img class="content-banner" src="images/lf_goods01.png" />
+        		</a>
+        	</div>
+            <div class="swiper-slide">
+            	<a class="lf_jump" href="javascript:void(0)">
+            		<img class="content-banner" src="images/lf_goods01.png" />
+        		</a>
+        	</div>
+        	<div class="swiper-slide">
+            	<a class="lf_jump" href="javascript:void(0)">
+            		<img class="content-banner" src="images/lf_goods01.png" />
+        		</a>
+        	</div>
+        </div>
+        <!-- 如果需要分页器 -->
+        <div class="swiper-pagination lf_page"></div>
+    </div>
+    <!--  详情介绍 -->
+	<div class="lf_goodsBox">
+		<!-- <div class="lf_goodsDetail">
+			<p class="lf_goodsTitle">Nike 耐克官方 NIKE FLEX BIJOUX 女子健身训练运动鞋健身训练运动鞋</p>
+			<div class="lf_price-comment lf_clearFloat">
+				<p class="lf_left lf_goodsPrice">
+					<span class="lf_goodsPrice-cn">￥<strong> 700</strong></span>
+					<span class="lf_goodsPrice-e">$100</span>
+				</p>
+				<p class="lf_right lf_goodsComment lf_clearFloat">
+					<img src="images/lf_greenStar.png" alt=""/>
+					<img src="images/lf_greenStar.png" alt=""/>
+					<img src="images/lf_greenStar.png" alt=""/>
+					<img src="images/lf_whiteStar.png" alt=""/>
+					<img style="margin-right:0" src="images/lf_whiteStar.png" alt=""/>
+				</p>
+			</div>
+		</div>
+		<div style="height:12px;border-top:1px solid #e6e6e6;border-bottom:1px solid #e6e6e6;"></div>
+		<div class="lf_shopDetail">
+			<h2 class="lf_shopName">
+				商店<span>Shop</span>
+			</h2>
+			<a href="javascript:void(0);" class="lf_jump">
+				<div class="lf_shopDetailbox lf_clearFloat">
+					<img src="images/lf_nike.png" alt="" class="lf_left"/>
+					<span>NIke</span>
+					<i class="iconfont icon-more"></i>
+				</div>
+			</a>
+		</div>
+		<div style="height:12px;border-top:1px solid #e6e6e6;border-bottom:1px solid #e6e6e6;"></div>
+		<div class="lf_goodsDetailNav">
+			<ul class="lf_detailReading lf_displayFlex">
+				<li class="lf_detail-reading lf_borderBox lf_goodslistOn">
+					商品详情<br/><span>Goods details</span>
+				</li>
+				<li class="lf_detail-reading lf_borderBox">
+					购物须知<br/><span>Buyer reading</span>
+				</li>
+			</ul>
+			<div class="lf_goodDetail-boxs">
+				<div class="lf_goodDetail-box lf_lf_goodDetail-box-img">
+					<img src="images/lf_goods01.png" alt=""/>
+				</div>
+				<div class="lf_goodDetail-box lf_lf_goodDetail-box-p" style="display:none">
+					<p>
+						购物须知购物须知购物须知购物须知购物须知购物须知购物须知购物须知购物须知购物须知购物须知购物须知购物须知购物须知购物须知购物须知购物须知购物须知购物须知购物须知购物须知购物须知购物须知购物须知购物须知购物须知购物须知购物须知购物须知购物须知购物须知购物须知购物须知购物须知购物须知购物须知购物须知购物须知购物须知购物须知购物须知购物须知购物须知购物须知购物须知购物须知。
+					</p>
+				</div>
+			</div>
+		</div> -->
+	</div>
+</div>
+<footer class="lf_footer lf_displayFlex">
+	<button class="lf_goodDetailBtn" type="button">
+		加入购物车<span>Add to cart</span>
+	</button>
+	<button class="lf_goodDetailBtn lf_purchaseBtn" type="button">
+		购买<span>Purchase</span>
+	</button>
+</footer>
+</body>
+<script id="table-template" type="text/x-handlebars-template">
+	<div class="swiper-container lf_banner">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">
+            	<a class="lf_jump" href="javascript:void(0)">
+            		<img class="content-banner" src="http://api.icpkys.com{{image}}" />
+        		</a>
+        	</div>
+        </div>
+        <div class="swiper-pagination lf_page"></div>
+    </div>
+	<div class="lf_goodsBox">
+		<div class="lf_goodsDetail">
+			<p class="lf_goodsTitle">{{name}}</p>
+			<div class="lf_price-comment lf_clearFloat">
+				<p class="lf_left lf_goodsPrice">
+					<span class="lf_goodsPrice-cn">￥<strong> {{price}}</strong></span>
+					<span class="lf_goodsPrice-e">${{price_us}}</span>
+				</p>
+				<p class="lf_right lf_goodsComment lf_clearFloat">
+					{{#if zerostart}}
+						<img src="images/lf_whiteStar.png" alt=""/>
+						<img src="images/lf_whiteStar.png" alt=""/>
+						<img src="images/lf_whiteStar.png" alt=""/>
+						<img src="images/lf_whiteStar.png" alt=""/>
+						<img style="margin-right:0" src="images/lf_whiteStar.png" alt=""/>
+					{{/if}}
+					{{#if onestart}}
+						<img src="images/lf_greenStar.png" alt=""/>
+						<img src="images/lf_whiteStar.png" alt=""/>
+						<img src="images/lf_whiteStar.png" alt=""/>
+						<img src="images/lf_whiteStar.png" alt=""/>
+						<img style="margin-right:0" src="images/lf_whiteStar.png" alt=""/>
+					{{/if}}
+					{{#if twostart}}
+						<img src="images/lf_greenStar.png" alt=""/>
+						<img src="images/lf_greenStar.png" alt=""/>
+						<img src="images/lf_whiteStar.png" alt=""/>
+						<img src="images/lf_whiteStar.png" alt=""/>
+						<img style="margin-right:0" src="images/lf_whiteStar.png" alt=""/>
+					{{/if}}
+					{{#if threestart}}
+						<img src="images/lf_greenStar.png" alt=""/>
+						<img src="images/lf_greenStar.png" alt=""/>
+						<img src="images/lf_greenStar.png" alt=""/>
+						<img src="images/lf_whiteStar.png" alt=""/>
+						<img style="margin-right:0" src="images/lf_whiteStar.png" alt=""/>
+					{{/if}}
+					{{#if fourstart}}
+						<img src="images/lf_greenStar.png" alt=""/>
+						<img src="images/lf_greenStar.png" alt=""/>
+						<img src="images/lf_greenStar.png" alt=""/>
+						<img src="images/lf_greenStar.png" alt=""/>
+						<img style="margin-right:0" src="images/lf_whiteStar.png" alt=""/>
+					{{/if}}
+					{{#if fivestart}}
+						<img src="images/lf_greenStar.png" alt=""/>
+						<img src="images/lf_greenStar.png" alt=""/>
+						<img src="images/lf_greenStar.png" alt=""/>
+						<img src="images/lf_greenStar.png" alt=""/>
+						<img style="margin-right:0" src="images/lf_greenStar.png" alt=""/>
+					{{/if}}
+				</p>
+			</div>
+		</div>
+		<div style="height:12px;border-top:1px solid #e6e6e6;border-bottom:1px solid #e6e6e6;"></div>
+		<div class="lf_shopDetail">
+			<h2 class="lf_shopName">
+				商店<span>Shop</span>
+			</h2>
+			<a href="javascript:void(0);" class="lf_jump">
+				<div class="lf_shopDetailbox lf_clearFloat">
+					<img src="http://api.icpkys.com{{image}}" alt="" class="lf_left"/>
+					<span>{{name}}</span>
+					<i class="iconfont icon-more"></i>
+				</div>
+			</a>
+		</div>
+		<div style="height:12px;border-top:1px solid #e6e6e6;border-bottom:1px solid #e6e6e6;"></div>
+		<div class="lf_goodsDetailNav">
+			<ul class="lf_detailReading lf_displayFlex">
+				<li class="lf_detail-reading lf_borderBox lf_goodslistOn">
+					商品详情<br/><span>Goods details</span>
+				</li>
+				<li class="lf_detail-reading lf_borderBox">
+					购物须知<br/><span>Buyer reading</span>
+				</li>
+			</ul>
+			<div class="lf_goodDetail-boxs">
+				<div class="lf_goodDetail-box lf_lf_goodDetail-box-img">
+					{{{details}}}
+				</div>
+				<div class="lf_goodDetail-box lf_lf_goodDetail-box-p" style="display:none">
+					<p>
+						购物须知购物须知购物须知购物须知购物须知购物须知购物须知购物须知购物须知购物须知购物须知购物须知购物须知购物须知购物须知购物须知购物须知购物须知购物须知购物须知购物须知购物须知购物须知购物须知购物须知购物须知购物须知购物须知购物须知购物须知购物须知购物须知购物须知购物须知购物须知购物须知购物须知购物须知购物须知购物须知购物须知购物须知购物须知购物须知购物须知购物须知。
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</script>
+<script>
+	var shopId;
+	$(".lf_purchaseBtn").on("touchstart", function () {
+		var shopCarPay = [];
+		shopCarPay[0] = {};
+		shopCarPay[0].name = $(".lf_goodsTitle").html();
+		console.log($(".lf_goodsPrice-cn").children("strong"));
+		shopCarPay[0].price1 = $(".lf_goodsPrice-cn").children("strong").html();
+		shopCarPay[0].price2 = $(".lf_goodsPrice-e").html().split("$")[1];
+		shopCarPay[0].num = 1;
+		shopCarPay[0].img = $(".content-banner")[0].src;
+		shopCarPay[0].id = shopId;
+		shopCarPay[0].pay = 1;
+		sessionStorage.shopCarPay = JSON.stringify(shopCarPay);
+	}).on("touchend", function () {
+		window.location.href = "purchaseGoods.html?shopid=" + shopId;
+	});
+</script>
+<script>
+	var shopShow;
+	$.ajax({
+	    url:'http://api.icpkys.com/shop/goods/details',
+	    type:'get',
+	    async: false,
+	    data: {
+	    	token: $.cookie('the_cookie'),
+	    	goods_id: window.location.href.split("?shopid=")[1].split("?")[0]
+	    },
+	    success: function (msg) {
+	    	console.log(msg);
+	    	shopShow = msg.data;
+	    	shopId = shopShow.id;
+	    	if (shopShow.status == 0) {
+	    		shopShow.zerostart = true;
+	    	} else if (shopShow.status == 1) {
+	    		shopShow.onestart = true;
+	    	} else if (shopShow.status == 2) {
+	    		shopShow.twostart = true;
+	    	} else if (shopShow.status == 3) {
+	    		shopShow.threestart = true;
+	    	} else if (shopShow.status == 4) {
+	    		shopShow.fourstart = true;
+	    	} else if (shopShow.status == 5) {
+	    		shopShow.fivestart = true;
+	    	}
+	    	shopShow.price_us = (shopShow.price / 7).toFixed(2);
+	    	var cacheArr = shopShow.details.split('src="');
+	    	for (var i = 0; i < cacheArr.length - 1; i++) {
+	    		shopShow.details = cacheArr[i] + 'src="http://api.icpkys.com' + cacheArr[i+1];
+	    	}
+			var myTemplate = Handlebars.compile($("#table-template").html());
+			$('.lf_content').html(myTemplate(shopShow));
+	    }
+	})
+</script>
+<script>
+	//加入购物车
+	$(".lf_goodDetailBtn").eq(0).on("touchstart", function () {
+		$.ajax({
+			type:"POST",
+			url:"http://api.icpkys.com/shop/cart/add?token=" + $.cookie("the_cookie"),
+			async:false,
+	        crossDomain:true,
+	        datatype: "json",
+	        xhrFields: {  withCredentials: true  },
+	    	crossDomain: true,
+			data: {
+				goods_id: window.location.href.split("?shopid=")[1].split("?")[0],
+				goods_num: 1
+			},
+			success: function (msg) {
+				console.log(msg);
+				if (msg.status === "success") {
+					if (confirm("购物车添加商品成功,是否前往购物车")) {
+						window.location.pathname = "goodsCar.html";
+					}
+				} else {
+					alert("添加购物车失败,请刷新重试");
+				}
+			}
+		});
+	});
+</script>
+<script type="text/javascript">
+	/*轮播图*/
+	$(function () {
+        var mySwiper = new Swiper ('.swiper-container', {
+            direction: 'horizontal',
+            loop: true,
+            autoplay : 3000, //时间
+            // 如果需要分页器
+            pagination: '.swiper-pagination',
+            autoplayDisableOnInteraction : false,
+         }) ; 
+    });
+    /*选项卡*/
+    $('.lf_detailReading li').on('click',function(){
+    	$('.lf_detailReading li').removeClass('lf_goodslistOn');
+    	$('.lf_detailReading li').eq($(this).index()).addClass('lf_goodslistOn');
+    	$('.lf_goodDetail-boxs div').css('display','none');
+    	$('.lf_goodDetail-boxs div').eq($(this).index()).css('display','block');
+    })
+</script>
+</html>

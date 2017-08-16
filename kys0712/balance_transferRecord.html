@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>余额转账记录</title>
+<meta charset="utf-8">
+<meta name="author" content="yy">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="author" content="yy">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<meta http-equiv="Expires" content="-1">
+<meta http-equiv="Cache-Control" content="no-cache">
+<meta http-equiv="Pragma" content="no-cache">
+<meta name="description" content="" />
+<meta name="Keywords" content="" />
+<link rel="stylesheet" href="css/swiper.min.css">
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" type="text/css" href="fonts/iconfont.css">
+<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="js/swiper.min.js"></script>
+<script type="text/javascript" src="js/jquery.cookie.js"></script>
+<style type="text/css">
+	
+</style>
+</head>
+<body>
+<div class="public_head">
+	<h3>余额转账记录<br/><span>Balance transfer record</span></h3>
+	<a href="javascript:history.go(-1)" class="iconfont icon-back"></a>
+</div>
+<ul class="bills">
+	<!-- <li>
+		<div><span>08:33</span><br/>02-16</div>
+		<div>蝴蝶向前飞-转账<span>Transfer accounts</span></div>
+		<div>-200.00</div>
+	</li>
+	<li>
+		<div><span>08:33</span><br/>02-16</div>
+		<div>Kit Harington-收款<span>Receivables</span></div>
+		<div>-200.00</div>
+	</li>
+	<li>
+		<div><span>08:33</span><br/>02-16</div>
+		<div>蝴蝶向前飞-转账<span>Transfer accounts</span></div>
+		<div>-200.00</div>
+	</li>
+	<li>
+		<div><span>08:33</span><br/>02-16</div>
+		<div>Kit Harington-收款<span>Receivables</span></div>
+		<div>-200.00</div>
+	</li>
+	<li>
+		<div><span>08:33</span><br/>02-16</div>
+		<div>蝴蝶向前飞-转账<span>Transfer accounts</span></div>
+		<div>-200.00</div>
+	</li>
+	<li>
+		<div><span>08:33</span><br/>02-16</div>
+		<div>Kit Harington-收款<span>Receivables</span></div>
+		<div>-200.00</div>
+	</li> -->
+</ul>
+
+<script>
+	$.ajax({
+		url: "http://api.icpkys.com/user/home/balance_records",
+		data: {
+			token: $.cookie('the_cookie')
+		},
+		success: function (msg) {
+			console.log(msg);
+			if (!msg.data) {
+				return $(".bills").html('<h1 style="text-align: center; font-size: 20px; line-height: 50px;">暂无转账记录</h1>');
+			}
+			var txt = "";
+			var box = $(".bills");
+			var arr = msg.data;
+			for (var i = 0; i < arr.length; i++) {
+				if (arr[i].created_at) {
+					var time = new Date(arr[i].created_at * 1000);
+					var timeMonth = time.getMonth() + 1 < 10 ? ("0" + (time.getMonth() + 1)) : time.getMonth() + 1;
+					var timeDay = time.getDate() < 10 ? ("0" + (time.getDate())) : time.getMonth();
+					var timeHour = time.getHours() < 10 ? ("0" + (time.getHours())) : time.getHours();
+					var timeMinute = time.getMinutes() < 10 ? ("0" + (time.getMinutes())) : time.getMinutes();
+					var status;
+					var sym;
+					if (arr[i].message.match("我转给")) {
+						status = "转账";
+						sym = "-";
+					} else if (arr[i].message.match("转给我")) {
+						status = "收款";
+						sym = "+";
+					}
+					txt += '<li>'
+							+'<div><span>' + timeHour + ':' + timeMinute + '</span><br/>' + timeMonth + '-' + timeDay + '</div>'
+							+'<div>' + arr[i].dealname + '-' + status + '<span>Receivables</span></div>'
+							+'<div>' + sym + arr[i].money +  '</div>'
+						+'</li>';
+				}
+			}
+			box.html(txt);
+		}
+	});
+</script>
+</body>
+</html>

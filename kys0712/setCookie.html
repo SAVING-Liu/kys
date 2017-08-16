@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>注册页</title>
+		<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+		<script src="js/new_cookie.js"></script>
+    </head>
+    <body>
+    <script>
+    // 存cookie
+    $.cookie('pid',window.location.href.split("?pid=")[1].split("&")[0]);
+    // 跳转到注册页
+    window.location = '/regist.html';
+    </script>
+    </body>
+</html>

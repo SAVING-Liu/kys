@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>健康使者升级</title>
+<meta charset="utf-8">
+<meta name="author" content="yy">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="author" content="yy">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<meta http-equiv="Expires" content="-1">
+<meta http-equiv="Cache-Control" content="no-cache">
+<meta http-equiv="Pragma" content="no-cache">
+<meta name="description" content="" />
+<meta name="Keywords" content="" />
+<link rel="stylesheet" href="css/swiper.min.css">
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" type="text/css" href="fonts/iconfont.css">
+<script type="text/javascript" src="js/jquery-1.10.1.min.js"></script>
+<script type="text/javascript" src="js/swiper.min.js"></script>
+<script type="text/javascript" src="js/jquery.cookie.js"></script>
+<style type="text/css">
+	body{ background: #f6f6f6; }
+	.health_envoy1 p:nth-child(3) span.lf_buchajia{
+		margin-left:0
+	}
+	.health_envoy1 span.lf_buchajia{
+		font-size:16px;color:#333;
+	}
+</style>
+</head>
+<body>
+<div class="public_head">
+	<h3>健康使者升级<br/><span>Health angel upgrade</span></h3>
+	<a href="javascript:history.go(-1)" class="iconfont icon-back"></a>
+	<!-- <i onclick="window.location.href='购物车.html'" class="iconfont icon-icon-cart"></i> -->
+</div>
+<img src="images/tu19.png" class="res_img">
+<div class="health_envoy">
+	<div class="health_envoy1">
+		<p>升级健康使者<span>Health angel upgrade</span></p>
+		<p class="price" style="color:#fe8600"> <span style="color:#333;display:inline;font-size:16px">当前价格：</span><!--￥ <span>$ 0.00</span> --></p>
+		<p class="rmb"><span class="lf_buchajia">补差价：</span>00.00<span class="meiyuan">$ 00.00</span></p>
+	</div>
+</div>
+<div class="select_star">
+	<div class="select_star_title">选择星级<span>Select the star</span></div>
+	<ul>
+		<li class="star2" name='2'>两星<span>Two stars</span></li>
+		<li class="star3" name='3'>三星<span>Three stars</span></li>
+		<li class="star4" name='4'>四星<span>Four stars</span></li>
+		<li class="star5" name='5'>五星<span>Five stars</span></li>
+		<li class="star6" name='6'>六星<span>Six stars</span></li>
+	</ul>
+</div>
+<input id="purchase" type="button" class="btn1" value="购买 Purchase" />
+<script type="text/javascript">
+	//获取等级
+	//获得当前使者星级价格
+	$.ajax({
+		url:'http://api.icpkys.com/health/all?token='+$.cookie('the_cookie'),
+		type:'get',
+		data:{
+		},
+		success:function(req){
+			if(req.status=='success'){
+				console.log(req);
+				var starPrice = req.data[0];
+				console.log(starPrice[1]);
+					$.ajax({
+					url:'http://api.icpkys.com/health/grade?token='+$.cookie('the_cookie'),
+					type:'get',
+					data:{},
+					success:function(req){
+						console.log(req);
+						if(req.status=='success'){
+							$('.price').append((req.data.money).toFixed(2)+'   <span style="display:inline">$ '+(req.data.money*0.055).toFixed(2)+'</span>');
+							var star = req.data.grade;
+							if(star==2){
+								$('.star2').remove();
+							}
+							if(star==3){
+								$('.star2').remove();
+								$('.star3').remove();
+							}
+							if(star==4){
+								$('.star2').remove();
+								$('.star3').remove();
+								$('.star4').remove();
+							}
+							if(star==5){
+								$('.star2').remove();
+								$('.star3').remove();
+								$('.star4').remove();
+								$('.star5').remove();
+							}
+							if(star==6){
+								$('.select_star').find('ul').remove();
+								$('.select_star').append('<p style="padding:20px 0;text-align:center;font-size:16px;line-height:20px">您当前的使者等级为六星 ，无需升级！</p>')
+								$('#purchase').remove();
+							}
+							if(star==0){
+								$('.select_star').find('ul').remove();
+								$('.select_star').append('<p style="padding:20px 0;text-align:center;font-size:16px;line-height:20px">您还没有购买健康使者 ，无法升级！</p>')
+								$('#purchase').remove();
+							}
+							//补差价：
+							var name = 1;
+							$('#purchase').on('click',function(){
+								window.location.href='upgradeHealther.html?name='+name;
+							})
+							$(".select_star ul li").click(function() {
+								$(this).addClass('ss_hover').siblings().removeClass('ss_hover');
+								var grade = parseInt($(this).attr('name'));
+									name = parseInt($(this).attr('name'));
+								console.log(grade);
+								$('.rmb').html('');
+								if(grade==2){
+									$('.rmb').append('<span class="lf_buchajia">补差价：</span>'+ (starPrice[2]-req.data.money).toFixed(2) + '<span>$ '+((starPrice[2]-req.data.money)*0.055).toFixed(2)+'</span>');
+								}
+								if(grade==3){
+									$('.rmb').append('<span class="lf_buchajia">补差价：</span>'+ (starPrice[3]-req.data.money).toFixed(2) + '<span>$ '+((starPrice[3]-req.data.money)*0.055).toFixed(2)+'</span>');
+								}
+								if(grade==4){
+									$('.rmb').append('<span class="lf_buchajia">补差价：</span>'+ (starPrice[4]-req.data.money).toFixed(2) + '<span>$ '+((starPrice[4]-req.data.money)*0.055).toFixed(2)+'</span>');
+								}
+								if(grade==5){
+									$('.rmb').append('<span class="lf_buchajia">补差价：</span>'+( starPrice[5]-req.data.money).toFixed(2) + '<span>$ '+((starPrice[5]-req.data.money)*0.055).toFixed(2)+'</span>');
+								}
+								if(grade==6){
+									$('.rmb').append('<span class="lf_buchajia">补差价：</span>'+ (starPrice[6]-req.data.money).toFixed(2) + '<span>$ '+((starPrice[6]-req.data.money)*0.055).toFixed(2)+'</span>');
+								}
+							});
+						}else{
+							alert(req.massage);
+						}
+					},
+					error:function(res){
+						if(res.status!=undefined){
+			        		if(res.status==404){
+				        		alert('接口不存在');
+				        	}
+				        	if(res.status==401 && res.responseText=='{"error":"token_expired"}'){
+				        		alert('请重新登录');
+				        		window.location.href='login.html';
+				        	}
+			        	}else{
+			        		console.log(res);
+			        		alert('未知错误');
+			        	}
+					}
+				});
+			}
+		},
+		error:function(res){
+			if(res.status!=undefined){
+        		if(res.status==404){
+	        		alert('接口不存在');
+	        	}
+	        	if(res.status==401 && res.responseText=='{"error":"token_expired"}'){
+	        		alert('请重新登录');
+	        		window.location.href='login.html';
+	        	}
+        	}else{
+        		console.log(res);
+        		alert('未知错误');
+        	}
+		}
+	})
+</script>
+</body>
+</html>

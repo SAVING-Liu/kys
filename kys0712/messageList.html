@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>信息列表</title>
+<meta charset="utf-8"/>
+<meta name="author" content="yy"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK"/>
+<meta name="author" content="yy"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+<meta name="format-detection" content="telephone=no"/>
+<meta http-equiv="Expires" content="-1"/>
+<meta http-equiv="Cache-Control" content="no-cache"/>
+<meta http-equiv="Pragma" content="no-cache">
+<meta name="description" content="" />
+<meta name="Keywords" content="" />
+<link rel="stylesheet" href="css/swiper.min.css"/>
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+<link rel="stylesheet" href="css/lf_style.css"/>
+<link rel="stylesheet" type="text/css" href="fonts/iconfont.css"/>
+<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="js/swiper.min.js"></script>
+<script type="text/javascript" src="js/jquery.cookie.js"></script>
+<style type="text/css">
+	body{
+		background-color:#f5f5f5;
+	}
+	em{
+		font-style:normal;
+	}
+	.lf_footer{
+		height:45px;
+	}
+</style>
+</head>
+<body>
+<div class="public_head">
+	<h3>信息列表<br/><span>Information list</span></h3>
+	<a href="javascript:history.go(-1);" class="iconfont icon-back"></a>
+</div>
+<div class="lf_content" style="padding-bottom:50px">
+	<ul class="lf_messageList">
+		<!-- <li class="lf_messageItem lf_clearFloat">
+			<div class="lf_left lf_messageDetail">
+				<div class="lf_healthJin lf_clearFloat">
+					<em>激励健康金1000个</em><span>1000 Encourage healthy gold</span>
+				</div>
+				<div class="lf_healther lf_clearFloat">
+					<em>卖家 Seller：CR小杀</em><span>17300000000</span>
+				</div>
+			</div>	
+			<div class="lf_right lf_messageNum">
+				RMB <em>700.00</em>
+				<span>$ 100.00</span>
+			</div>
+		</li> -->
+	</ul>
+</div>
+<div style="height:50px" class="lf_footer">
+	<button onclick="javascript:window.location.href='postMessage.html'" id="purchase" type="button" class="lf_purchase">发布<br/><span>Release</span></button>
+</div>
+<script>
+    var _token = $.cookie('the_cookie');
+    $.ajax({
+	    	url:'http://api.icpkys.com/user/message_lists?token='+_token,
+	    	type:'get',
+	    	data:{},
+	    	success:function(req){
+	    		console.log(req);
+	    		if(req.status=='success'){
+	    			var data = req.data;
+	    			function msg(_arr,divClass){
+						$.each(_arr,function(index,value){
+							var _li = '<li class="lf_messageItem lf_clearFloat">'
+									+	'<div class="lf_left lf_messageDetail">'
+									+		'<div class="lf_healthJin lf_clearFloat">'
+									+			'<em>激励健康金'+value.amount+'个</em><span>'+value.amount +' Encourage healthy gold</span>'
+									+		'</div>'
+									+		'<div class="lf_healther lf_clearFloat">'
+									+			'<em>'+value.name+'</em><span>'+value.mobile+'</span>'
+									+		'</div>'
+									+	'</div>'	
+									+	'<div class="lf_right lf_messageNum">'
+									+		'RMB <em>'+value.price+'</em>'
+									+		'<span>$ '+parseInt(value.price / 7)+'</span>'
+									+	'</div>'
+									+'</li>';
+							divClass.append(_li);
+						})
+					};
+					var goodsDiv = $('.lf_messageList');
+					msg(req.data,goodsDiv);
+	    		}
+
+	    	},
+	    	error:function(req){
+	    	 
+	    			    		
+	    	}
+	    })
+</script>
+</body>
+</html>

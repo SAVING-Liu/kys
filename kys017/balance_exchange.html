@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>余额兑换</title>
+<meta charset="utf-8">
+<meta name="author" content="yy">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="author" content="yy">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<meta http-equiv="Expires" content="-1">
+<meta http-equiv="Cache-Control" content="no-cache">
+<meta http-equiv="Pragma" content="no-cache">
+<meta name="description" content="" />
+<meta name="Keywords" content="" />
+<link rel="stylesheet" href="css/swiper.min.css">
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" type="text/css" href="fonts/iconfont.css">
+<script type="text/javascript" src="js/jquery-1.10.1.min.js"></script>
+<script type="text/javascript" src="js/swiper.min.js"></script>
+<script type="text/javascript" src="js/jquery.cookie.js"></script>
+<style>
+	.lf_meiyuan{
+		font-size:12px;
+		color:#666;
+	}
+</style>
+</head>
+<body>
+<div class="public_head">
+	<h3>余额兑换<br/><span>Balance exchange</span></h3>
+	<a href="javascript:history.go(-1);" class="iconfont icon-back"></a>
+	<i onclick="javascript:window.location.href='balance_exchangeRecord.html'" class="iconfont icon-form"></i>
+</div>
+<div class="input_price">
+	<div class="dhje" id="money" contenteditable="true">请输入兑换金额<br/><span>Please enter the amount of the exchange</span></div>
+</div>
+<div class="usable_balance">
+	<div class="usable_title">可用余额<span>Available balance</span></div>
+	<div class="usable_tatol">￥ <span id="rmb"></span><br/><span class="lf_meiyuan">$ <span id="meiyuan"></span></span></div>
+</div>
+<div class="usable_balance">
+	<label for="currency1">
+		<div class="usable_title">流通健康金<span>Health fund type</span></div>
+	</label>
+	<!-- <input type="radio" name="currency" id="currency1" /> -->
+</div>
+<input id="jyt_sub" type="button" name="exchange" value="兑换 Exchange" class="exchange"/>
+<script type="text/javascript">
+	$(".dhje").click(function() {
+		$(this).text(" ").css({
+			height: '36px',
+			lineHeight: '36px'
+		});
+	});
+	$(".dhje").blur(function() {
+		if($(this).text()==" "){
+			$(this).html("请输入兑换金额<br><span>Please enter the amount of the exchange</span>").css({
+			height: '36px',
+			lineHeight: '18px'
+			});
+		}
+	});
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+	
+	$.ajax({
+		url: "http://api.icpkys.com/user/home/exchange",
+		type:"get",
+		data: {
+			token: $.cookie('the_cookie'),
+			type:0,
+		},
+		success: function (msg) {
+			console.log(msg)
+			$("#rmb").text(msg.data)
+			$("#meiyuan").text(msg.data/7)
+		},
+	});
+	$("#jyt_sub").on("click",function(){
+		var money = $("#money").text(); 
+		if (money == "请输入兑换金额Please enter the amount of the exchange") {
+			return alert("请输入兑换金额");
+		}
+		$.ajax({
+			url: "http://api.icpkys.com/user/home/exchange",
+			type:"get",
+			data: {
+				token: $.cookie('the_cookie'),
+				type:1,
+				money:money,
+			},
+			success: function (msg) {
+				console.log(msg)
+				if(msg.status=="success"){
+					alert(msg.message);
+					window.location.href="accountBalance.html";
+				}else{
+					alert(msg.massage);
+				}
+			},
+		});
+	})
+});
+</script>
+</body>
+</html>

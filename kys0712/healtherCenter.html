@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>健康使者中心</title>
+<meta charset="utf-8">
+<meta name="author" content="yy"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK"/>
+<meta name="author" content="yy"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+<meta name="format-detection" content="telephone=no"/>
+<meta http-equiv="Expires" content="-1"/>
+<meta http-equiv="Cache-Control" content="no-cache"/>
+<meta http-equiv="Pragma" content="no-cache"/>
+<meta name="description" content="" />
+<meta name="Keywords" content="" />
+<link rel="stylesheet" href="css/swiper.min.css"/>
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+<link rel="stylesheet" type="text/css" href="fonts/iconfont.css"/>
+<link rel="stylesheet" href="css/lf_style.css"/>
+<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="js/swiper.min.js"></script>
+<script type="text/javascript" src="js/jquery.cookie.js"></script>
+<style type="text/css">
+	body{ background: #f5f5f5; }
+</style>
+</head>
+<body>
+<div class="public_head">
+	<h3>健康使者中心<br/><span>Health envoy Center</span></h3>
+	<a href="javascript:history.go(-1)" class="iconfont icon-back"></a>
+</div>
+<div class="link_diagram">
+	<div class="lf_myStar">
+		<div class="lf_myStarbox lf_borderBox">
+			<div class="lf_starGrade lf_clearFloat">
+				<h2 class="lf_left lf_myStar-h2">
+					我的星级：<br/><span>My star</span>
+				</h2>
+				<p class="myGrade lf_right"></p>
+			</div>
+			<p class="lf_myHealthIndex">
+				
+			</p>
+			<div class="lf_line"></div>
+		</div>
+	</div>
+	<div style="height:10px;border-top:1px solid #e6e6e6;border-bottom:1px solid #e6e6e6"></div>
+	<ul>
+		<li>
+			<a href="myTeam.html" class="lf_jump lf_clearFloat">
+				<p>我的团队<span>My team</span></p>
+			</a>
+		</li>
+		<li>
+			<a href="healtherOrder.html" class="lf_jump lf_clearFloat">
+				<p>我的订单<span>My order</span></p>
+			</a>
+		</li>
+		<li>
+			<a href="dynamic_static.html" class="lf_jump lf_clearFloat">
+				<p>收入明细<span>Income breakdown</span></p>
+			</a>
+		</li>
+		<li>
+			<a href="virtualSeed.html" class="lf_jump lf_clearFloat">
+				<p>种子金<span>Seed money</span></p>
+			</a>
+		</li>
+		<li>
+			<a href="healtherUpgrade.html" class="lf_jump lf_clearFloat">
+				<p>健康使者升级<span>Health angel upgrade</span></p>
+			</a>
+		</li>
+		<li>
+			<a href="javascript:void(0);" class="lf_jump lf_clearFloat">
+				<p>种子健康金<span>Total seed health gold</span></p>
+			</a>
+		</li>
+		<li>
+			<a href="javascript:void(0);" class="lf_jump lf_clearFloat">
+				<p>激励健康金<span>Energize your health</span></p>
+			</a>
+		</li>
+		<li>
+			<a href="javascript:void(0);" class="lf_jump lf_clearFloat">
+				<p>购物健康金<span>Buy health gold</span></p>
+			</a>
+		</li>
+		<li>
+			<a href="picture.html" class="lf_jump lf_clearFloat">
+				<p>健康指数走势图<span>Health index chart</span></p>
+			</a>
+		</li>
+		<!-- <li>
+			<a href="#" class="lf_jump lf_clearFloat">
+				<p>深圳成分指数走势图<span>Shenzhen component index chart</span></p>
+			</a>
+		</li>
+		<li>
+			<a href="#" class="lf_jump lf_clearFloat">
+				<p>基因检测报告<span>Gene test report</span></p>
+			</a>
+		</li> -->
+	</ul>
+</div>
+<script type="text/javascript">
+	var _token = $.cookie('the_cookie');
+	//获取健康使者等级
+	$.ajax({
+		url:'http://api.icpkys.com/health/grade?token='+_token,
+		type:'get',
+		data:{},
+		success:function(req){
+			console.log(req);
+			if(req.status=='success'){
+				var _data = req.data;
+				//健康指数
+				if(_data.index==null){
+					_data.index=0;
+					$('.lf_myHealthIndex').html('我的健康指数：'+_data.index+'<br/><span>My health index</span>')
+				}else{
+					$('.lf_myHealthIndex').html('我的健康指数：'+_data.index+'<br/><span>My health index</span>')
+				}
+				
+				//星级
+				$('.myGrade').text(_data.grade);
+				var star = _data.grade;
+				if(star==1){
+					$('.lf_line').css({
+						transition:'all linear 0.3s',
+						width:'10%'
+					});
+				};
+				if(star==2){
+					$('.lf_line').css({
+						transition:'all linear 0.3s',
+						width:'30%'
+					});
+				};
+				if(star==3){
+					$('.lf_line').css({
+						transition:'all linear 0.3s',
+						width:'50%'
+					});
+				};
+				if(star==4){
+					$('.lf_line').css({
+						transition:'all linear 0.3s',
+						width:'70%'
+					});
+				};
+				if(star==5){
+					$('.lf_line').css({
+						transition:'all linear 0.3s',
+						width:'90%'
+					});
+				};
+				if(star==6){
+					$('.lf_line').css({
+						transition:'all linear 0.3s',
+						width:'98%'
+					});
+				};
+			}else{
+				alert(req.massage);
+			}
+		},
+		error:function(res){
+			console.log(res);
+			if(res.status!=undefined){
+        		if(res.status==404){
+	        		alert('接口不存在');
+	        	}
+	        	if(res.status==401 && res.responseText=='{"error":"token_expired"}'){
+	        		alert('请重新登录');
+	        		window.location.href='login.html';
+	        	}
+        	}else{
+        		console.log(res);
+        		alert('未知错误');
+        	}
+		}
+	});
+</script>
+</body>
+</html>

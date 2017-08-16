@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>首页</title>
+<meta charset="utf-8"/>
+<meta name="author" content="yy"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+<meta name="format-detection" content="telephone=no"/>
+<meta http-equiv="Expires" content="-1"/>
+<meta http-equiv="Cache-Control" content="no-cache"/>
+<meta http-equiv="Pragma" content="no-cache"/>
+<meta name="description" content="" />
+<meta name="Keywords" content="" />
+<link rel="stylesheet" href="css/swiper.min.css"/>
+<link rel="stylesheet" type="text/css" href="css/lf_style.css"/>
+<link rel="stylesheet" type="text/css" href="fonts/iconfont.css"/>
+<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="js/swiper.min.js"></script>
+<script type="text/javascript" src="js/jquery.cookie.js"></script>
+<style type="text/css">
+	body{ background: #fff; }
+	.jyt_tan{
+		position: fixed;
+		z-index: 9999999;
+		display: none;
+		top: 0;
+		left: 0;
+		width: 100vw;
+		height: 100vh;
+		background: rgba(0, 0, 0, 0.6);
+	}
+	.jyt_tanimg{
+		display: block;
+		width: 100%;
+		margin: 0 auto;
+		margin-top: 20%; 
+		
+	}
+	.jyt11{
+		position: relative;
+		width: 95%;
+		margin: 0 auto;
+	}
+	.close{
+		display: block;
+		position: absolute;
+		top: 0;
+		right: 0;
+		width: 10%;
+		height: 10%;
+	}
+	.jump{
+		display: block;
+		position: absolute;
+		bottom: 5%;
+		left: 8%;
+		width: 82%;
+		height: 12%;
+	}
+</style>
+</head>
+<body>
+<div class="jyt_tan">
+	<div class="jyt11">
+		<div class="close"></div>
+		<img class="jyt_tanimg" src="images/indextan.png">
+		<div class="jump"></div>
+	</div>
+</div>
+<!-- banner图 -->
+<div class="lf_banner">
+	<img src="images/lf_banner.png" alt=""/>
+</div>
+<!-- 首页导航 -->
+<div class="lf_content" style="padding-bottom:70px">
+	<div class="lf_indexNav lf_displayFlex">
+		<a href="findShop.html" class="lf_jump">
+			<img class="lf_navimg" src="images/lf_nav01.png" alt=""/>
+			<p class="lf_navname">找商家</p>
+			<p class="lf_navname-e">Find Businesses</p>
+		</a>
+		<a href="findGoods.html" class="lf_jump">
+			<img class="lf_navimg" src="images/lf_nav02.png" alt=""/>
+			<p class="lf_navname">找商品</p>
+			<p class="lf_navname-e">Looking For Goods</p>
+		</a>
+		<a href="findService.html" class="lf_jump">
+			<img class="lf_navimg" src="images/lf_nav03.png" alt=""/>
+			<p class="lf_navname">找服务</p>
+			<p class="lf_navname-e">Looking For Service</p>
+		</a>
+	</div>
+	<!-- 公告 -->
+	<div class="lf_gonggao">
+		<div onclick="javascript:window.location.href='announcement.html'" class="lf_gonggaoCon lf_clearFloat lf_borderBox">
+			<img class="lf_left" src="images/lf_notice.png" alt=""/>
+			<div class="lf_left lf_notice lf_borderBox">
+				<p>康益身G21商户康益身G21商户康益身G21商户</p>
+				<p>G21 merchants G21 merchants G21 merchants</p>
+			</div>
+		</div>
+	</div>
+	<!-- 商品专区 -->
+	<div class="lf_commodityZone">
+		<div class="lf_floorZone">
+			<h3 class="lf_zoneTitle lf_zoneTitle01">会员专区<span>Members Area</span></h3>
+			<a href="purchaseVIP.html" class="lf_jump">
+				<img src="images/lf_zone01.png" alt=""/>
+				<div class="lf_commodityDetail lf_borderBox lf_clearFloat">
+					<p class="lf_left lf_zoneTitle-fu">
+						购买VIP会员<span>Buy VIP Member</span>
+					</p>
+					<div class="lf_right lf_commodityPrice">
+						<p class="lf_price-cn">RMB <span id="vip_price"></span></p>
+						<p class="lf_price-e">$ <span id="vip_price1"></span></p>
+					</div>
+				</div>
+			</a>
+		</div>
+		<div class="lf_floorZone">
+			<h3 class="lf_zoneTitle lf_zoneTitle02">商家专区<span>Members Zone</span></h3>
+			<a href="purchaseG21.html" class="lf_jump">
+				<img src="images/lf_zone02.png" alt=""/>
+				<div class="lf_commodityDetail lf_borderBox lf_clearFloat">
+					<p class="lf_left lf_zoneTitle-fu">
+						成为G21商户<span>Become G21 Merchants</span>
+					</p>
+					<div class="lf_right lf_commodityPrice">
+						<p class="lf_price-cn">RMB <span id="g21_price"></span></p>
+						<p class="lf_price-e">$ <span id="g21_price1"></span></p>
+					</div>
+				</div>
+			</a>
+		</div>
+		<div class="lf_floorZone">
+			<h3 class="lf_zoneTitle lf_zoneTitle03">健康使者专区<span>The Health Messenger Zone</span></h3>
+			<a href="behealther.html" class="lf_jump">
+				<img src="images/lf_zone03.png" alt=""/>
+				<div class="lf_commodityDetail lf_borderBox lf_clearFloat" style="background:rgba(51,51,51,0.4)">
+					<p class="lf_left lf_zoneTitle-fu2">
+						购买健康服务成为健康使者<br/><span>Buy health services as health ambassadors</span>
+					</p>
+				</div>
+			</a>
+		</div>
+	</div>
+	<!-- 信息发布专区 -->
+	<div class="lf_inforZone">
+		<h3 onclick="javascript:window.location.href='messageList.html'" class="lf_inforTitle">
+			信息发布专区<span>Information Publishing Zone</span>
+		</h3>
+		<!-- <div class="lf_health lf_clearFloat">
+			<div class="lf_left">
+				<p class="lf_healthJin">激励健康金1000个<br/><span>1000 Encourage healthy gold</span></p>
+				<p class="lf_seller">卖家：CR小杀<span>Seller:CRxiaosha</span></p>
+			</div>
+			<div class="lf_right lf_healthMoney">
+				<p class="lf_health-e">$ 100.00</p>
+				<p class="lf_health-cn">RMB <span>700.00</span></p>
+			</div>
+		</div> -->
+		<div class="lf_outLinks">
+			
+		</div>
+		<div class="lf_photoLink" onclick="javascript:window.location.href='chartLink.html'">
+			<div class="lf_photoLinkCon lf_borderBox">
+				<i class="iconfont lf_left icon-qushitu"></i>
+				<h3 class="lf_photoTitle lf_left">图表链接<span>Charts link</span></h3>
+			</div>
+		</div>
+	</div>
+</div>
+<footer class="lf_footer">
+	<div class="lf_footerCon lf_displayFlex">
+		<a href="index.html" class="lf_jump lf_borderBox lf_footerOn">
+			<i class="iconfont icon-shouye-shouye"></i>
+			<span class="lf_footerlist-cn">首页</span>
+			<span class="lf_footerlist-e">Home</span>
+		</a>
+		<a href="interactiveZone.html" class="lf_jump lf_borderBox">
+			<i class="iconfont icon-hudong"></i>
+			<span class="lf_footerlist-cn">互动</span>
+			<span class="lf_footerlist-e">Interaction</span>
+		</a>
+		<a href="javascript:void(0);" class="lf_jump lf_borderBox">
+			<i class="iconfont icon-ditu"></i>
+			<span class="lf_footerlist-cn">导航</span>
+			<span class="lf_footerlist-e">Navigation</span>
+		</a>
+		<a href="personalCenter.html" class="lf_jump lf_borderBox">
+			<i class="iconfont icon-wode"></i>
+			<span class="lf_footerlist-cn">我的</span>
+			<span class="lf_footerlist-e">My</span>
+		</a>
+	</div>
+</footer>
+</body>
+<script type="text/javascript">
+$(document).ready(function() {
+if (sessionStorage.num == 1) {
+	setTimeout(function(){
+		$(".jyt_tan").fadeIn(1000)
+	},500)
+	sessionStorage.num = 2
+}
+	
+});
+$(".close").on("click",function(){
+	$(".jyt_tan").css('display', 'none');
+})
+$(".jump").on("click",function(){
+	window.location.href="behealther.html"
+})
+$.ajax({
+	    url : 'http://api.icpkys.com/price/config?token='+$.cookie('the_cookie'),
+	    type:'post',
+	    data:{
+	    },
+	    success : function(req){
+	    	console.log(req)
+	    	var price = req.data.vip_price
+	    		price = (price).toFixed(2)
+	    	var price11 = (price/7).toFixed(2)
+	    	$("#vip_price").text(price)
+	    	$("#vip_price1").text(price11)
+    		var price1 = req.data.g21_price
+    		price1 = (price1).toFixed(2)
+	    	var price22 = (price1/7).toFixed(2)
+	    	$("#g21_price").text(price1)
+	    	$("#g21_price1").text(price22)
+	    },
+	    error:function(){
+	    	alert("登录错误,刷新重试");
+	    }
+	})
+</script>
+</html>

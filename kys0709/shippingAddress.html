@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>收货地址</title>
+<meta charset="utf-8">
+<meta name="author" content="yy">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="author" content="yy">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<meta http-equiv="Expires" content="-1">
+<meta http-equiv="Cache-Control" content="no-cache">
+<meta http-equiv="Pragma" content="no-cache">
+<meta name="description" content="" />
+<meta name="Keywords" content="" />
+<link rel="stylesheet" href="css/swiper.min.css">
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" type="text/css" href="fonts/iconfont.css">
+<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="js/swiper.min.js"></script>
+<script type="text/javascript" src="js/jquery.cookie.js"></script>
+<script src="https://cdn.bootcss.com/handlebars.js/4.0.10/handlebars.js"></script>
+<style>
+	button{
+		outline: none;
+	}
+	.newAddress{
+		border: none;
+		background: #49d477;
+		width: 100%;
+		padding: 4px 0;
+		position: fixed;
+		bottom: 0;
+		color: #fff;
+	}
+	.newAddress > .span1{
+		font-size: 18px;
+	}
+	.newAddress > .span2{
+		font-size: 12px;
+	}
+	.list_div{
+		padding: 0 15px;
+		margin-top: 12px;
+		border-top: 1px solid #eaeaea;
+		border-bottom: 1px solid #eaeaea;
+	}
+	.list_top{
+		padding: 15px 0;
+		border-bottom: 1px solid #eaeaea;
+		font-size: 16px;
+	}
+	.list_top .wy_p1{
+		overflow: hidden;
+	}
+	.list_top .name{
+		float: left;
+	}
+	.list_top .phone{
+		float: right;
+	}
+	.list_top .wy_p2{
+		font-size: 12px;
+		margin-top: 8px;
+	}
+	.list_bottom {
+		padding: 10px 0;
+		overflow: hidden;
+	}
+	.list_bottom .gou_box{
+		color: #333;
+		overflow: hidden;
+		float: left;
+	}
+	.list_bottom .gou_box .icon-yuancircle46{
+		color: #888;
+	}
+	.list_bottom .gou_box > i{
+		float: left;
+		display: block;
+		width: 23px;
+		padding-top: 14px;
+
+	}
+	.list_bottom .gou_box > span{
+		float: left;
+	}
+	.list_bottom .gou_box > span > i{
+		font-style: normal;
+		font-size: 12px;
+		line-height: 12px;
+		color: #999;
+	}
+	.list_bottom .gou_box > span > em{
+		font-style: normal;
+		font-size: 15px;
+	}
+	.list_bottom .gou_box_on{
+		color: #49d477;
+	}
+	.btn-change, .list_bottom .btn{
+		float: right;
+		border: none;
+		background: #fff;
+		border-radius: 12px;
+		border: 1px solid #999;
+		padding: 4px;
+		margin-top: 7px;
+	}
+	.btn-change {
+		margin-right: 10px;
+		font: 13.3333px Arial;
+		outline: none;
+	}
+</style>
+</head>
+<body>
+<div class="public_head">
+	<h3>收货地址<br/><span>Shipping address</span></h3>
+	<a href="javascript:history.go(-1);" class="iconfont icon-back"></a>
+</div>
+<div class="list-box">
+	
+</div>
+
+<!-- <div class="list_div">
+	<div class="list_top">
+		<p class="wy_p1"> 
+			<span class="name">贾西贝</span>
+			<span class="phone">12367214978</span>
+		</p>
+		
+		<p class="wy_p2">河南省，郑州市，郑东新区，农业南路街道，如意西路建业大厦F座2306</p>
+	</div>
+	<div class="list_bottom">
+		<div class="gou_box gou_box_on">
+			<i class="iconfont icon-done"></i>
+			<span><em>默认地址</em><br><i>Default address</i></span>
+		</div>
+		<button class="btn" type="button">删除Cancel</button>
+		<button class="btn-change" href="./addAddress.html" type="button">修改Revise</button>
+	</div>
+</div> -->
+
+<!-- <div class="list_div">
+	<div class="list_top">
+		<p class="wy_p1"> 
+			<span class="name">贾西贝</span>
+			<span class="phone">12367214978</span>
+		</p>
+		
+		<p class="wy_p2">河南省，郑州市，郑东新区，农业南路街道，如意西路建业大厦F座2306</p>
+	</div>
+	<div class="list_bottom">
+		<div class="gou_box">
+			<i class="iconfont icon-yuancircle46"></i>
+			<span><em>设为默认地址</em><br><i>Set to the default address</i></span>
+		</div>
+		<button class="btn" type="button">删除Cancel</button>
+	</div>
+</div>
+
+<div class="list_div">
+	<div class="list_top">
+		<p class="wy_p1"> 
+			<span class="name">贾西贝</span>
+			<span class="phone">12367214978</span>
+		</p>
+		
+		<p class="wy_p2">河南省，郑州市，郑东新区，农业南路街道，如意西路建业大厦F座2306</p>
+	</div>
+	<div class="list_bottom">
+		<div class="gou_box">
+			<i class="iconfont icon-yuancircle46"></i>
+			<span><em>设为默认地址</em><br><i>Set to the default address</i></span>
+		</div>
+		<button class="btn" type="button">删除Cancel</button>
+	</div>
+</div> -->
+
+<button type="button" onclick="javascript:window.location.href='addAddress.html'" class="newAddress"><span class="span1">新增收货地址</span><br/><span  class="span2">New shipping address</span></button>
+<script type="text/javascript" defer="defer">
+	$(function(){
+		$(".list_div .gou_box").click(function(){
+			var name = $(this).parent().prev().children(".wy_p1").children(".name").html();
+			if (!confirm("是否设置 " + name + " 的收货地址为默认")) {
+				return false;
+			}
+			var id = $(this).parent()[0].dataset.id;
+			var box = this;
+			$.ajax({
+				url: "http://api.icpkys.com/user/set_default_address",
+		    	type: "GET",
+		    	async: false,
+		    	data: {
+		    		token: _token,
+		    		id: id
+		    	},
+		    	success: function (msg) {
+		    		if (msg.message) {
+		    			alert(msg.message);
+		    			doit(box);
+		    		} else {
+		    			alert(msg.massage);
+		    		}
+		    	}
+			});
+
+			function doit(it) {
+				$(it).children("i").removeClass('icon-yuancircle46').addClass('icon-done');
+				$(it).find("em").text("默认地址");
+				$(it).find("span > i").text("Default address");
+				$(it).addClass('gou_box_on');
+
+
+				$(it).parents(".list_div").siblings('.list_div').find(".gou_box").children("i").removeClass('icon-done').addClass('icon-yuancircle46');
+				$(it).parents(".list_div").siblings('.list_div').find(".gou_box").find("em").text("设为默认地址");
+				$(it).parents(".list_div").siblings('.list_div').find(".gou_box").find("span > i").text("Set to the default address");
+				$(it).parents(".list_div").siblings('.list_div').find(".gou_box").removeClass('gou_box_on');
+			}
+			
+		});
+
+
+		// 删除
+		$(".btn").click(function(){
+			var id = $(this).parent()[0].dataset.id;
+			var name = $(this).parent().prev().children(".wy_p1").children(".name").html();
+			if (!confirm("是否删除 " + name + " 的收货地址")) {
+				return false;
+			}
+			var box = $(this);
+			$.ajax({
+		    	url: "http://api.icpkys.com/user/delete_address",
+		    	type: "GET",
+		    	async: false,
+		    	data: {
+		    		token: _token,
+		    		id: id
+		    	},
+		    	success: function (msg) {
+		    		if (msg.message) {
+						box.parents(".list_div").fadeOut();
+		    			alert(msg.message);
+		    		} else {
+		    			alert(msg.massage);
+		    		}
+		    	}
+		    })
+		});
+	})
+</script>
+
+<!-- handelbars模板 -->
+<script type="text/x-handlebars-template" id="site-show-handlebars">
+	{{#each this}}
+		<div class="list_div">
+			<div class="list_top">
+				<p class="wy_p1"> 
+					<span class="name">{{name}}</span>
+					<span class="phone">{{phone}}</span>
+				</p>
+				
+				<p class="wy_p2">{{province}}，{{city}}，{{district}}，{{address}}</p>
+			</div>
+			<div class="list_bottom" data-id="{{id}}">
+				{{#if is_default}}
+				<div class="gou_box gou_box_on">
+					<i class="iconfont icon-done"></i>
+					<span><em>默认地址</em><br><i>Default address</i></span>
+				</div>
+				{{else}}
+				<div class="gou_box">
+					<i class="iconfont icon-yuancircle46"></i>
+					<span><em>设为默认地址</em><br><i>Set to the default address</i></span>
+				</div>
+				{{/if}}
+				<button class="btn" type="button">删除Cancel</button>
+				<a class="btn-change" href="./addAddress.html?siteId={{id}}" type="button">修改Revise</a>
+			</div>
+		</div>
+	{{/each}}
+</script>
+
+<script defer="defer">
+    var _token = $.cookie('the_cookie');
+    $.ajax({
+    	url: "http://api.icpkys.com/user/lists_address",
+    	type: "GET",
+    	async: false,
+    	data: {
+    		token: _token
+    	},
+    	success: function (msg) {
+    		console.log(msg);
+    		var arr = msg.data;
+    		var myTemplate = Handlebars.compile($("#site-show-handlebars").html());
+    		$('.list-box').html(myTemplate(arr));
+    		// var txt = "";
+    		// for (var i = 0; i < arr.length; i++) {
+    		// 	txt += '<div class="list_div">'
+						// +	'<div class="list_top">'
+						// +		'<p class="wy_p1"> '
+						// +			'<span class="name">' + arr[i].name + '</span>'
+						// +			'<span class="phone">' + arr[i].phone + '</span>'
+						// +		'</p>'
+						// +		'<p class="wy_p2">' + arr[i].province + '，' + arr[i].city + '，' + arr[i].district + '，' + arr[i].address + '</p>'
+						// +	'</div>'
+						// +	'<div class="list_bottom" data-id="' + arr[i].id + '">'
+						// if (arr[i].is_default) {
+						// 	txt += '<div class="gou_box gou_box_on">'
+						// 		+	'<i class="iconfont icon-done"></i>'
+						// 		+	'<span><em>默认地址</em><br><i>Default address</i></span>'
+						// 		+'</div>';
+						// } else {
+						// 	txt += '<div class="gou_box">'
+						// 		+	'<i class="iconfont icon-yuancircle46"></i>'
+						// 		+	'<span><em>设为默认地址</em><br><i>Set to the default address</i></span>'
+						// 		+'</div>';
+						// }
+						// txt +=		'<button class="btn" type="button" data-id="' + arr[i].id + '">删除Cancel</button>'
+						// +     		'<a class="btn-change" href="./addAddress.html?siteId=' + arr[i].id + '" type="button">修改Revise</a>'
+						// +	'</div>'
+						// +'</div>'
+    		// }
+    		// $(".list-box").html(txt);
+    	}
+    });
+</script>
+
+
+</body>
+</html>

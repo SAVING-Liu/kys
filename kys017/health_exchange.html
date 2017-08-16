@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>流通健康金_兑换</title>
+<meta charset="utf-8">
+<meta name="author" content="yy">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="author" content="yy">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<meta http-equiv="Expires" content="-1">
+<meta http-equiv="Cache-Control" content="no-cache">
+<meta http-equiv="Pragma" content="no-cache">
+<meta name="description" content="" />
+<meta name="Keywords" content="" />
+<link rel="stylesheet" href="css/swiper.min.css">
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" type="text/css" href="fonts/iconfont.css">
+<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="js/swiper.min.js"></script>
+<script type="text/javascript" src="js/jquery.cookie.js"></script>
+</head>
+<body>
+<div class="public_head">
+	<h3>流通健康金兑换<br/><span>Circulation health exchange</span></h3>
+	<a href="javascript:history.go(-1)" class="iconfont icon-back"></a>
+	<i onclick="javascript:window.location.href='health_exchangeRecord.html'" class="iconfont icon-form"></i>
+</div>
+<div class="input_price">
+	<div class="dhje" contenteditable="true">请输入兑换金额<br/><span>Please enter the amount of the exchange</span></div>
+</div>
+<div class="usable_balance">
+	<div class="usable_title">可用余额<span>Available balance</span></div>
+	<div class="usable_tatol">0.00</div>
+</div>
+<div class="currency">
+	<div>币种<span>Currency</span></div>
+</div>
+<!-- <div class="currency_select">
+	<label for="currency1">种子健康金<span>Seed health benefits</span></label>
+	<input type="radio" name="currency" id="currency1" data-number="0" />
+</div> -->
+<div class="currency_select">
+	<label for="currency2">激励健康金<span>Incentive Health Fund</span></label>
+	<input type="radio" name="currency" checked="checked" id="currency2" data-number="1" />
+</div>
+<div class="currency_select">
+	<label for="currency3">购物健康金<span>Shopping health benefits</span></label>
+	<input type="radio" name="currency" id="currency3" data-number="2" />
+</div>
+<div class="currency_select">
+	<label for="currency4">余额<span>Balance</span></label>
+	<input type="radio" name="currency" id="currency4" data-number="3" />
+</div>
+<input type="button" name="exchange" value="兑换 Exchange" class="exchange"/>
+<script type="text/javascript">
+	$(".dhje").click(function() {
+		$(this).text(" ").css({
+			height: '36px',
+			lineHeight: '36px'
+		});
+	});
+	$(".dhje").blur(function() {
+		if($(this).text()==" "){
+			$(this).html("请输入兑换金额<br/><span>Please enter the amount of the exchange</span>").css({
+			height: '36px',
+			lineHeight: '18px'
+			});
+		}
+	});
+</script>
+
+<script>
+	var flag = 0;//兑换种子币
+	$.ajax({
+		url: "http://api.icpkys.com/user/home/my_health",
+		data: {
+			token: $.cookie('the_cookie'),
+			type: 0
+		},
+		success: function (msg) {
+			console.log(msg);
+			$(".usable_tatol").html(msg.data.toFixed(2));
+		}
+	});
+	$("input[name=currency]").on("change", function () {
+		flag = this.attributes["data-number"].value;
+	});
+	
+	$(".exchange").on("touchend", function () {
+		var moneyNumber = parseFloat($(".dhje").html());
+		console.log(moneyNumber);
+		if (!moneyNumber) {
+			return alert("请输入兑换金额");
+		}
+		$.ajax({
+			url: "http://api.icpkys.com/user/home/exchange_health",
+			data: {
+				token: $.cookie('the_cookie'),
+				type: 1,
+				money_type: flag,
+				money: moneyNumber
+			},
+			success: function (msg) {
+				console.log(msg);
+				if (msg.status == "success") {
+					alert(msg.message);
+					history.go(-1);
+				} else {
+					alert(msg.massage);
+				}
+			}
+		});
+	});
+</script>
+</body>
+</html>

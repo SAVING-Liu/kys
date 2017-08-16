@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>我的推广会员</title>
+<meta charset="utf-8">
+<meta name="author" content="yy">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="author" content="yy">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<meta http-equiv="Expires" content="-1">
+<meta http-equiv="Cache-Control" content="no-cache">
+<meta http-equiv="Pragma" content="no-cache">
+<meta name="description" content="" />
+<meta name="Keywords" content="" />
+<link rel="stylesheet" href="css/swiper.min.css">
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" type="text/css" href="fonts/iconfont.css">
+<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="js/swiper.min.js"></script>
+<script type="text/javascript" src="js/jquery.cookie.js"></script>
+<style type="text/css">
+	body{ background: #f5f5f5; }
+</style>
+</head>
+<body>
+<div class="public_head">
+	<h3>我的会员<br/><span>My members</span></h3>
+	<a href="javascript:history.go(-1)" class="iconfont icon-back"></a>
+</div>
+<ul class="credential">
+	<li class="zhi credential_hover">直推会员<span>Push straight member</span></li>
+	<li class="jian">间推会员<span>Between push member</span></li>
+</ul>
+<div class="credential_con" style="display: block;">
+	<ul class="zhitui">
+		<!-- <li>
+			<div class="credential_c_num">1</div>
+			<img src="images/tu9.png" class="credential_pic">
+			<div class="credential_c_t">Evelyn Fisher<span>2017-03-29  09:55</span></div>
+			<div class="credential_c_phone">136****2104</div>
+			<img src="images/tu17.png" class="credential_flag">
+		</li> -->
+	</ul>
+</div>	
+<div class="credential_con">
+	<ul class="jiantui">
+		<!-- <li>
+			<div class="credential_c_num">1</div>
+			<img src="images/tu9.png" class="credential_pic">
+			<div class="credential_c_t">2Evelyn Fisher<span>2017-03-29  09:55</span></div>
+			<div class="credential_c_phone">136****2104</div>
+			<img src="images/tu17.png" class="credential_flag">
+		</li> -->
+	</ul>
+</div>		
+<script type="text/javascript">
+	$(".credential li").click(function() {
+		var index = $(this).index();
+		$(this).addClass('credential_hover').siblings().removeClass('credential_hover');
+		$(".credential_con").eq(index).show().siblings(".credential_con").hide();
+	});
+</script>
+<script type="text/javascript">
+	var _token = $.cookie('the_cookie');
+	$.ajax({
+		url:'http://api.icpkys.com/user/home/my_users?token='+_token,
+		type:'get',
+		data:{},
+		success:function(req){
+			console.log(req);
+			if(req.status=='success'){
+				var data = req.data.first_users;
+				console.log(data);
+				var zhitui = $('.zhitui');
+				$.each(data,function(index,value){
+					if(value.avatar==null){
+							value.avatar = 'images/lf_center.png'
+						};
+						if(value.nickname==null){
+							value.nickname = '这个人很懒。。。'
+						};
+						var _li = '';
+						if(value.vip_sum==0){
+ 							_li = '<li>'
+								+	  '<div class="credential_c_num">'+ (index+1) +'</div>'
+								+	  '<img src="'+ value.avatar +'" class="credential_pic"/>'
+								+	 ' <div class="credential_c_t">'+ value.nickname +'<span>'+value.created_at+'</span></div>'
+								+	  '<div class="credential_c_phone">'+ value.phone +'</div>'
+								+ '</li>';
+						}else{
+							_li = '<li>'
+								+	  '<div class="credential_c_num">'+ (index+1) +'</div>'
+								+	  '<img src="'+ value.avatar +'" class="credential_pic"/>'
+								+	 ' <div class="credential_c_t">'+ value.nickname +'<span>'+value.created_at+'</span></div>'
+								+	  '<div class="credential_c_phone">'+ value.phone +'</div>'
+								+	 ' <img src="images/tu17.png" class="credential_flag"/>'
+								+ '</li>';
+						}
+					zhitui.append(_li);
+				});
+				$('.zhi').on('click',function(){
+					$('.zhitui').html('');
+					var zhitui = $('.zhitui');
+					$.each(data,function(index,value){
+						if(value.avatar==null){
+							value.avatar = 'images/lf_center.png'
+						};
+						if(value.nickname==null){
+							value.nickname = '这个人很懒。。。'
+						};
+						var _li = '';
+						if(value.vip_sum==0){
+ 							_li = '<li>'
+								+	  '<div class="credential_c_num">'+ (index+1) +'</div>'
+								+	  '<img src="'+ value.avatar +'" class="credential_pic"/>'
+								+	 ' <div class="credential_c_t">'+ value.nickname +'<span>'+value.created_at+'</span></div>'
+								+	  '<div class="credential_c_phone">'+ value.phone +'</div>'
+								+ '</li>';
+						}else{
+							_li = '<li>'
+								+	  '<div class="credential_c_num">'+ (index+1) +'</div>'
+								+	  '<img src="'+ value.avatar +'" class="credential_pic"/>'
+								+	 ' <div class="credential_c_t">'+ value.nickname +'<span>'+value.created_at+'</span></div>'
+								+	  '<div class="credential_c_phone">'+ value.phone +'</div>'
+								+	 ' <img src="images/tu17.png" class="credential_flag"/>'
+								+ '</li>';
+						}
+						zhitui.append(_li);
+					});
+				});
+				var data2 = req.data.second_users;
+				$('.jian').on('click',function(){
+					$('.jiantui').html('');
+					var jiantui = $('.jiantui');
+					$.each(data2,function(index,value){
+						if(value.avatar==null){
+							value.avatar = 'images/lf_center.png'
+						};
+						if(value.nickname==null){
+							value.nickname = '这个人很懒。。。'
+						};
+						var _li = '';
+						if(value.vip_sum==0){
+ 							_li = '<li>'
+								+	  '<div class="credential_c_num">'+ (index+1) +'</div>'
+								+	  '<img src="'+ value.avatar +'" class="credential_pic"/>'
+								+	 ' <div class="credential_c_t">'+ value.nickname +'<span>'+value.created_at+'</span></div>'
+								+	  '<div class="credential_c_phone">'+ value.phone +'</div>'
+								+ '</li>';
+						}else{
+							_li = '<li>'
+								+	  '<div class="credential_c_num">'+ (index+1) +'</div>'
+								+	  '<img src="'+ value.avatar +'" class="credential_pic"/>'
+								+	 ' <div class="credential_c_t">'+ value.nickname +'<span>'+value.created_at+'</span></div>'
+								+	  '<div class="credential_c_phone">'+ value.phone +'</div>'
+								+	 ' <img src="images/tu17.png" class="credential_flag"/>'
+								+ '</li>';
+						}
+						jiantui.append(_li);
+					});
+				});
+			}else{
+				alert(req.massage);
+			}
+		},
+		error:function(res){
+			if(res.status!=undefined){
+        		if(res.status==404){
+	        		alert('接口不存在');
+	        	}
+	        	if(res.status==401 && res.responseText=='{"error":"token_expired"}'){
+	        		alert('请重新登录');
+	        		window.location.href='login.html';
+	        	}
+        	}else{
+        		console.log(res);
+        		alert('未知错误');
+        	}
+		}
+
+	})
+</script>
+</body>
+</html>

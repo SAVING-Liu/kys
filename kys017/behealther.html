@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>成为健康使者</title>
+<meta charset="utf-8">
+<meta name="author" content="yy">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="author" content="yy">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<meta http-equiv="Expires" content="-1">
+<meta http-equiv="Cache-Control" content="no-cache">
+<meta http-equiv="Pragma" content="no-cache">
+<meta name="description" content="" />
+<meta name="Keywords" content="" />
+<link rel="stylesheet" href="css/swiper.min.css">
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+<link rel="stylesheet" href="css/lf_style.css"/>
+<link rel="stylesheet" type="text/css" href="fonts/iconfont.css"/>
+<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="js/swiper.min.js"></script>
+<script type="text/javascript" src="js/jquery.cookie.js"></script>
+<style type="text/css">
+	body{ background: #f6f6f6; }
+	.lf_manageJiang{
+		display:block;
+	}
+	.lf_manageJiangBox{
+		margin:35% auto 0;
+	}
+	.lf_serviceCon{
+		font-size:12px;
+		color:#999;
+	}
+	.lf_selectH3{
+		text-align:center;
+		font-size:16px;
+		color:#333;
+		margin-bottom:10px;
+	}
+</style>
+</head>
+<body>
+<div class="public_head">
+	<h3>成为健康使者<br/><span>Become a health messenger</span></h3>
+	<a href="javascript:history.go(-1)" class="iconfont icon-back"></a>
+	<!-- <i onclick="window.location.href='购物车.html'" class="iconfont icon-icon-cart"></i> -->
+</div>
+<img src="images/tu19.png" class="res_img">
+<div class="health_envoy">
+	<div class="health_envoy1">
+		<p>购买健康服务成为健康使者<span>Buy health services as health ambassadors</span></p>
+		<p>￥ 700-44100<span>$ 100-6300</span></p>
+		<p class="rmb"></p>
+	</div>
+</div>
+<div class="select_star">
+	<div class="select_star_title">选择星级<span>Select the star</span></div>
+	<ul>
+		<li name='1' class="ss_hover">一星<span>One star</span></li>
+		<li name='2'>两星<span>Two stars</span></li>
+		<li name='3'>三星<span>Three stars</span></li>
+		<li name='4'>四星<span>Four stars</span></li>
+		<li name='5'>五星<span>Five stars</span></li>
+		<li name='6'>六星<span>Six stars</span></li>
+	</ul>
+</div>
+<div class="lf_manageJiang">
+	<div class="lf_manageJiangBox lf_borderBox">
+		<h2>服务内容<br/><span>The service content</span></h2>
+		<p style="padding:10px 0;" class="lf_jiangTips">
+			<!-- <span class="lf_serviceCon"></span> -->
+			 1、抑癌基因检测，出检测报告，健康指导意见（纸质版、电子版）。<br/>2、北美专家1次健康咨询（不含产品）。
+		</p>
+		<h3 class="lf_selectH3">（二选一）</h3>
+		<div class="lf_cardSure lf_clearFloat">
+			<button class="lf_makeSure" type="button">确定<br/><span style="font-size:12px">Confirm</span></button>
+		</div>
+	</div>
+</div>
+<input id="purchase" type="button" class="btn1" value="购买 Purchase" />
+<script type="text/javascript">
+	
+	//弹窗消息
+	$('.lf_makeSure').on('click',function(){
+		$('.lf_manageJiang').css('display','none');
+	});
+	//星级健康金获取
+	$.ajax({
+		url:'http://api.icpkys.com/health/all?token='+$.cookie('the_cookie'),
+		type:'get',
+		data:{
+		},
+		success:function(req){
+            console.log(req);
+			if(req.status=='success'){
+				console.log(req.data[0][1]);
+				$('.rmb').append((req.data[0][1]) + '<span>$ '+ ((req.data[0][1])*0.055).toFixed(2) +'</span>');
+				var name = 1;
+				$('#purchase').on('click',function(){
+					window.location.href='payment.html?id=3?name='+name;
+				})
+				$(".select_star ul li").click(function() {
+					$(this).addClass('ss_hover').siblings().removeClass('ss_hover');
+					var grade = parseInt($(this).attr('name'));
+						name = parseInt($(this).attr('name'));
+					$('.rmb').html('');
+					if(grade==2){
+						$('.rmb').append((req.data[0][2]) + '<span>$ '+ ((req.data[0][2])*0.055).toFixed(2) +'</span>');
+						$('.lf_manageJiang').css('display','block');
+						$('.lf_jiangTips').html(' 1、肿瘤单项任选一项，出检测报告、健康指导意见。<br/>2、北美专家健康咨询6个月（含个性化方案、24小时咨询、跟踪指导服务不含产品）。');
+						$('.lf_selectH3').html('（二选一）');
+					}
+					if(grade==3){
+						$('.rmb').append((req.data[0][3]) + '<span>$ '+ ((req.data[0][3])*0.055).toFixed(2) +'</span>');
+						$('.lf_manageJiang').css('display','block');
+						$('.lf_jiangTips').html('  1、男4项/女4项肿瘤基因检测，出检测报告（纸质版、电子版）。<br/>2、北美专家健康咨询6个月（含个性化方案、24小时咨询、跟踪指导服务。不含产品）。');
+						$('.lf_selectH3').html('（二选一）');
+					}
+					if(grade==4){
+						$('.rmb').append((req.data[0][4]) + '<span>$ '+ ((req.data[0][4])*0.055).toFixed(2) +'</span>');
+						$('.lf_manageJiang').css('display','block');
+						$('.lf_jiangTips').html(' 1、多种常见肿瘤男7项/女9项基因检测，出纸质版、电子版报告，健康指导意见。<br/>2、北美专家一家三口健康咨询1年（含个性化方案、24小时咨询、跟踪指导服务）不含产品。<br/>3、清肝清肠排毒1人（含北美专家指导和产品<br/>4、基因减肥一人次。');
+						$('.lf_selectH3').html('（四选一）');
+					}
+					if(grade==5){
+						$('.rmb').append((req.data[0][5]) + '<span>$ '+ ((req.data[0][5])*0.055).toFixed(2) +'</span>');
+						$('.lf_manageJiang').css('display','block');
+						$('.lf_jiangTips').html('  1、基因检测1600多项，出报告，健康指导意见（纸质版、电子版）。<br/>2、北美专家一家三口2年健康咨询（含个性化方案、24小时咨询、跟      踪指导服务），清肝清肠排毒1人次，含北美专家指导和产品。<br/>3、儿童强化免疫套餐（含北美专家个性化方案和3个月产品）。<br/>4、儿童消化功能提升套餐1人（含北美专家个性化方案3个月产品）。<br/>5、基因减肥1人+清肝清肠排毒1人（含北美专家指导和产品）。');
+						$('.lf_selectH3').html('（五选一）');
+					}
+					if(grade==6){
+						$('.rmb').append((req.data[0][6]) + '<span>$ '+ ((req.data[0][6])*0.055).toFixed(2) +'</span>');
+						$('.lf_manageJiang').css('display','block');
+						$('.lf_jiangTips').html(' 1、全套基因检测1600多项2人。<br/>2、北美专家一家三口3年健康咨询（含个性化方案、24小时咨询、跟踪指导服务）+清肝清肠排毒2人次。<br/>3、健康基础保养套餐（含北美专家个性化方案+3个月产品）。<br/>4、美容套餐（含北美专家个性化方案+3个月产品）。 <br/>5、强化免疫套餐（含北美专家个性化方案+3个月产品）。<br/>6、孕妇套餐（含北美专家个性化方案，3个月产品）。');
+						$('.lf_selectH3').html('（六选一）');
+					}
+					if(grade==1){
+						$('.rmb').append((req.data[0][1]) + '<span>$ '+ ((req.data[0][1])*0.055).toFixed(2) +'</span>');
+						$('.lf_manageJiang').css('display','block');
+						$('.lf_jiangTips').html('  1、抑癌基因检测，出检测报告，健康指导意见（纸质版、电子版）。<br/>2、北美专家1次健康咨询（不含产品）。');
+						$('.lf_selectH3').html('（二选一）');
+					}
+				});
+			}else{
+				alert(req.massage);
+			}	
+		},
+		error:function(res){
+			if(res.status!=undefined){
+                if(res.status==404){
+                    alert('接口不存在');
+                }
+                if(res.status==401 && res.responseText=='{"error":"token_expired"}'){
+                    alert('请重新登录');
+                    window.location.href='login.html';
+                }
+            }else{
+                console.log(res);
+                alert('未知错误');
+            }
+		}
+	});
+</script>
+</body>
+</html>

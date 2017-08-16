@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>购买VIP会员</title>
+<meta charset="utf-8">
+<meta name="author" content="yy">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="author" content="yy">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<meta http-equiv="Expires" content="-1">
+<meta http-equiv="Cache-Control" content="no-cache">
+<meta http-equiv="Pragma" content="no-cache">
+<meta name="description" content="" />
+<meta name="Keywords" content="" />
+<link rel="stylesheet" href="css/swiper.min.css">
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" type="text/css" href="fonts/iconfont.css">
+<link rel="stylesheet" href="css/lf_style.css"/>
+<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="js/swiper.min.js"></script>
+<script type="text/javascript" src="js/jquery.cookie.js"></script>
+<style type="text/css">
+	.lf_meiyuan{
+		font-size:12px;
+		color:#666;
+	}
+	.usable_tatol{
+		font-size:16px;
+		color:#fe7200;
+	}
+	.usable_title span{
+		margin:0;
+	}
+	.lf_rmb{
+		color:#fe7200;
+		font-size:12px;
+	}
+	body{
+		background-color:#f5f5f5;
+		padding-bottom:70px;
+	}
+	.usable_balance{
+		background-color:#fff;
+	}
+	.lf_merchant{
+		margin-bottom:15px;
+	}
+	.lf_merchant .lf_jump img{
+		display:block;
+		width:100%;
+	}
+	.usable_balance{
+		border-top:1px solid #e6e6e6;
+		border-bottom:1px solid #e6e6e6;
+	}
+	.lf_footer{
+		height:50px;
+	}
+	.description{
+		padding:20px 4%;
+		text-indent: 2em;
+		font-size:16px;
+		color:#333;
+	}
+</style>
+</head>
+<body>
+<div class="public_head">
+	<h3>购买VIP会员<br/><span>Buy VIP Member</span></h3>
+	<a href="javascript:history.go(-1)" class="iconfont icon-back"></a>
+</div>
+<div class="lf_merchant">
+	<a href="javascript:void(0);" class="lf_jump">
+		<img src="images/lf_vip.png" alt=""/>
+	</a>
+</div>
+<div class="usable_balance">
+	<div class="usable_title">购买VIP会员<br/><span>Buy VIP Member</span></div>
+	<div class="usable_tatol"><span class="lf_rmb">￥ </span><span id="vip_price"></span><br/><span class="lf_meiyuan">$<span id="vip_price1"></span></span></div>
+</div>
+<div class="description">
+	健康高于一切，失去健康将失去一切！提高生命质量和健康水平，是全人类共同的目标！健康不仅仅是一种权利，是一种义务，更是一种责任！我们要对自己的健康真正负起责任来，不仅要把握科学而系统的健康知识和全新的健康理念与方法，更要有实现自我健康的能力与行动。普及健康知识,增强国民体质是我们每个科宣健康工作者义不容辞的责任。
+</div>
+<div class="lf_footer">
+	<button onclick="javascript:window.location.href='payment.html?id=1'" type="button" class="lf_purchase">购买<br/><span>Purchase</span></button>
+</div>
+</body>
+<script type="text/javascript">
+ $.ajax({
+    url : 'http://api.icpkys.com/price/config?token='+$.cookie('the_cookie'),
+    type:'post',
+    data:{
+    },
+    success : function(req){
+    	// console.log(req)
+    	var price = req.data.vip_price
+    		price = price.toFixed(2)
+    		price1 = (price/7).toFixed(2)
+    	$("#vip_price").text(price)
+    	$("#vip_price1").text(price1)
+    },
+    error:function(res){
+    	if(res.status!=undefined){
+    		if(res.status==404){
+        		alert('接口不存在');
+        	}
+        	if(res.status==401 && res.responseText=='{"error":"token_expired"}'){
+        		alert('请重新登录');
+        		window.location.href='login.html';
+        	}
+    	}else{
+    		console.log(res);
+    		alert('未知错误');
+    	}
+    }
+})
+</script>
+</html>

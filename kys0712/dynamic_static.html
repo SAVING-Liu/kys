@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>动态明细_静态明细</title>
+<meta charset="utf-8">
+<meta name="author" content="yy">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="author" content="yy">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<meta http-equiv="Expires" content="-1">
+<meta http-equiv="Cache-Control" content="no-cache">
+<meta http-equiv="Pragma" content="no-cache">
+<meta name="description" content="" />
+<meta name="Keywords" content="" />
+<link rel="stylesheet" href="css/swiper.min.css">
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" type="text/css" href="fonts/iconfont.css"/>
+<link rel="stylesheet" href="css/lf_style.css"/>
+<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="js/swiper.min.js"></script>
+<script type="text/javascript" src="js/jquery.cookie.js"></script>
+<style>
+	 #loading{
+         position:absolute;width:100%;height:100%;background-color:#fff;z-index:99;
+      /* text-align:center; */
+    }
+    #loading>img{
+          display:block;
+          margin:40vw auto;
+          width:60vw;
+          height:60vw;
+    }
+</style>
+</head>
+<body>
+<div id="loading" style=""></div>
+<div class="detail_head">
+	<ul>
+		<li class="detail_hover">动态明细<span>Dynamic detail</span></li>
+		<li>静态明细<span>Static detail</span></li>
+	</ul>
+	<a href="javascript:history.go(-1);" class="iconfont icon-back"></a>
+	<i id="filters" class="iconfont icon-form"></i>
+</div>
+<div class="t"></div>
+<div class="detail_content dynamic" style="display: block;">
+	<!-- <div class="detail_1">
+		<div>总 金 额：<span>Total amount:</span></div>
+		<div>RMB 700.00<span>$ 100.00</span></div>
+	</div> -->
+	<div class="t"></div>
+	<!-- <div class="detail_2">
+		<div>
+			<p>推荐VIP会员</p>
+			<p>Recommend the VIP member</p>
+			<p>李木子</p>
+			<p>2017-03-29  09:55</p>
+		</div>
+		<div>
+			RMB 700.00<span>$ 100.00</span>
+		</div>
+	</div> -->
+</div>
+<div class="detail_content static">
+	<div class="detail_1">
+		<div class="lf_changeTotal">总金额：<span>Total amount:</span></div>
+		<div class="lf_heji"><span></span></div>
+	</div>
+	<div class="t"></div>
+	<!-- <div class="detail_3">
+		<div>
+			<p>动态分红</p>
+			<p>The dynamic share out bonus</p>
+			<p>2017-03-29  09:55</p>
+		</div>
+		<div>RMB 70000.00<span>$ 100.00</span></div>
+	</div> -->
+</div>
+<!-- 右导航弹窗-动态 -->
+<div class="lf_tanchuang tan1">
+	<div class="lf_tanBox">
+		<ul>
+			<li class="lf_jiangList lf_borderBox lf_jiangListOn">
+				<p class="lf_left">
+					直推奖<span>Straight push prize</span>
+				</p>
+				<i class="iconfont lf_right icon-duihao"></i>
+			</li>
+			<li class="lf_jiangList lf_borderBox">
+				<p class="lf_left">
+					间推奖<span>Push the prize between</span>
+				</p>
+				<i class="iconfont lf_right icon-duihao"></i>
+			</li>
+			<li class="lf_jiangList lf_borderBox">
+				<p class="lf_left">
+					升级奖<span>Upgrade awards</span>
+				</p>
+				<i class="iconfont lf_right icon-duihao"></i>
+			</li>
+			<li class="lf_jiangList lf_borderBox">
+				<p class="lf_left">
+					推广奖<span>Promotion award</span>
+				</p>
+				<i class="iconfont lf_right icon-duihao"></i>
+			</li>
+			<li class="lf_jiangList lf_borderBox">
+				<p class="lf_left">
+					感恩奖<span>Thanksgiving Award</span>
+				</p>
+				<i class="iconfont lf_right icon-duihao"></i>
+			</li>
+			<li class="lf_jiangList lf_borderBox">
+				<p class="lf_left">
+					管理奖<span>Management award</span>
+				</p>
+				<i class="iconfont lf_right icon-duihao"></i>
+			</li>
+			<li class="lf_jiangBtn lf_borderBox">
+				<button id="lf_jiangSure1" type="button">确定<br/><span>Confirm</span></button>
+			</li>
+		</ul>
+	</div>
+
+</div>
+<!-- 右导航弹窗-静态 -->
+<div class="lf_tanchuang tan2">
+	<div class="lf_tanBox">
+		<ul>
+			<li name="3" class="lf_jiangList lf_borderBox lf_jiangListOn">
+				<p class="lf_left">
+					购物健康金总额<span>Buy health gold</span>
+				</p>
+				<i class="iconfont lf_right icon-duihao"></i>
+			</li>
+			<li name="2" class="lf_jiangList lf_borderBox">
+				<p class="lf_left">
+					激励健康金总额<span>Energize your health</span>
+				</p>
+				<i class="iconfont lf_right icon-duihao"></i>
+			</li>
+			<li name="1" class="lf_jiangList lf_borderBox">
+				<p class="lf_left">
+					种子健康金总额<span>Total seed health gold</span>
+				</p>
+				<i class="iconfont lf_right icon-duihao"></i>
+			</li>
+			<li class="lf_jiangBtn lf_borderBox">
+				<button id="lf_jiangSure2" type="button">确定<br/><span>Confirm</span></button>
+			</li>
+		</ul>
+	</div>
+
+</div>
+<script type="text/javascript">
+	//默认弹窗内容
+	if($('.dynamic').hasClass('detail_hover')){
+		/*弹窗内容-动态*/
+		$('#filters').on('click',function(){
+			$('.tan1').css('display','block');
+			$('.tan2').css('display','none');
+			$('.tan1').find('.lf_jiangList').on('click',function(){
+				$('.tan1').find('.lf_jiangList').removeClass('lf_jiangListOn');
+				$('.tan1').find('.lf_jiangList').eq($(this).index()).addClass('lf_jiangListOn');
+			});
+			$('#lf_jiangSure1').on('click',function(){
+				$('.tan1').css('display','none');
+			})
+		})
+	}
+	$(".detail_head ul li").click(function() {
+		var index = $(this).index();
+		$(this).addClass('detail_hover').siblings().removeClass('detail_hover');
+		$(".detail_content").eq(index).show().siblings(".detail_content").hide();
+		if(index==0){
+			/*弹窗内容-动态*/
+			$('#filters').on('click',function(){
+				$('.tan1').css('display','block');
+				$('.tan2').css('display','none');
+				$('.tan1').find('.lf_jiangList').on('click',function(){
+					$('.tan1').find('.lf_jiangList').removeClass('lf_jiangListOn');
+					$('.tan1').find('.lf_jiangList').eq($(this).index()).addClass('lf_jiangListOn');
+				});
+				$('#lf_jiangSure1').on('click',function(){
+					$('.tan1').css('display','none');
+				})
+			})
+		}
+		if(index==1){
+			/*弹窗内容*/
+			$('#filters').off('click').on('click',function(){
+				$('.tan1').css('display','none');
+				$('.tan2').css('display','block');
+				$('.tan2').find('.lf_jiangList').off('click').on('click',function(){
+					$('.tan2').find('.lf_jiangList').removeClass('lf_jiangListOn');
+					$('.tan2').find('.lf_jiangList').eq($(this).index()).addClass('lf_jiangListOn');
+					var txt = $('.tan2').find('.lf_jiangListOn p').html();
+					$('.lf_changeTotal').html(txt);
+				});
+				$('#lf_jiangSure2').off('click').on('click',function(){
+					$('.tan2').css('display','none');
+					var txt = $('.tan2').find('.lf_jiangListOn p').html();
+					$('.lf_changeTotal').html(txt);
+					//静态明细-筛选
+					var _name = $('.tan2').find('.lf_jiangListOn').attr('name');
+					console.log(_name);
+					$.ajax({
+						url:'http://api.icpkys.com/health/income?token='+$.cookie('the_cookie'),
+						type:'get',
+						data:{type:_name},
+						success:function(req){
+							if(req.status=='success'){
+								var _data = req.data.data;
+								var _static = $('.static');
+								$('.static .detail_3').remove('');
+								$('.lf_heji').html(+(req.data.score).toFixed(2));
+								$.each(_data,function(index,value){
+									var _div = '<div class="detail_3">'
+											 +	  '<div>'
+											 +		 '<p>'+value.info+'</p>'
+											 +		 '<p>The dynamic share out bonus</p>'
+											 +		 '<p>'+value.created_at+'</p>'
+											 +	  '</div>'
+											 +	  '<div>'
+											 +        value.amount.toFixed(2)
+											 +	  '</div>'
+											 + '</div>';
+									_static.append(_div);
+
+								});
+							}else{
+								alert(req.massage);
+							}
+						},
+						error:function(res){
+							if(res.status!=undefined){
+				        		if(res.status==404){
+					        		alert('接口不存在');
+					        	}
+					        	if(res.status==401 && res.responseText=='{"error":"token_expired"}'){
+					        		alert('请重新登录');
+					        		window.location.href='login.html';
+					        	}
+				        	}else{
+				        		console.log(res);
+				        		alert('未知错误');
+				        	}
+						}
+					})
+				})
+			})
+		}
+	});
+</script>
+<script type="text/javascript">
+	//获得收入明细--静态
+	var _token = $.cookie('the_cookie');
+	$.ajax({
+		url:'http://api.icpkys.com/health/income?token='+_token,
+		type:'get',
+		data:{},
+		beforeSend:function(XMLHttpRequest){ 
+            $("#loading").html("<img src='images/8.gif'/>"); //在后台返回success之前显示loading图标
+        }, 
+		success:function(req){
+			$("#loading").remove(); //ajax返回成功，清除loading图标
+			if(req.status=='success'){
+				var _data = req.data.data;
+				$('.lf_heji').html((req.data.score).toFixed(2));
+				var _static = $('.static');
+				$.each(_data,function(index,value){
+					var _div = '<div class="detail_3">'
+							 +	  '<div>'
+							 +		 '<p>'+value.info+'</p>'
+							 +		 '<p>The dynamic share out bonus</p>'
+							 +		 '<p>'+value.created_at+'</p>'
+							 +	  '</div>'
+							 +	  '<div>'
+							 +        value.amount.toFixed(2)
+							 +	  '</div>'
+							 + '</div>';
+					_static.append(_div);
+
+				});
+			}else{
+				alert(req.massage);
+			}
+		},
+		error:function(res){
+			if(res.status!=undefined){
+        		if(res.status==404){
+	        		alert('接口不存在');
+	        	}
+	        	if(res.status==401 && res.responseText=='{"error":"token_expired"}'){
+	        		alert('请重新登录');
+	        		window.location.href='login.html';
+	        	}
+        	}else{
+        		console.log(res);
+        		alert('未知错误');
+        	}
+		}
+	});
+	//获得收入明细--动态
+	$.ajax({
+		url:'http://api.icpkys.com/health/dynamic?token='+_token,
+		type:'get',
+		data:{},
+		beforeSend:function(XMLHttpRequest){ 
+            $("#loading").html("<img src='images/8.gif'/>"); //在后台返回success之前显示loading图标
+        }, 
+		success:function(req){
+			console.log(req);
+			$("#loading").remove(); //ajax返回成功，清除loading图标
+			if(req.status=='success'){
+				var _data = req.data;
+				var _dynamic = $('.dynamic');
+				$.each(_data,function(index,value){
+					var _div = '<div class="detail_2">'
+							 +		'<div>'
+							 +			'<p>'+ value.info +'</p>'
+							 +			'<p></p>'
+							 +			'<p>'+value.nickname+'</p>'
+							 +			'<p>'+ value.created_at +'</p>'
+							 + 		'</div>'
+							 +		'<div>'
+							 +			value.amount
+							 +		'</div>'
+							 +	'</div>'
+					_dynamic.append(_div);
+
+				});
+			}else{
+				alert(req.massage);
+			}
+		},
+		error:function(res){
+			if(res.status!=undefined){
+        		if(res.status==404){
+	        		alert('接口不存在');
+	        	}
+	        	if(res.status==401 && res.responseText=='{"error":"token_expired"}'){
+	        		alert('请重新登录');
+	        		window.location.href='login.html';
+	        	}
+        	}else{
+        		console.log(res);
+        		alert('未知错误');
+        	}
+		}
+	});
+</script>
+</body>
+</html>

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta charset="utf-8">
+        <meta name="author" content="ZZJBS" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="format-detection" content="email=no" />
+        <link rel="stylesheet" type="text/css" href="fonts/iconfont.css">
+        <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+      	<script type="text/javascript" src="js/new_cookie.js"></script>
+        <script type="text/javascript" src="js/swiper.min.js"></script>
+        <title>康益身</title>
+        <style>
+            *{margin:0;padding:0;}
+            body{
+                width:100%;
+                height:100%;
+            }
+            canvas{ display: none; }
+            img{ display: block; width: 100%; height: auto; }
+            #loading{
+                 position:absolute;width:100%;height:100%;background-color:#fff;z-index:99;
+                 text-align:center;box-sizing:border-box;
+                 padding-top:50%;font-size:16px;
+            }
+            .back {
+                color: #fff;
+                text-decoration: none;
+                padding: 5px 10px;
+                border-radius: 50%;
+                line-height: 30px;
+                font-size:22px;
+                display:block;
+                float:left;
+                width:30%;
+
+            }
+            .back>span{
+                font-size:16px;
+            }
+        </style>
+    </head>  
+    <body>
+       <div style="background-color:#000;height:50px;line-height:50px"> 
+           <a href="javascript:history.go(-1);" class="iconfont icon-back back">
+                <span>返回</span>
+           </a>
+           <h2 style="font-size:18px;width:30%;text-align:center;float:left;font-weight:normal;color:#fff">康益身</h2>
+       </div>
+      
+       <div id="loading" style="">正在生成二维码，请耐心等候。。。</div>
+       <img src="" id="img" />
+
+
+<script>
+    var data={
+        "name":"俞可淼",
+        "image":["images/lf_erweima.png","images/lf_portrait.png","images/lf_codeimg.png"]
+    },imgPath;
+    var _token = $.cookie('the_cookie');
+    $.ajax({
+        url:'http://api.icpkys.com/user/get_code?token='+_token,
+        type:'get',
+        async: false,
+        beforeSend:function(XMLHttpRequest){ 
+             $("#loading").html('正在生成二维码，请耐心等候。。。'); 
+        }, 
+        success: function (msg) {
+
+            data.name = msg.data.nickname;
+            data.image[1] = '/http.php?url='+msg.data.head_url;
+            data.image[2] = '/http.php?url='+msg.data.code_url+'?token='+_token;
+             
+        },
+      	error:function(){
+        	alert('请重新登录');
+          	window.location ='/login.html';
+        }
+    })
+</script>
+
+<script type="text/javascript">
+/*var userid = window.location.href.split('?')[1].split('=')[1];*/
+
+function draw(){
+    var mycanvas=document.createElement('canvas');
+    $("body").append(mycanvas);
+    var len=data.image.length;
+    mycanvas.width=screen.width;
+    mycanvas.height=screen.height-50;
+    var xWidth = screen.width;
+    var yHeight = screen.height-50;
+    // 文字0
+    var left0 = xWidth * 0.5 - mycanvas.getContext('2d').measureText(data.name).width / 2;
+    var top0 = yHeight * 0.42;
+    // 头像
+    var left1 = (xWidth - yHeight * 0.14) * 0.5;
+    var top1 = yHeight * 0.24;
+    var x1 = yHeight * 0.14;
+    var y1 = yHeight * 0.14;
+    // 二维码
+    var left2 = xWidth * 0.32;
+    var top2 = yHeight * 0.51;
+    var x2 = xWidth * 0.40;
+    var y2 = yHeight * 0.21;
+    // logo
+    var left3 = xWidth * 0.47;
+    var top3 = yHeight * 0.30;
+    var x3 = xWidth * 0.06;
+    var y3 = yHeight * 0.03;
+    if(mycanvas.getContext){
+        var context=mycanvas.getContext('2d');
+        drawing(0);
+        var h=0;
+        function drawing(num){
+            // console.log(num);
+            if(num<3){
+                var img = new Image;
+                img.src = data.image[num];
+                img.crossOrigin = "*";
+                if(num==0){
+                    // 背景
+                    img.onerror=function(){
+                        h=140;
+                    }
+                    img.onload=function(){
+                        context.drawImage(img,0,0,screen.width,screen.height-50);
+                        drawing(num+1);
+                    }
+                }else if(num==1){
+                    // 头像
+                    img.onload=function(){
+                        context.drawImage(img,left1,top1,x1,y1);
+                        
+                        context.font='20px 宋体';
+                        context.fillStyle='#1c53b7';
+                        context.fillText(data.name,left0,top0); 
+                        drawing(num+1);
+                    }
+                }else if(num==2){
+                    img.onload=function(){
+                        context.drawImage(img,left2,top2,x2,y2);
+                        // alert(num+1);
+                        drawing(num+1);
+                    }
+                }else if(num==3){
+                    img.onload=function(){
+                        context.drawImage(img,left3,top3,x3,y3);
+                        drawing(num+1);
+                    }
+                } 
+            }else{
+                imgPath = mycanvas.toDataURL("image/jpeg");
+                $('#img').attr('src',imgPath);
+                $("#loading").remove();
+            }
+        }
+    }
+}
+CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
+    var min_size = Math.min(w, h);
+    if (r > min_size / 2) r = min_size / 2;
+    // 开始绘制
+    this.beginPath();
+    this.moveTo(x + r, y);
+    this.arcTo(x + w, y, x + w, y + h, r);
+    this.arcTo(x + w, y + h, x, y + h, r);
+    this.arcTo(x, y + h, x, y, r);
+    this.arcTo(x, y, x + w, y, r);
+    this.closePath();
+    return this;
+}
+function convertCanvasToImage(canvas) {  
+    //新Image对象，可以理解为DOM  
+    var image = new Image();  
+    // canvas.toDataURL 返回的是一串Base64编码的URL，当然,浏览器自己肯定支持  
+    // 指定格式 PNG  
+    image.src = canvas.toDataURL("image/png");  
+    return image;  
+} 
+draw(); 
+        </script>
+    </body>
+</html>
+

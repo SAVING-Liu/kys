@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>动态明细_筛选</title>
+<meta charset="utf-8">
+<meta name="author" content="yy">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="author" content="yy">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<meta http-equiv="Expires" content="-1">
+<meta http-equiv="Cache-Control" content="no-cache">
+<meta http-equiv="Pragma" content="no-cache">
+<meta name="description" content="" />
+<meta name="Keywords" content="" />
+<link rel="stylesheet" href="css/swiper.min.css">
+<link rel="stylesheet" type="text/css" href="fonts/iconfont.css">
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" href="css/lf_style.css"/>
+<script type="text/javascript" src="js/jquery-1.10.1.min.js"></script>
+<script type="text/javascript" src="js/swiper.min.js"></script>
+</head>
+<body>
+<div class="detail_head">
+	<ul>
+		<li class="detail_hover">动态明细<span>Dynamic detail</span></li>
+		<li>静态明细<span>Static detail</span></li>
+	</ul>
+	<a class="iconfont icon-back"></a>
+	<i id="filters" class="iconfont icon-form"></i>
+</div>
+<div class="t"></div>
+<div class="detail_content" style="display: block;">
+	<div class="detail_1">
+		<div>总 金 额：<span>Total amount:</span></div>
+		<div>￥ 700.00<span>$ 100.00</span></div>
+	</div>
+	<div class="t"></div>
+	<div class="detail_2">
+		<div>
+			<p>推荐VIP会员</p>
+			<p>Recommend the VIP member</p>
+			<p>李木子</p>
+			<p>2017-03-29  09:55</p>
+		</div>
+		<div>
+			￥ 700.00<span>$ 100.00</span>
+		</div>
+	</div>
+	<div class="detail_2">
+		<div>
+			<p>推荐健康使者</p>
+			<p>Health envoy</p>
+			<p>李木子</p>
+			<p>2017-03-29  09:55</p>
+		</div>
+		<div>
+			￥ 700.00<span>$ 100.00</span>
+		</div>
+	</div>
+	<div class="detail_2">
+		<div>
+			<p>推荐G21商户</p>
+			<p>Recommend G21 mall</p>
+			<p>蓝海之谜</p>
+			<p>2017-03-29  09:55</p>
+		</div>
+		<div>
+			￥ 700.00<span>$ 100.00</span>
+		</div>
+	</div>
+</div>
+<div class="detail_content">
+	<div class="detail_1">
+		<div>购物健康金总额：<span>Buy health gold</span></div>
+		<div>￥ 70000.00<span>$ 100.00</span></div>
+	</div>
+	<div class="t"></div>
+	<div class="detail_3">
+		<div>
+			<p>动态分红</p>
+			<p>The dynamic share out bonus</p>
+			<p>2017-03-29  09:55</p>
+		</div>
+		<div>
+			- 700.00
+		</div>
+	</div>
+	<div class="detail_3">
+		<div>
+			<p>购买商品</p>
+			<p>Buy goods</p>
+			<p>2017-03-29  09:55</p>
+		</div>
+		<div>
+			+ 700.00
+		</div>
+	</div>
+	<div class="detail_3">
+		<div>
+			<p>动态分红</p>
+			<p>The dynamic share out bonus</p>
+			<p>2017-03-29  09:55</p>
+		</div>
+		<div>
+			+ 700.00
+		</div>
+	</div>
+</div>
+<!-- 右导航弹窗 -->
+<div class="lf_tanchuang">
+	<div class="lf_tanBox">
+		<ul>
+			<li class="lf_jiangList lf_borderBox lf_jiangListOn">
+				<p class="lf_left">
+					直推奖<span>Straight push prize</span>
+				</p>
+				<i class="iconfont lf_right icon-duihao"></i>
+			</li>
+			<li class="lf_jiangList lf_borderBox">
+				<p class="lf_left">
+					间推奖<span>Push the prize between</span>
+				</p>
+				<i class="iconfont lf_right icon-duihao"></i>
+			</li>
+			<li class="lf_jiangList lf_borderBox">
+				<p class="lf_left">
+					升级奖<span>Upgrade awards</span>
+				</p>
+				<i class="iconfont lf_right icon-duihao"></i>
+			</li>
+			<li class="lf_jiangList lf_borderBox">
+				<p class="lf_left">
+					推广奖<span>Promotion award</span>
+				</p>
+				<i class="iconfont lf_right icon-duihao"></i>
+			</li>
+			<li class="lf_jiangList lf_borderBox">
+				<p class="lf_left">
+					感恩奖<span>Thanksgiving Award</span>
+				</p>
+				<i class="iconfont lf_right icon-duihao"></i>
+			</li>
+			<li class="lf_jiangList lf_borderBox">
+				<p class="lf_left">
+					管理奖<span>Management award</span>
+				</p>
+				<i class="iconfont lf_right icon-duihao"></i>
+			</li>
+			<li class="lf_jiangBtn lf_borderBox">
+				<button id="lf_jiangSure" type="button">确定<br/><span>Confirm</span></button>
+			</li>
+		</ul>
+	</div>
+
+</div>
+<script type="text/javascript">
+	$(".detail_head ul li").click(function() {
+		var index = $(this).index();
+		$(this).addClass('detail_hover').siblings().removeClass('detail_hover');
+		$(".detail_content").eq(index).show().siblings(".detail_content").hide();
+	});
+</script>
+<script>
+	/*弹窗内容*/
+	$('#filters').on('click',function(){
+		$('.lf_tanchuang').css('display','block');
+		$('.lf_jiangList').on('click',function(){
+			$('.lf_jiangList').removeClass('lf_jiangListOn');
+			$('.lf_jiangList').eq($(this).index()).addClass('lf_jiangListOn');
+		});
+		$('#lf_jiangSure').on('click',function(){
+			$('.lf_tanchuang').css('display','none');
+		})
+	})
+	
+</script>
+</body>
+</html>

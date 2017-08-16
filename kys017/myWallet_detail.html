@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>会员中心</title>
+<meta charset="utf-8">
+<meta name="author" content="yy">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="author" content="yy">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<meta http-equiv="Expires" content="-1">
+<meta http-equiv="Cache-Control" content="no-cache">
+<meta http-equiv="Pragma" content="no-cache">
+<meta name="description" content="" />
+<meta name="Keywords" content="" />
+<link rel="stylesheet" href="css/swiper.min.css">
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" type="text/css" href="fonts/iconfont.css">
+<link rel="stylesheet" href="css/lf_style.css"/>
+<script type="text/javascript" src="js/jquery-1.10.1.min.js"></script>
+<script type="text/javascript" src="js/swiper.min.js"></script>
+<script type="text/javascript" src="js/jquery.cookie.js"></script>
+<script src="https://cdn.bootcss.com/handlebars.js/4.0.10/handlebars.min.js"></script>
+<style type="text/css">
+	body{ background: #fff; }
+	.detail_2 div:nth-child(1) p:nth-child(1) {
+	    font-size: 16px;
+	}
+	.detail_2 div:nth-child(2){
+		margin-top: 0
+	}
+	.detail_3 div:nth-child(1) p:nth-child(1) {
+	    color:#000;
+	    font-size:16px;
+	}
+	.detail_3 div:nth-child(1) p:nth-child(3) {
+	    font-size: 14px;
+	    color: #666;
+	    margin-top:5px;
+	}
+	.detail_3 div:nth-child(1) p:nth-child(4) {
+	    font-size: 12px;
+	    color: #999999;
+	}
+</style>
+</head>
+<body>
+<div class="public_head">
+	<h3>收入明细<br/><span>Income Detail</span></h3>
+	<a href="javascript:history.go(-1)" class="iconfont icon-back"></a>
+</div>
+<div class="lf_totalBox lf_borderBox lf_clearFloat">
+	<div class="lf_left lf_yueBox">
+		<h2>
+			总计：<br/><span>Total:</span>
+		</h2>
+		<p>
+			<span id="RMB"></span><br/><span id='money'></span>
+		</p>
+	</div>
+</div>
+<div class="lf_walletChange lf_displayFlex">
+	<div class="lf_wallet lf_borderBox lf_walletOn" style="border-bottom:0px">
+		会员收入明细<span>VIP IncomeDetail</span>
+	</div>
+</div>
+<div class="detail_content" style="display: block;">
+<!-- 	<div class="t"></div>
+	<div class="detail_2">
+		<div>
+			<p>推荐VIP会员</p>
+			<p>Recommend the VIP member</p>
+			<p>李木子</p>
+			<p>2017-03-29  09:55</p>
+		</div>
+		<div>
+			+￥ 700.00<span>$ 100.00</span>
+		</div>
+	</div> -->
+</div>
+
+</body>
+<script type="text/x-handlebars-template" id="show-left">
+	<div class="t"></div>
+	{{#each this}}
+		<div class="detail_2">
+			<div>
+				<p>{{info}}</p>
+				<p></p>
+				<p>{{to_account}}</p>
+				<p>{{created_at}}</p>
+			</div>
+			<div>
+				{{add}}￥ {{amount}}<span>$ {{price1}}</span>
+			</div>
+		</div>
+	{{/each}}
+</script>
+<script type="text/x-handlebars-template" id="show-right">
+	<div class="t"></div>
+	{{#each this}}
+		<div class="detail_3">
+		<div>
+			<p>{{info}}</p>
+			<p></p>
+			<p>{{info}}</p>
+			<p>{{created_at}}</p>
+		</div>
+		<div>
+			{{add}} {{amount}}
+		</div>
+	</div>
+	{{/each}}
+</script>
+<script type="text/javascript">
+	$('.lf_wallet').on('click',function(){
+		$('.lf_wallet').removeClass('lf_walletOn');
+		$('.lf_wallet').eq($(this).index()).addClass('lf_walletOn');
+		$('.detail_content').css('display','none');
+		$('.detail_content').eq($(this).index()).css('display','block');
+	})
+</script>
+<script>
+	$.ajax({
+			url: "http://api.icpkys.com/user/home/wallet",
+			data: {
+				token: $.cookie('the_cookie')
+			},
+			success: function (msg) {
+				console.log(msg);
+				var arr1 = msg.data.balance;
+				var sum = msg.data.sum;
+				for (var i = 0; i < arr1.length; i++) {
+					arr1[i].price1 = (arr1[i].amount / 7).toFixed(2);
+					arr1[i].amount = arr1[i].amount.toFixed(2);
+					if (arr1[i].is_add) {
+						arr1[i].add = "+"
+					} else {
+						arr1[i].add = "-";
+					}
+					if (arr1[i].type==20) {
+						arr1[i].info = '升银卡';
+					}else if (arr1[i].type==21) {
+						arr1[i].info = '升金卡';
+					}else if (arr1[i].type==22) {
+						arr1[i].info = '升钻卡';
+					}else if (arr1[i].type==23 ) {
+						arr1[i].info = '升洲际卡';
+					}else if (arr1[i].type==24) {
+						arr1[i].info = '升全球卡';
+					}else if (arr1[i].type==10) {
+						arr1[i].info = '推荐VIP奖励';
+					}else if (arr1[i].type==11) {
+						arr1[i].info = 'VIP推荐VIP奖励';
+					}else if (arr1[i].type==12) {
+						arr1[i].info = '推荐G21奖励';
+					}else if (arr1[i].type==13) {
+						arr1[i].info = 'VIP推荐G21奖励';
+					}else{
+						arr1[i].info = '系统奖励';
+					}
+				}
+				var leftTemplate = Handlebars.compile($("#show-left").html());
+				$(".detail_content").eq(0).html(leftTemplate(arr1));
+				$('#RMB').html(sum);
+				$('#money').html(sum*0.7);
+
+			}
+		});
+		
+		$.ajax({
+			url: "http://api.icpkys.com/user/home/my_info",
+			data: {
+				token: $.cookie('the_cookie')
+			},
+			success: function (msg) {
+				$(".lf_yueBox").children("p").html('￥ ' + msg.data.balance.toFixed(2) + '<br><span>$ ' + (msg.data.balance / 7).toFixed(2) + '</span>');
+				$(".lf_xianjinBox").children("p").html(msg.data.liutong_score.toFixed(2));
+			}
+		});
+</script>
+</html>

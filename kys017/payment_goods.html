@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>支付方式</title>
+<meta charset="utf-8">
+<meta name="author" content="yy">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="author" content="yy">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<meta http-equiv="Expires" content="-1">
+<meta http-equiv="Cache-Control" content="no-cache">
+<meta http-equiv="Pragma" content="no-cache">
+<meta name="description" content="" />
+<meta name="Keywords" content="" />
+<link rel="stylesheet" href="css/swiper.min.css">
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" type="text/css" href="fonts/iconfont.css"/>
+<link rel="stylesheet" href="css/lf_style.css"/>
+<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="js/swiper.min.js"></script>
+<script type="text/javascript" src="js/jquery.cookie.js"></script>
+<style type="text/css">
+	body{ background: #f5f5f5; }
+	.lf_footer{
+		height:50px;
+		padding:0 3.125%;
+	}
+</style>
+</head>
+<body>
+<div class="public_head">
+	<h3>支付方式<br/><span>Method of payment</span></h3>
+	<a href="javascript:history.go(-1);" class="iconfont icon-back"></a>
+</div>
+<div class="lf_payments">
+	<ul class="lf_paymentBox">
+		 <li class="paymentList lf_clearFloat">
+			<i name="0" class="iconfont icon-yuancircle46 icon-done"></i>
+			<h2 class="lf_left">
+				微信支付<span>WeChat</span>
+			</h2>
+			<p class="lf_right">
+				￥ 0.00 <span>$ 0.00</span>
+			</p>
+		</li>
+		<li class="paymentList lf_clearFloat">
+			<i name="2" class="iconfont icon-yuancircle46"></i>
+			<h2 class="lf_left">
+				流通健康金<span>Circulation health fund</span>
+			</h2>
+			<p class="lf_right">
+				￥ 0.00 <span>$ 0.00</span>
+			</p>
+		</li>
+		<li class="paymentList lf_clearFloat">
+			<i name="3" class="iconfont icon-yuancircle46"></i>
+			<h2 class="lf_left">
+				购物健康金<span>Shopping health gold</span>
+			</h2>
+			<p class="lf_right">
+				￥ 0.00 <span>$ 0.00</span>
+			</p>
+		</li>
+		<!-- <li class="paymentList lf_clearFloat">
+			<i name="0" class="iconfont icon-yuancircle46"></i>
+			<h2 class="lf_left">
+				微信支付<span>WeChat</span>
+			</h2>
+			<p class="lf_right">
+				￥ 0.00 <span>$ 0.00</span>
+			</p>
+		</li>
+		<li class="paymentList lf_clearFloat">
+			<i class="iconfont icon-yuancircle46"></i>
+			<h2 class="lf_left">
+				支付宝支付<span>Pay treasure</span>
+			</h2>
+			<p class="lf_right">
+				￥ 0.00 <span>$ 0.00</span>
+			</p>
+		</li> -->
+	</ul>
+	<footer class="lf_footer">
+		<p class="lf_left lf_total-P">
+			合计<span>Total</span>
+		</p>
+		<p class="lf_left lf_total-P" style="color:#fe7200">
+			<i style="font-style:normal;font-size:12px">￥</i> 700<span>$ 100</span>
+		</p>
+		<button id="payment" class="lf_paymentBtn" type="button">付款<span>Payment</span></button>
+	</footer>
+</div>
+</body>
+<script type="text/javascript">
+	$('.lf_paymentBox>li').on("click",function(){
+		$('.lf_paymentBox>li').find('i').removeClass('icon-done');
+		$('.lf_paymentBox>li').eq($(this).index()).find('i').addClass('icon-done');
+	});
+	var price1 = window.location.href.split("?rmb=")[1].split("&")[0];
+	var price2 = window.location.href.split("dol=")[1].split("&")[0];
+	$(".lf_total-P").eq(1).html('<i style="font-style:normal;font-size:12px">￥</i> ' + price1 + '<span>$ ' + price2 + '</span>');
+	
+	$(".lf_right").html('￥ ' + price1 + ' <span>$ ' + price2 + '</span>');
+	
+	var arr = window.location.href.split("shopList=")[1].split("&")[0];
+	arr = JSON.parse(arr);
+	
+	$("#payment").on("touchend", function () {
+		$.ajax({
+			url:"http://api.icpkys.com/shop/order/pay?token=" + $.cookie('the_cookie'),
+			type:"POST",
+			async:false,
+			data: {
+				order_ids: arr,
+				pay_type: $(".icon-done").attr("name")
+			},
+	        crossDomain:true,
+	        datatype: "json",
+	        xhrFields: {  withCredentials: true  },
+	    	crossDomain: true,
+			success: function (msg) {
+				if (msg.status == "success") {
+					alert("支付成功");
+					history.go(-5);
+				}
+			}
+		});
+	});
+</script>
+</html>

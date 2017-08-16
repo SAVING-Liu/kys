@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>流通健康金兑换记录</title>
+<meta charset="utf-8">
+<meta name="author" content="yy">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="author" content="yy">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<meta http-equiv="Expires" content="-1">
+<meta http-equiv="Cache-Control" content="no-cache">
+<meta http-equiv="Pragma" content="no-cache">
+<meta name="description" content="" />
+<meta name="Keywords" content="" />
+<link rel="stylesheet" href="css/swiper.min.css">
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" type="text/css" href="fonts/iconfont.css">
+<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="js/swiper.min.js"></script>
+<script type="text/javascript" src="js/jquery.cookie.js"></script>
+<style type="text/css">
+	
+</style>
+</head>
+<body>
+<div class="public_head">
+	<h3>流通健康金兑换记录<br/><span>Circulation health exchange record</span></h3>
+	<a href="javascript:history.go(-1);" class="iconfont icon-back"></a>
+</div>
+<ul class="bills">
+	<!-- <li>
+		<div><span>08:33</span><br/>02-16</div>
+		<div>兑换为激励健康金<span>Exchange to incentive Health Fund</span></div>
+		<div>-200.00</div>
+	</li>
+	<li>
+		<div><span>08:33</span><br/>02-16</div>
+		<div>兑换为购物健康金<span>Exchange to shopping health insurance</span></div>
+		<div>+500.00</div>
+	</li>
+	<li>
+		<div><span>08:33</span><br/>02-16</div>
+		<div>兑换为种子健康金<span>Change to seed health</span></div>
+		<div>-200.00</div>
+	</li>
+	<li>
+		<div><span>08:33</span><br/>02-16</div>
+		<div>兑换为激励健康金<span>Exchange to incentive Health Fund</span></div>
+		<div>-500.00</div>
+	</li>
+	<li>
+		<div><span>08:33</span><br/>02-16</div>
+		<div>兑换为购物健康金<span>Exchange to shopping health insurance</span></div>
+		<div>-500.00</div>
+	</li>
+	<li>
+		<div><span>08:33</span><br/>02-16</div>
+		<div>兑换为余额<span>Exchange to balance</span></div>
+		<div>-200.00</div>
+	</li> -->
+</ul>
+<script>
+	$.ajax({
+		url: "http://api.icpkys.com/user/home/health_records",
+		data: {
+			token: $.cookie("the_cookie")
+		},
+		success: function (msg) {
+			console.log(msg);
+			var arr = msg.data;
+			var txt = "";
+			for (var i = arr.length - 1; i >= 0; i--) {
+				var hours = arr[i].created_at.split(" ")[1].split(":")[0];
+				var minutes = arr[i].created_at.split(":")[1];
+				var month = arr[i].created_at.split("-")[1];
+				var day = arr[i].created_at.split("-")[2].split(" ")[0];
+				var show;
+				var showUs;
+				if (arr[i].type == 50) {
+					show = "兑换为激励健康金";
+					showUs = "Exchange to incentive Health Fund"
+				} else if (arr[i].type == 51) {
+					show = "兑换为购物健康金";
+					showUs = "Exchange to shopping health insurance"
+				} else if (arr[i].type == 52) {
+					show = "兑换为余额";
+					showUs = "Exchange to balance"
+				} else if (arr[i].type == 53) {
+					show = "兑换为种子健康金";
+					showUs = "Change to seed health"
+				}
+				txt += '<li>'
+						+'<div><span>' + hours + ':' + minutes + '</span><br/>' + month + '-' + day + '</div>'
+						+'<div>' + show + '<span>' + showUs + '</span></div>'
+						+'<div>-' + arr[i].amount.toFixed(2) + '</div>'
+					+'</li>'
+			}
+			$(".bills").html(txt);
+		}
+	});
+</script>
+
+</body>
+</html>

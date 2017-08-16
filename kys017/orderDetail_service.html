@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>订单详情-服务类</title>
+<meta charset="utf-8">
+<meta name="author" content="yy">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="author" content="yy">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<meta http-equiv="Expires" content="-1">
+<meta http-equiv="Cache-Control" content="no-cache">
+<meta http-equiv="Pragma" content="no-cache">
+<meta name="description" content="" />
+<meta name="Keywords" content="" />
+<link rel="stylesheet" href="css/swiper.min.css">
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" type="text/css" href="fonts/iconfont.css">
+<script type="text/javascript" src="js/jquery-1.10.1.min.js"></script>
+<script type="text/javascript" src="js/swiper.min.js"></script>
+<script type="text/javascript" src="js/jquery.raty.min.js"></script>
+<style type="text/css">
+	body{ background: #f6f6f6; }
+</style>
+</head>
+<body>
+<div class="public_head">
+	<h3>订单详情<br/><span>Order details</span></h3>
+	<a class="iconfont icon-back"></a>
+	<i class="iconfont icon-kefu"></i>
+</div>
+<div class="order_number">
+	<i class="iconfont icon-wuliu"></i>
+	<p>订单编号：12346791583<span>Order number</span></p>
+</div>
+<div class="order_details">
+	<i class="iconfont icon-map-marker"></i>
+	<div class="order_details_1">
+		<div class="order_details_2">
+			<p>收货人：CR小杀<span>Consignee</span></p>
+			<p>17300000000</p>
+		</div>
+		<div class="order_details_3">
+			<p>地址：<span>address</span></p>
+			<p>河南省郑州市金水区MOUMOU小区13号楼一单元6楼西户</p>
+		</div>
+	</div>
+</div>
+<div class="order_shop_details">
+	<img src="images/tu13.png">
+	<p>塑料凳子椅子特价家用时尚创意成加厚实木小圆凳子餐桌...</p>
+	<p><span>￥ 700.00</span><span>$ 100</span><span>x1</span></p>
+</div>
+<div class="order_shop_time">
+	<p>联系方式<span>Contact information</span></p>
+	<p>17000000000</p>
+</div>
+<div class="order_price">
+	<!-- <div class="order_price_1">
+		<p>运费<span>Freight</span></p>
+		<p>￥ 0.00<span>$ 0.00</span></p>
+	</div> -->
+	<div class="order_price_1">
+		<p>实付款(含运费)<span>Real payment (including shipping)</span></p>
+		<p>￥ 700.00<span>$ 100.00</span></p>
+	</div>
+</div>
+<div class="commodity_grade">
+	<i class="iconfont icon-pingjia"></i>
+	<p>商品评分<span>Product rating</span></p>
+	<div id="star"></div>
+</div>
+<script type="text/javascript">
+	$('#star').raty({ path: 'images' });
+</script>
+</body>
+</html>

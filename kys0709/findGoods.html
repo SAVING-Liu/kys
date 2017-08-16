@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>找商品</title>
+<meta charset="utf-8"/>
+<meta name="author" content="yy"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK"/>
+<meta name="author" content="yy"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+<meta name="format-detection" content="telephone=no"/>
+<meta http-equiv="Expires" content="-1"/>
+<meta http-equiv="Cache-Control" content="no-cache"/>
+<meta http-equiv="Pragma" content="no-cache"/>
+<meta name="description" content="" />
+<meta name="Keywords" content="" />
+<link rel="stylesheet" href="css/swiper.min.css"/>
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+<link rel="stylesheet" type="text/css" href="fonts/iconfont.css"/>
+<link rel="stylesheet" href="css/lf_style.css"/>
+<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="js/swiper.min.js"></script>
+<script src="js/jquery.cookie.js"></script>
+<script src="https://cdn.bootcss.com/handlebars.js/4.0.10/handlebars.min.js"></script>
+<style type="text/css">
+	body{ background: #f5f5f5; }
+	input::-webkit-input-placeholder, textarea::-webkit-input-placeholder { 
+		color: #999; 
+	} 
+	input:-moz-placeholder, textarea:-moz-placeholder { 
+		color: #999; 
+	} 
+	input::-moz-placeholder, textarea::-moz-placeholder { 
+		color: #999; 
+	} 
+	input:-ms-input-placeholder, textarea:-ms-input-placeholder { 
+		color: #999; 
+	} 
+	.lf_tanchuang{
+		padding-top:0px;
+		position:absolute;
+		top:56px;
+		left:0;
+		width:201%;
+		background:0;
+	}
+	em{
+		font-style:normal;
+	}
+</style>
+</head>
+<body>
+<div style="background-color:#f5f5f5" class="public_head">
+	<div class="lf_headSearch">
+		<input type="search" placeholder="搜索商品 Search for goods"/>
+		<span class="iconfont searchBtn icon-sousuo"></span>
+	</div>
+	<a href="javascript:history.go(-1);" class="iconfont icon-back"></a>
+</div>
+<div class="lf_content">
+	<ul class="lf_findGoodsNav lf_displayFlex">
+		<li class="lf_findGoodsNavList lf_findGoodsNavList1 lf_clearFloat lf_borderBox" style="border-right:1px solid #e6e6e6">
+			<div class="lf_left lf_findGoodsNavCon">
+				<h2 class=" lf_clearFloat"><span style="width:65px;text-align-last:justify;">品类：</span><em> 全部</em></h2>
+				<p class=" lf_clearFloat"><span>Category：</span><em>  All</em></p>
+			</div>
+			<i class="iconfont icon-xia lf_right lf_categoryli"></i>
+			<!-- 品类弹窗 -->
+			<div class="lf_tanchuang lf_category">
+				<div class="lf_tanBox">
+					<ul>
+						<li class="lf_jiangList lf_borderBox lf_jiangListOn">
+							<p class="lf_left">
+								<em>全部</em><span>All</span>
+							</p>
+							<i class="iconfont lf_right icon-duihao"></i>
+						</li>
+						<li class="lf_jiangList lf_borderBox">
+							<p class="lf_left">
+								<em>食品生鲜</em><span>Food and fresh</span>
+							</p>
+							<i class="iconfont lf_right icon-duihao"></i>
+						</li>
+						<li class="lf_jiangList lf_borderBox">
+							<p class="lf_left">
+								<em>水饮料</em>酒<span>Wines and drinks</span>
+							</p>
+							<i class="iconfont lf_right icon-duihao"></i>
+						</li>
+						<li class="lf_jiangList lf_borderBox">
+							<p class="lf_left">
+								<em>厨卫清洁</em><span>Kitchen cleaner</span>
+							</p>
+							<i class="iconfont lf_right icon-duihao"></i>
+						</li>
+						<li class="lf_jiangList lf_borderBox">
+							<p class="lf_left">
+								<em>母婴用品</em><span>Maternal and child supplies</span>
+							</p>
+							<i class="iconfont lf_right icon-duihao"></i>
+						</li>
+						<li class="lf_jiangList lf_borderBox">
+							<p class="lf_left">
+								<em>美容个护</em><span>Beauty a guard</span>
+							</p>
+							<i class="iconfont lf_right icon-duihao"></i>
+						</li>
+						<li class="lf_jiangList lf_borderBox">
+							<p class="lf_left">
+								<em>家居家纺</em><span>Household textile</span>
+							</p>
+							<i class="iconfont lf_right icon-duihao"></i>
+						</li>
+						<li class="lf_jiangList lf_borderBox">
+							<p class="lf_left">
+								<em>服饰内衣</em><span>Dress underwear</span>
+							</p>
+							<i class="iconfont lf_right icon-duihao"></i>
+						</li>
+						<li class="lf_jiangList lf_borderBox">
+							<p class="lf_left">
+								<em>箱包珠宝</em><span>Bags jewelry</span>
+							</p>
+							<i class="iconfont lf_right icon-duihao"></i>
+						</li>
+						<li class="lf_jiangList lf_borderBox">
+							<p class="lf_left">
+								<em>鞋靴运动</em><span>Shoe movement</span>
+							</p>
+							<i class="iconfont lf_right icon-duihao"></i>
+						</li>
+						<li class="lf_jiangList lf_borderBox">
+							<p class="lf_left">
+								<em>手机数码</em><span>Mobile digital</span>
+							</p>
+							<i class="iconfont lf_right icon-duihao"></i>
+						</li>
+						<li class="lf_jiangList lf_borderBox">
+							<p class="lf_left">
+								<em>家用家店</em><span>Household appliances</span>
+							</p>
+							<i class="iconfont lf_right icon-duihao"></i>
+						</li>
+						<li class="lf_jiangBtn lf_borderBox">
+							<button id="lf_jiangSure1" type="button">确定<br/><span>Confirm</span></button>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</li>
+		<li class="lf_findGoodsNavList lf_findGoodsNavList2 lf_clearFloat lf_borderBox">
+			<div class="lf_left lf_findGoodsNavCon">
+				<h2 class=" lf_clearFloat"><span>排序：</span><em> 最热</em></h2>
+				<p class=" lf_clearFloat"><span style="width:41px;text-align-last:justify;">Sort：</span><em>  Hottest</em></p>
+			</div>
+			<i class="iconfont icon-xia lf_right lf_categoryli"></i>
+			<!-- 品类弹窗 -->
+			<div style="left:-100%" class="lf_tanchuang lf_category">
+				<div class="lf_tanBox">
+					<ul>
+						<li class="lf_jiangList lf_borderBox lf_jiangListOn">
+							<p class="lf_left">
+								<em>最热</em><span>Hottest</span>
+							</p>
+							<i class="iconfont lf_right icon-duihao"></i>
+						</li>
+						<li class="lf_jiangList lf_borderBox">
+							<p class="lf_left">
+								<em>最新</em><span>Newest</span>
+							</p>
+							<i class="iconfont lf_right icon-duihao"></i>
+						</li>
+						<li class="lf_jiangList lf_borderBox">
+							<p class="lf_left">
+								<em>价格从高到低</em><span>Prices go from high to low</span>
+							</p>
+							<i class="iconfont lf_right icon-duihao"></i>
+						</li>
+						<li class="lf_jiangList lf_borderBox">
+							<p class="lf_left">
+								<em>价格从低到高</em><span>Prices go from low to high</span>
+							</p>
+							<i class="iconfont lf_right icon-duihao"></i>
+						</li>
+						<li class="lf_jiangBtn lf_borderBox">
+							<button id="lf_jiangSure2" type="button">确定<br/><span>Confirm</span></button>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</li>
+	</ul>
+	<ul class="lf_findGoodsBox lf_clearFloat">
+		<!-- <li class="lf_findGoodsBoxlist lf_borderBox">
+			<img src="images/lf_goods02.png" alt=""/>
+			<div class="lf_shangpinBox">
+				<p class="lf_shangpinName">Nike</p>
+				<p class="lf_shangpinCon">Nike耐克官方女子健身训练女子健身训练</p>
+				<p class="lf_shangpinPrice">
+					RMB <span class="lf_shangpinPrice-cn">700.00</span>
+					<span class="lf_shangpinPrice-e"> $100.00</span>
+				</p>
+			</div>
+		</li>
+		<li class="lf_findGoodsBoxlist lf_borderBox">
+			<img src="images/lf_goods02.png" alt=""/>
+			<div class="lf_shangpinBox">
+				<p class="lf_shangpinName">Nike</p>
+				<p class="lf_shangpinCon">Nike耐克官方女子健身训练女子健身训练</p>
+				<p class="lf_shangpinPrice">
+					RMB <span class="lf_shangpinPrice-cn">700.00</span>
+					<span class="lf_shangpinPrice-e"> $100.00</span>
+				</p>
+			</div>
+		</li> -->
+	</ul>
+</div>
+</body>
+<script>
+	var goodsArr = []
+	$.ajax({
+	    url:'http://api.icpkys.com/shop/goods/list',
+	    type:'get',
+	    async: false,
+	    data: {
+	    	token: $.cookie('the_cookie')
+	    },
+	    success: function (msg) {
+	    	console.log(msg);
+	        var arr = msg.data;
+	        for (var i = 0; i < arr.length; i++) {
+	        	goodsArr[i] = {};
+	        	goodsArr[i].img = "http://api.icpkys.com" + arr[i].image;
+	        	goodsArr[i].name = arr[i].name;
+	        	goodsArr[i].con = arr[i].describe;
+	        	goodsArr[i].price1 = arr[i].price.toFixed(2);
+	        	goodsArr[i].price2 = (arr[i].price / 7).toFixed(2);
+	        	goodsArr[i].id = arr[i].id;
+	        }
+	    }
+	})
+</script>
+<script type="text/javascript">
+	//动态加载商品
+	function goodsBox(_arr,divClass){
+		$.each(_arr,function(index,value){
+			var _li = '<li class="lf_findGoodsBoxlist lf_borderBox" data-id="' + value.id + '">'
+					+ 		'<img src="'  + value.img + '" alt=""/>'
+					+ 		'<div class="lf_shangpinBox">'
+				    + 			'<p class="lf_shangpinName">' + value.name +'</p>'
+				    + 			'<p class="lf_shangpinCon">' + value.con +'</p>'
+				    + 			'<p class="lf_shangpinPrice">'
+					+ 				'RMB <span class="lf_shangpinPrice-cn">'+ value.price1 +'</span>'
+					+ 				'<span class="lf_shangpinPrice-e">'+ value.price2 +'</span>'
+				    + 			'</p>'
+					+ 		'</div>'
+					+ '</li> ';
+			divClass.append(_li);
+		})
+	};
+	var goodsClass = $('.lf_findGoodsBox');
+	goodsBox(goodsArr,goodsClass);
+	$('.lf_findGoodsBoxlist').on('click',function(){
+		window.location.href='goodsDetail.html?shopid=' + this.dataset.id;
+	})
+	$('.lf_findGoodsBox li:even').css('float','left');
+	$('.lf_findGoodsBox li:odd').css('float','right');
+	$('.searchBtn').on('click',function(){
+		var goodsClass = $('.lf_findGoodsBox');
+		var searchContext = $(this).prev().val();
+		$.ajax({
+		    url:'http://api.icpkys.com/shop/goods/list',
+		    type:'get',
+		    async: false,
+		    data: {
+		    	token: $.cookie('the_cookie'),
+		    	search: searchContext
+		    },
+		    success: function (msg) {
+		        var arr = msg.data;
+		        goodsArr = [];
+		        for (var i = 0; i < arr.length; i++) {
+		        	goodsArr[i] = {};
+		        	goodsArr[i].img = "http://api.icpkys.com" + arr[i].image;
+		        	goodsArr[i].name = arr[i].name;
+		        	goodsArr[i].con = arr[i].describe;
+		        	goodsArr[i].price1 = parseFloat(arr[i].price).toFixed(2);
+		        	goodsArr[i].price2 = (arr[i].price / 7).toFixed(2);
+	        		goodsArr[i].id = arr[i].id;
+		        }
+		        $('.lf_findGoodsBox').html('');
+		        goodsBox(goodsArr,goodsClass);
+		        $('.lf_findGoodsBox li:even').css('float','left');
+				$('.lf_findGoodsBox li:odd').css('float','right');
+		    }
+		})
+	});
+	/*弹窗内容*/
+		_li1();
+		_li2();
+	/*左边弹窗*/
+	function _li1(){
+		var flag = true;
+		$('.lf_findGoodsNavList1').find('.lf_categoryli').off("click").on('click',function(){
+			if(flag){
+				console.log("ok");
+				$(this).addClass('icon-shang');
+				$(this).siblings('.lf_tanchuang').css('display','block');
+				$('.lf_findGoodsNavList2').find('.lf_categoryli').unbind('click');
+				$(this).siblings('.lf_tanchuang').find('.lf_jiangList').on('click',function(){
+					//li中内容替换
+					$('.lf_findGoodsNavList1 .lf_findGoodsNavCon').find('h2>em').text($(this).find('p>em').text());
+					$('.lf_findGoodsNavList1 .lf_findGoodsNavCon').find('p>em').text($(this).find('p>span').text());
+					$('.lf_findGoodsNavList1').find('.lf_jiangList').removeClass('lf_jiangListOn');
+					$('.lf_findGoodsNavList1').find('.lf_jiangList').eq($(this).index()).addClass('lf_jiangListOn');
+				});
+				$('#lf_jiangSure1').on('click',function(){
+					$('.lf_findGoodsNavList1').find('.lf_tanchuang').css('display','none');
+					$('.lf_findGoodsNavList1').find('.lf_categoryli').removeClass('icon-shang');
+					
+						_li2();
+			
+				})
+			}else{
+				$(this).removeClass('icon-shang');
+				$(this).siblings('.lf_tanchuang').css('display','none');
+					_li2();
+			}
+			flag = !flag;
+		});
+	}
+	
+	/*右边弹窗*/
+	function _li2(){
+		var flag = true;
+		$('.lf_findGoodsNavList2').find('.lf_categoryli').off("click").on('click',function(){
+			if(flag){
+				$(this).addClass('icon-shang');
+				$(this).siblings('.lf_tanchuang').css('display','block');
+				$('.lf_findGoodsNavList1').find('.lf_categoryli').unbind('click');
+				$(this).siblings('.lf_tanchuang').find('.lf_jiangList').on('click',function(){
+					//li中内容替换
+					$('.lf_findGoodsNavList2 .lf_findGoodsNavCon').find('h2>em').text($(this).find('p>em').text());
+					$('.lf_findGoodsNavList2 .lf_findGoodsNavCon').find('p>em').text($(this).find('p>span').text());
+					$('.lf_findGoodsNavList2').find('.lf_jiangList').removeClass('lf_jiangListOn');
+					$('.lf_findGoodsNavList2').find('.lf_jiangList').eq($(this).index()).addClass('lf_jiangListOn');
+				});
+				$('#lf_jiangSure2').on('click',function(){
+					$('.lf_findGoodsNavList2').find('.lf_tanchuang').css('display','none');
+					$('.lf_findGoodsNavList2').find('.lf_categoryli').removeClass('icon-shang');
+		
+						_li1();
+				
+				})
+			}else{
+				$(this).removeClass('icon-shang');
+				$(this).siblings('.lf_tanchuang').css('display','none');
+					_li1();
+			}
+			flag = !flag;
+		})
+	};
+	
+</script>
+</html>

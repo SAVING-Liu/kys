@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>购买商品</title>
+<meta charset="utf-8">
+<meta name="author" content="yy">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="author" content="yy">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<meta http-equiv="Expires" content="-1">
+<meta http-equiv="Cache-Control" content="no-cache">
+<meta http-equiv="Pragma" content="no-cache">
+<meta name="description" content="" />
+<meta name="Keywords" content="" />
+<link rel="stylesheet" href="css/swiper.min.css">
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" type="text/css" href="fonts/iconfont.css">
+<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="js/swiper.min.js"></script>
+<script src="js/jquery.cookie.js"></script>
+<script src="https://cdn.bootcss.com/handlebars.js/4.0.10/handlebars.min.js"></script>
+<style type="text/css">
+	body{ background: #f5f5f5; }
+	em{
+		font-style: normal;
+	}
+	.msgBox{
+		padding: 10px 15px;
+		background: #fff;
+		overflow: hidden;
+		font-size: 15px;
+	}
+	.msgBox .icon-map-marker{
+		display: block;
+		width: 22px;
+		height: 100%;
+		float: left;
+		margin-right: 15px;
+		font-size: 22px;
+		padding-top: 45px;
+	}
+	.msgBox .msg_right{
+		float: right;
+		width: calc(100% - 37px);
+	}
+	.msg_right > p{
+		overflow: hidden;
+	}
+	.msg_right > p .left{
+		float: left;
+		display: block;
+		width: auto;
+		line-height: 14px;
+		padding: 8px 0 7px;
+		margin-right: 11px;
+	}
+	.msg_right > p .left em{
+		font-style: normal;
+		font-size: 12px;
+		color: #999;
+	}
+	.msg_right > p .phone{
+		float: right;
+		padding-top: 8px;
+	}
+	.msg_right > p .address{
+		display: block;
+    	padding-top: 6px;
+	}
+	.border{
+		width: 100%;
+		height: 10px; 
+		background: url(images/wy_border.png) repeat-x;
+	}
+	.goodsBox{
+		margin-top: 10px;
+		background: #fff;
+		border-top: 1px solid #eaeaea;
+		border-bottom: 1px solid #eaeaea;
+		padding: 15px;
+		overflow: hidden;	
+	}
+	.goodsBox .wy_goods{
+		width: 25%;
+		height: auto;
+		float: left;
+		margin-right: 15px;
+	}
+	.goodsBox .tit{
+		font-size: 15px;
+		margin-bottom: 20px;
+	}
+	.goodsBox .price{
+		line-height: 14px;
+		float: left;
+		width: auto;
+	}
+	.goodsBox .price .span1{
+		font-size: 14px;
+		color: #fe7200;
+	}
+	.goodsBox .price .span1 > em{
+		font-size: 17px;
+	}
+	.goodsBox .price .span2{
+		color: #999;
+		font-size: 13px;
+	}
+	.goodsBox .number{
+		float: right;
+		padding-top: 10px;
+		font-size: 16px;
+	}
+	.goodsBox .number .iconfont{
+		font-size: 15px;
+	}
+
+	.moneyBox{
+		overflow: hidden;
+		background: #fff;
+		margin: 10px 0 50px;
+		border-top: 1px solid #eaeaea;
+		border-bottom: 1px solid #eaeaea;
+		padding: 13px 15px;
+	}
+	.moneyBox .p1{
+		float: left;
+		line-height: 14px;
+		font-size: 16px;
+	}
+	.moneyBox .p1 span{
+		color: #999;
+		font-size: 12px;
+	}
+	.moneyBox .p2{
+		float: right;
+		line-height: 16px;
+		font-size: 15px;
+	}
+	.moneyBox .p2 .span2{
+		font-size: 13px;
+		color: #999;
+	}
+	.footer{
+		position: fixed;
+		bottom: 0;
+		width: 100%;
+		height: 48px;
+		background: #fff;
+		border-top: 1px solid #eaeaea;
+		font-size: 16px;
+		overflow: hidden;
+	}
+	.footer .all {
+		line-height: 15px;
+		float: left;
+		padding: 8px 15px 0;
+	}
+	.footer .all span{
+		font-size: 12px;
+		color: #999;
+	}
+	.footer .price{
+		float: left;
+		line-height: 16px;
+		padding-top: 6px;
+	}
+	.footer .price .span1{
+		font-size: 14px;
+		color: #fe7200;
+	}
+	.footer .price .span1 > em{
+		font-size: 17px;
+	}
+	.footer .price .span2{
+		color: #999;
+		font-size: 13px;
+	}
+	.footer button{
+		float: right;
+		height: 48px;
+		border: none;
+		background: #4bd475;
+		color: #fff;
+		font-size: 16px;
+	}
+	.footer button span{
+		font-size: 13px;
+	}
+</style>
+</head>
+<body>
+<div class="public_head">
+	<h3>购买商品<br/><span>Buy goods</span></h3>
+	<a href="javascript:history.go(-1);" class="iconfont icon-back"></a>
+</div>
+
+<div class="msgBox">
+	<!--<i class="iconfont icon-map-marker"></i>
+	<div class="msg_right">
+		<p><span class="left">收货人：CR小杀<br><em>Consignee</em></span> <span class="phone">1762000000</span></p>
+
+		<p class=""><span class="left">地址：<br><em>address</em></span> <span class="address">河南省郑州市金水区MOUMOU小区13号楼一单元6楼西户</span></p>
+	</div>-->
+</div>
+<div class="border"></div>
+
+
+<!--商品显示-->
+<div class="goodsBoxShow">
+</div>
+<!--<div class="goodsBox">
+	<img class="wy_goods" src="images/wy_goods.png" alt="">
+	<div class="goods_right">
+		<p class="tit">Nike 耐克官方 NIKE FLEX BIJOUX 女子健身训练运动鞋</p>
+
+		<p class="price"><span class="span1">RMB <em>700.00</em></span> <br><span class="span2">$<em>100.00</em></span></p>
+		
+		<p class="number"><i class="iconfont ">X</i><span>1</span></p>
+	</div>
+</div>-->
+
+<div class="moneyBox">
+	<p class="p1">商品金额<br><span>Amount goods</span></p>
+
+	<p class="p2"><span class="span1">RMB <em>0.00</em></span> <br><span class="span2">$<em>0.00</em></span></p>
+</div>
+
+<div class="footer">
+	<p class="all">合计<br><span>Total</span></p>
+
+	<p class="price"><span class="span1">RMB <em>0.00</em></span> <br><span class="span2">$<em>0.00</em></span></p>
+
+	<button id="upShop" type="button">付款<br><span>Payment</span></button>
+</div>
+
+<!-- 地址模板 -->
+<script type="text/x-handlebars-temlpate" id="person-address">
+	<i class="iconfont icon-map-marker"></i>
+	<div class="msg_right" data-id="{{id}}">
+		<p>
+			<span class="left">收货人：{{name}}<br><em>Consignee</em></span> 
+			<span class="phone">{{phone}}</span>
+		</p>
+
+		<p class="">
+			<span class="left">地址：<br><em>address</em></span> 
+			<span class="address">{{province}}{{city}}{{district}}{{address}}</span>
+		</p>
+	</div>
+</script>
+
+<!--商品模板-->
+<script type="text/x-handlebars-temlpate" id="person-shop">
+	{{#each this}}
+		<div class="goodsBox" data-id="{{id}}">
+			<img class="wy_goods" src="{{img}}" alt="">
+			<div class="goods_right">
+				<p class="tit">{{name}}</p>
+		
+				<p class="price"><span class="span1">RMB <em>{{price1}}</em></span> <br><span class="span2">$<em>{{price2}}</em></span></p>
+				
+				<p class="number"><i class="iconfont ">X</i><span>{{num}}</span></p>
+			</div>
+		</div>
+	{{/each}}
+</script>
+
+<script>
+	var upData = {};//上传的数据的对象
+	upData.goods_ids = [];
+	$.ajax({
+		type:"POST",
+		url:"http://api.icpkys.com/shop/order/address?token=" + $.cookie('the_cookie'),
+		async:false,
+        crossDomain:true,
+        datatype: "json",
+        xhrFields: {  withCredentials: true  },
+    	crossDomain: true,
+		success: function (msg) {
+			var sietTemplate = Handlebars.compile($("#person-address").html());
+			$(".msgBox").html(sietTemplate(msg.data));
+			upData.address_id = msg.data.id;
+		}
+	});
+	
+	var shopCarPay = JSON.parse(sessionStorage.shopCarPay);
+	var shopTemplate = Handlebars.compile($("#person-shop").html());
+	$(".goodsBoxShow").html(shopTemplate(shopCarPay));
+	
+	//计算总金额
+	var priceAll1 = 0;
+	var priceAll2 = 0;
+	for (var i = 0; i < shopCarPay.length; i++) {
+		priceAll1 += shopCarPay[i].price1 * shopCarPay[i].num;
+		priceAll2 += shopCarPay[i].price2 * shopCarPay[i].num;
+		upData.goods_ids.push(shopCarPay[i].id);
+	}
+	$(".moneyBox").children(".p2").children(".span1").children("em").html(priceAll1.toFixed(2));
+	$(".moneyBox").children(".p2").children(".span2").children("em").html(priceAll2.toFixed(2));
+	$(".footer").children(".price").children(".span1").children("em").html(priceAll1.toFixed(2));
+	$(".footer").children(".price").children(".span2").children("em").html(priceAll2.toFixed(2));
+	
+	
+	$("#upShop").on("touchend", function () {
+		if (shopCarPay[0].pay) {
+			upData.goods_id = shopCarPay[0].id;
+			delete upData.goods_ids;
+			$.ajax({
+				url:"http://api.icpkys.com/shop/order/quickConfirm?token=" + $.cookie('the_cookie'),
+				type:"POST",
+				async:false,
+				data: upData,
+		        crossDomain:true,
+		        datatype: "json",
+		        xhrFields: {  withCredentials: true  },
+		    	crossDomain: true,
+				success: function (msg) {
+					var x = JSON.stringify(msg.data.order_id);
+					if (msg.status == "success") {
+						window.location.href = "./payment_goods.html?rmb=" + $(".footer").children(".price").children(".span1").children("em").html() + "&dol=" + $(".footer").children(".price").children(".span2").children("em").html() + "&shopList=" + x;
+					}
+	
+				}
+			});
+		} else {
+			$.ajax({
+				url:"http://api.icpkys.com/shop/order/confirm?token=" + $.cookie('the_cookie'),
+				type:"POST",
+				async:false,
+				data: upData,
+		        crossDomain:true,
+		        datatype: "json",
+		        xhrFields: {  withCredentials: true  },
+		    	crossDomain: true,
+				success: function (msg) {
+					var x = JSON.stringify(msg.data);
+					if (msg.status == "success") {
+						window.location.href = "./payment_goods.html?rmb=" + $(".footer").children(".price").children(".span1").children("em").html() + "&dol=" + $(".footer").children(".price").children(".span2").children("em").html() + "&shopList=" + x;
+					}
+	
+				}
+			});
+		}
+	});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>账户余额</title>
+<meta charset="utf-8">
+<meta name="author" content="yy">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="author" content="yy">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<meta http-equiv="Expires" content="-1">
+<meta http-equiv="Cache-Control" content="no-cache">
+<meta http-equiv="Pragma" content="no-cache">
+<meta name="description" content="" />
+<meta name="Keywords" content="" />
+<link rel="stylesheet" href="css/swiper.min.css">
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" type="text/css" href="fonts/iconfont.css">
+<link rel="stylesheet" href="css/lf_style.css"/>
+<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="js/swiper.min.js"></script>
+<script type="text/javascript" src="js/jquery.cookie.js"></script>
+<style type="text/css">
+	body{ background: #fff; }
+	.lf_totalBox>div{
+		opacity:0.9;
+	}
+</style>
+</head>
+<body>
+<div class="public_head">
+	<h3>账户余额<br/><span>Account balance</span></h3>
+	<a href="javascript:history.go(-1)" class="iconfont icon-back"></a>
+</div>
+<div class="lf_totalBox lf_borderBox lf_clearFloat">
+	<div class="lf_yueBox">
+		<h2>
+			余额：<br/><span>Balance:</span>
+		</h2>
+		<p class="kll_yueshow-p">
+			<span>RMB0.00</span><br/><span>$0.00</span>
+		</p>
+	</div>
+</div>
+<ul class="list1">
+	<li>
+		<a href="balance_exchange.html">
+			<span class="iconfont icon-duihuan"></span>
+			<span>兑换<strong>Exchange</strong></span>
+			<i class="iconfont icon-more"></i>
+		</a>
+	</li>
+	<li>
+		<a href="balance_transfer.html">
+			<span class="iconfont icon-zhuanzhang"></span>
+			<span>转账<strong>Transfer accounts</strong></span>
+			<i class="iconfont icon-more"></i>
+		</a>
+	</li>
+	<li>
+		<a href="balanceRecharge.html">
+			<span class="iconfont icon-chongzhi"></span>
+			<span>充值<strong>Recharge</strong></span>
+			<i class="iconfont icon-more"></i>
+		</a>
+	</li>
+	<li>
+		<a href="balanceWithdrawal.html">
+			<span class="iconfont icon-tixian"></span>
+			<span>提现<strong>Withdrawals</strong></span>
+			<i class="iconfont icon-more"></i>
+		</a>
+	</li>
+</ul>
+
+
+<script>
+	$.ajax({
+		url: "http://api.icpkys.com/user/home/balance?token=" + $.cookie('the_cookie'),
+		data: {
+			token: $.cookie('the_cookie')
+		},
+		success: function (msg) {
+			
+			$(".kll_yueshow-p").children("span").eq(0).text("RMB" + msg.data.toFixed(2));
+			$(".kll_yueshow-p").children("span").eq(1).text("$" + (msg.data / 7).toFixed(2));
+		},
+		error: function (msg) {
+			console.log(msg);
+		}
+	});
+</script>
+</body>
+</html>

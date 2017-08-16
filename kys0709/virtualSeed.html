@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>种子金</title>
+<meta charset="utf-8"/>
+<meta name="author" content="yy"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK"/>
+<meta name="author" content="yy"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+<meta name="format-detection" content="telephone=no"/>
+<meta http-equiv="Expires" content="-1"/>
+<meta http-equiv="Cache-Control" content="no-cache"/>
+<meta http-equiv="Pragma" content="no-cache"/>
+<meta name="description" content="" />
+<meta name="Keywords" content="" />
+<link rel="stylesheet" href="css/swiper.min.css"/>
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+<link rel="stylesheet" type="text/css" href="fonts/iconfont.css"/>
+<link rel="stylesheet" href="css/lf_style.css"/>
+<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="js/swiper.min.js"></script>
+<script type="text/javascript" src="js/jquery.cookie.js"></script>
+<style type="text/css">
+	body{ background: #f5f5f5;padding-bottom:60px; }
+	.account_setting_1 a i{
+		font-style:normal;
+		font-size:14px;
+		color:#333;
+	}
+	.lf_footer{
+		height:50px;
+	}
+</style>
+</head>
+<body>
+<div class="public_head">
+	<h3>种子金<br/><span>Seed gold</span></h3>
+	<a href="javascript:history.go(-1);" class="iconfont icon-back"></a>
+</div>
+<div class="account_setting_1">
+	<a href="#">
+		<p>种子金<span>Seed gold</span></p>
+		<i class="num">个</i>
+	</a>
+</div>
+<div class="lf_footer">
+	<button onclick="window.location.href='activeNewmember.html'" type="button" class="lf_purchase">购买六星健康使者<br/><span>Buy six star health messengers</span></button>
+</div>
+<script type="text/javascript">
+	$.ajax({
+		url:'http://api.icpkys.com/health/coin?token='+$.cookie('the_cookie'),
+		type:'get',
+		data:{},
+		success:function(req){
+			if(req.status=='success'){
+				$('.num').text(req.data+'个');
+			}else{
+				alert(req.massage);
+			}
+		},
+		error:function(res){
+			if(res.status!=undefined){
+        		if(res.status==404){
+	        		alert('接口不存在');
+	        	}
+	        	if(res.status==401 && res.responseText=='{"error":"token_expired"}'){
+	        		alert('请重新登录');
+	        		window.location.href='login.html';
+	        	}
+        	}else{
+        		console.log(res);
+        		alert('未知错误');
+        	}
+		}
+	})
+</script>
+</body>
+</html>

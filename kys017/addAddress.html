@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>新增收货地址</title>
+<meta charset="utf-8">
+<meta name="author" content="yy">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="author" content="yy">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<meta http-equiv="Expires" content="-1">
+<meta http-equiv="Cache-Control" content="no-cache">
+<meta http-equiv="Pragma" content="no-cache">
+<meta name="description" content="" />
+<meta name="Keywords" content="" />
+<link rel="stylesheet" href="css/swiper.min.css">
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" type="text/css" href="fonts/iconfont.css">
+<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="js/swiper.min.js"></script>
+<script type="text/javascript" src="js/jquery.cookie.js"></script>
+<!-- <link href="http://www.jq22.com/jquery/bootstrap-3.3.4.css" rel="stylesheet"> -->
+<script src="http://www.jq22.com/jquery/bootstrap-3.3.4.js"></script>
+<script src="js/distpicker.data.js"></script>
+<script src="js/distpicker.js"></script>
+<script src="js/main.js"></script>
+
+
+<style>
+select{
+	outline: none;
+}
+	.newads_ul > li{
+		margin: 0 15px;
+		padding: 16px 0 12px;
+		height: 30px;
+		border-bottom: 1px solid #eaeaea;
+		clear: both;
+	}
+	.newads_ul > li > p{
+		line-height: 14px;
+		float: left;
+	}
+	.newads_ul > li > input{
+		float: right;
+		height: 28px;
+		border: none;
+		font-size: 16px;
+	}
+	.newads_ul > li > input.input1{
+		width: calc(100% - 112px);
+	}
+	.newads_ul > li > input.input2{
+		width: calc(100% - 152px);
+	}
+	.newads_ul > li > input.input3{
+		width: calc(100% - 144px);
+	}
+	.newads_ul > li > input.input4{
+		width: calc(100% - 119px);
+	}
+	.newads_ul > li .you{
+		float: right;
+	}
+	.newads_ul li .wy_p1{
+		width: 92px;
+	}
+	.newads_ul li .wy_p2{
+		width: 132px;
+	}
+	.newads_ul li .wy_p3{
+		width: 124px;
+	}
+	.newads_ul li .wy_p4{
+		width: 99px;
+	}
+	.newads_ul > li span{
+		font-size: 12px;
+		color: #666;
+	}
+	.newads_ul > li span.span1{
+		font-size: 16px;
+	}
+	.fengeDiv{
+		height: 10px;
+		background: #f5f5f5;
+		border-bottom: 1px solid #eaeaea;
+	}
+	.click_bc,.click_bc_copy{
+		border: none;
+		background: none;
+		width: 90%;
+		height: 45px;
+		display: block;
+		margin: 80px auto 10px;
+		background: #49d477;
+		border-radius: 5px;
+		color: #fff;
+		font-size: 16px;
+	}
+	.click_bc > span, .click_bc_copy span {
+		font-size: 12px;
+	}
+	#panel{
+		padding:20px 15px;
+		display:none;
+		border: 1px solid #eaeaea;
+		border-radius: 10px;
+	}
+	#panel .form-group{
+		height: 40px;
+		clear: both;
+	}
+	#panel .form-group .sr-only{
+		width: 80px;
+		display: block;
+		font-size: 15px;
+		float: left;
+	}
+	.form-control{
+		height: 25px;
+	}
+</style>
+</head>
+<body>
+<div class="public_head">
+	<h3>新增收货地址<br/><span>New shipping address</span></h3>
+	<a href="javascript:history.go(-1);" class="iconfont icon-back"></a>
+	<!-- <i class="iconfont icon-form"></i> -->
+</div>
+
+<div class="fengeDiv"></div>
+<div class="xzdz_from">
+	<ul class="newads_ul">
+		<li>
+			<p class="wy_p1">收货人姓名<br><span>ContacterName</span></p>
+			<input class="input1" type="text">
+		</li>
+		<li>
+			<p class="wy_p2">手机号码<br><span>Mobile phone number</span></p>
+			<input class="input2" type="text">
+		</li>
+		<li id="flip">
+			<p class="wy_p3">省、市、区<br><span>province, city, district</span></p>
+			<!-- <input class="input3" type="text"> -->
+			<img class="you" src="images/xzdz_gt.png">
+		</li>
+
+		<div id="panel">
+			<form class="form-inline">
+		        <div data-toggle="distpicker">
+			        <div class="form-group">
+			          <label class="sr-only" for="province2">Province</label>
+			          <select class="form-control" id="province2" data-province="---- 选择省 ----"></select>
+			        </div>
+			        <div class="form-group">
+			          <label class="sr-only" for="city2">City</label>
+			          <select class="form-control" id="city2" data-city="---- 选择市 ----"></select>
+			        </div>
+			        <div class="form-group">
+			          <label class="sr-only" for="district2">District</label>
+			          <select class="form-control" id="district2" data-district="---- 选择区 ----"></select>
+			        </div>
+		        </div>
+		    </form>
+
+		</div>
+
+		<li>
+			<p class="wy_p4">详细地址<br><span>Detailed address</span></p>
+			<input class="input4" type="text">
+		</li>
+	</ul>
+</div>
+<button class="click_bc" type="button">保存<br/><span>Save</span></button>
+<button class="click_bc_copy" type="button" style="display:none;">修改<br/><span>Revise</span></button>
+</body>
+
+<script> 
+$(document).ready(function(){
+  $("#flip").click(function(){
+    $("#panel").slideToggle("fast");
+  });
+});
+</script>
+<script>
+	var flag = true;
+	$("#flip").on("touchend", function () {
+		flag = false;
+	});
+    var _token = $.cookie('the_cookie');
+    $(".click_bc").on("touchstart", function () {
+    	var name = $(".input1").val();
+    	var phone = $(".input2").val();
+    	var province = $("#province2").val();
+    	var city = $("#city2").val();
+    	var district = $("#district2").val();
+    	var address = $(".input4").val();
+    	var reg = /^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|18[0|1|2|3|5|6|7|8|9])\d{8}$/;
+    	if (!name) {
+    		return alert("请输入收货人姓名");
+    	} else if (!reg.test(phone)) {
+    		return alert("请输入正确手机号");
+    	} else if (flag) {
+    		return alert("请确认省市区收货地址");
+    	} else if (!address) {
+    		return alert("请填写正确收货地址");
+    	}
+    	var _default;
+    	confirm("是否设为默认地址") ? _default = 1 : _default = 0;
+	    $.ajax({
+	    	url: "http://api.icpkys.com/user/add_address",
+	    	type: "GET",
+	    	data: {
+	    		token: _token,
+	    		name: name,
+	    		phone: phone,
+	    		province: province,
+	    		city: city,
+	    		district: district,
+	    		address: address,
+	    		is_default: _default
+	    	},
+	    	success: function (msg) {
+	    		alert(msg.message);
+	    		if (msg.status == "success") {
+		    		window.location.pathname = "shippingAddress.html";
+	    		}
+	    	}
+	    });
+    });
+</script>
+
+<script>
+	if (window.location.href.split("?siteId=")[1]) {
+		$(".public_head").children("h3").html('修改收货地址<br/><span>Change shipping address</span>');
+		$(".click_bc").css("display", "none");
+		$(".click_bc_copy").css("display", "block");
+		$.ajax({
+			url: "http://api.icpkys.com/user/find_address",
+	    	type: "GET",
+	    	data: {
+	    		token: _token,
+	    		id: window.location.href.split("?siteId=")[1]
+	    	},
+	    	success: function (msg) {
+	    		console.log(msg);
+	    		$(".input1").val(msg.data.name);
+	    		$(".input2").val(msg.data.phone);
+	    		$(".input4").val(msg.data.address);
+	    		$("#province2").val(msg.data.province);
+	    		$("#province2").trigger("change");
+	    		$("#city2").val(msg.data.city);
+	    		$("#city2").trigger("change");
+	    		$("#district2").val(msg.data.district);
+	    	}
+		});
+
+
+		$(".click_bc_copy").on("touchstart", function () {
+	    	var name = $(".input1").val();
+	    	var phone = $(".input2").val();
+	    	var province = $("#province2").val();
+	    	var city = $("#city2").val();
+	    	var district = $("#district2").val();
+	    	var address = $(".input4").val();
+	    	var reg = /^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|18[0|1|2|3|5|6|7|8|9])\d{8}$/;
+	    	if (!name) {
+	    		return alert("请输入收货人姓名");
+	    	} else if (!reg.test(phone)) {
+	    		return alert("请输入正确手机号");
+	    	} else if (!address) {
+	    		return alert("请填写正确收货地址");
+	    	}
+	    	var _default;
+	    	confirm("是否设为默认地址") ? _default = 1 : _default = 0;
+		    $.ajax({
+		    	url: "http://api.icpkys.com/user/edit_address",
+		    	type: "GET",
+		    	data: {
+		    		token: _token,
+		    		name: name,
+		    		phone: phone,
+		    		province: province,
+		    		city: city,
+		    		district: district,
+		    		address: address,
+		    		is_default: _default,
+		    		id: window.location.href.split("?siteId=")[1]
+		    	},
+		    	success: function (msg) {
+		    		if (msg.status == "success") {
+		    			alert(msg.message);
+		    			window.location.pathname = "shippingAddress.html";
+		    		} else {
+		    			alert(msg.massage);
+		    		}
+		    	}
+		    });
+	    });
+
+	}
+</script>
+</html>

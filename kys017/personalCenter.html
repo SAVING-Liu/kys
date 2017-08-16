@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>个人中心</title>
+<meta charset="utf-8">
+<meta name="author" content="yy">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="author" content="yy">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<meta http-equiv="Expires" content="-1">
+<meta http-equiv="Cache-Control" content="no-cache">
+<meta http-equiv="Pragma" content="no-cache">
+<meta name="description" content="" />
+<meta name="Keywords" content="" />
+<link rel="stylesheet" href="css/swiper.min.css">
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" href="css/lf_style.css"/>
+<link rel="stylesheet" type="text/css" href="fonts/iconfont.css">
+<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="js/jquery.cookie.js"></script>
+<script type="text/javascript" src="js/swiper.min.js"></script>
+<style type="text/css">
+	body{ background: #f5f5f5; }
+	.lf_kefu{
+		display: block;
+	    width: 25px;
+	    color: #333;
+	    position: absolute;
+	    top: 0;
+	    right: 50px;
+	    line-height: 60px;
+	    font-size: 24px;
+	}
+	.public_head i.lf_set{
+		font-size: 24px;
+		margin-right:10px;
+	}
+	.member{
+		margin-top:0;
+		border-top:0;
+	}
+	.member .lf_recommender{color:#4bd475;}
+	.lf_recommender-e{
+		color:#999;
+		padding-left:5px;
+	}
+	.lf_jiangTips{
+		margin:10px 0 20px;
+	}
+</style>
+</head>
+<body>
+<div class="public_head" style="border:0">
+	<!-- <h3>会员中心<br/><span>Member Center</span></h3> -->
+	<span onclick="javascript:window.location.href='customerCenter.html'" class="iconfont lf_kefu icon-service"></span>
+	<i onclick="javascript:window.location.href='setting.html'" class="iconfont lf_set icon-set"></i>
+</div>
+<div class="member">
+	<img id="imgurl" src=""/>
+	<h3 id="nickname"></h3>
+	<p>推荐人<span class="lf_recommender-e">Recommender</span></p>
+	<span class="lf_recommender"></span>
+</div>
+<ul class="member_list">
+	<li>
+		<a href="membersCenter.html">
+			<i class="iconfont icon-jewelry"></i>
+			<p>会员中心<br/><span>Member Center</span></p>
+			<i class="iconfont icon-more"></i>
+		</a>
+	</li>
+	<li>
+		<a href="healtherCenter.html">
+			<i class="iconfont icon-jiankang"></i>
+			<p>健康使者中心<br/><span>Health envoy Center</span></p>
+			<i class="iconfont icon-more"></i>
+		</a>
+	</li>
+	<li>
+		<a href="accountBalance.html">
+			<i class="iconfont icon-trade"></i>
+			<p>账户余额<br/><span>Account balance</span></p>
+			<i class="iconfont icon-more"></i>
+		</a>
+	</li>
+	<li>
+		<a href="healthFund.html">
+			<i class="iconfont icon-trade-assurance-copy"></i>
+			<p>流通健康金<br/><span>Circulation health fund</span></p>
+			<i class="iconfont icon-more"></i>
+		</a>
+	</li>
+	<li>
+		<a href="myRecords.html">
+			<i class="iconfont icon-survey"></i>
+			<p>我的记录<br/><span>My records</span></p>
+			<i class="iconfont icon-more"></i>
+		</a>
+	</li>
+	<li>
+		<a href="myMerchants.html">
+			<i class="iconfont icon-shangjia"></i>
+			<p>我的商家<br/><span>My Merchants</span></p>
+			<i class="iconfont icon-more"></i>
+		</a>
+	</li>
+	<li>
+		<a href="Qrcode.html">
+			<i class="iconfont icon-qrcode"></i>
+			<p>二维码<br/><span>QR code</span></p>
+			<i class="iconfont icon-more"></i>
+		</a>
+	</li>
+	<li>
+		<a href="shareCode_help.html">
+			<i class="iconfont icon-pingjia"></i>
+			<p>我要助力<br/><span>I want to help</span></p>
+			<i class="iconfont icon-more"></i>
+		</a>
+	</li>
+</ul>
+<div class="lf_content" style="padding-bottom:70px">
+	<!-- <div class="lf_myCenterbox">
+		<h2 class="lf_myGradeTitle lf_borderBox">
+			我的等级<br/><span>My grades</span>
+		</h2>
+		<div class="lf_memberGrade lf_borderBox">
+			<div class="lf_memberlevel lf_clearFloat">
+				<h2 class="lf_left lf_level">
+					会员等级：<br/><span>Membership level</span>
+				</h2>
+				<p class="lf_left lf_levelName">无</p>
+			</div>
+			<div class="lf_levelLine lf_gradeLine"></div>
+			<p onclick="javascript:window.location.href='shareCode_help.html'" class="lf_myHelp">我要助力<span>I want to help</span></p>
+		</div> -->
+		<!-- <div class="lf_memberGrade lf_memberGrade2 lf_borderBox">
+			<div class="lf_memberlevel lf_clearFloat">
+				<h2 class="lf_left lf_level">
+					健康使者星级：<br/><span>Health envoy stars</span>
+				</h2>
+				<p class="lf_left lf_startName">0</p>
+			</div>
+			<div class="lf_levelLine lf_starLine"></div>
+		</div> -->
+	</div>
+</div>
+<footer class="lf_footer">
+	<div class="lf_footerCon lf_displayFlex">
+		<a href="index.html" class="lf_jump lf_borderBox">
+			<i class="iconfont icon-shouye-shouye"></i>
+			<span class="lf_footerlist-cn">首页</span>
+			<span class="lf_footerlist-e">Home</span>
+		</a>
+		<a href="interactiveZone.html" class="lf_jump lf_borderBox">
+			<i class="iconfont icon-hudong"></i>
+			<span class="lf_footerlist-cn">互动</span>
+			<span class="lf_footerlist-e">Interaction</span>
+		</a>
+		<a href="http://ditu.amap.com/" class="lf_jump lf_borderBox">
+			<i class="iconfont icon-ditu"></i>
+			<span class="lf_footerlist-cn">导航</span>
+			<span class="lf_footerlist-e">Navigation</span>
+		</a>
+		<a href="personalCenter.html" class="lf_jump lf_borderBox lf_footerOn">
+			<i class="iconfont icon-wode"></i>
+			<span class="lf_footerlist-cn">我的</span>
+			<span class="lf_footerlist-e">My</span>
+		</a>
+	</div>
+</footer>
+<div class="lf_manageJiang">
+	<div class="lf_manageJiangBox lf_borderBox">
+		<h2>提示<br/><span>Tips</span></h2>
+		<p class="lf_jiangTips">
+			您已快升为钻卡会员，如想继续升级，请尽快推荐1位直接会员，1位间接会员
+		</p>
+		<div class="lf_cardSure lf_clearFloat">
+			<button class="lf_makeSure" type="button">确定<br/><span style="font-size:12px">Confirm</span></button>
+		</div>
+	</div>
+</div>
+</body>
+<script type="text/javascript">
+	 var _token = $.cookie('the_cookie');
+	 $.ajax({
+        url : 'http://api.icpkys.com/user/get_user_info',
+        type:'get',
+        data:{
+        	token:_token
+        },
+        success : function(req){
+            console.log(req);
+    	    if(req.status=='success'){
+    			//页面赋值
+    			var _data = req.data;
+    			$('#nickname').text(_data.nickname);
+    			if(_data.puser_phone==null){
+    				$('.lf_recommender').text('系统  system')
+    			}else{
+    				$('.lf_recommender').text(_data.puser_phone);
+    			}
+    			if(_data.avatar==null){
+    				$('#imgurl').attr("src","images/lf_center.png");
+    			}else{
+    				$('#imgurl').attr('src',_data.avatar);
+    			};
+    		/*	if(_data.row_list==null){
+    				$('.lf_levelName').text('无');
+    				$('.lf_gradeLine').css('width','0%');
+    			}else{
+    				var card = _data.row_list;
+					if(card==1){
+						$('.lf_levelName').text('银卡');
+						$('.lf_gradeLine').css({
+							transition:'all linear 0.3s',
+							width:'18%'
+						});
+					};
+					if(card==2){
+						$('.lf_levelName').text('金卡');
+						$('.lf_gradeLine').css({
+							transition:'all linear 0.3s',
+							width:'36%'
+						});
+					};
+					if(card==3){
+						$('.lf_levelName').text('钻卡');
+						$('.lf_gradeLine').css({
+							transition:'all linear 0.3s',
+							width:'54%'
+						});
+					};
+					if(card==4){
+						$('.lf_levelName').text('洲际卡');
+						$('.lf_gradeLine').css({
+							transition:'all linear 0.3s',
+							width:'72%'
+						});
+					};
+					if(card==5){
+						$('.lf_levelName').text('全球卡');
+						$('.lf_gradeLine').css({
+							transition:'all linear 0.3s',
+							width:'92%'
+						});
+					};
+    				//弹窗出现-消失
+					//$('.lf_gradeLine').css('width','0%');
+					if(_data.reminder==1){
+						$('.lf_manageJiang').css('display','block');
+						$('.lf_makeSure').on('click',function(){
+							$('.lf_manageJiang').css('display','none');
+						})
+					};
+    			};
+    			if(_data.grade==null){
+    				$('.lf_startName').text('0');
+    				$('.lf_starLine').css('width','0');
+    			}else{
+    				$('.lf_startName').text(_data.grade);
+    				var star = _data.grade;
+    				if(star==1){
+    					$('.lf_starLine').css({
+							transition:'all linear 0.3s',
+							width:'15%'
+						});
+    				};
+    				if(star==2){
+    					$('.lf_starLine').css({
+							transition:'all linear 0.3s',
+							width:'30%'
+						});
+    				};
+    				if(star==3){
+    					$('.lf_starLine').css({
+							transition:'all linear 0.3s',
+							width:'45%'
+						});
+    				};
+    				if(star==4){
+    					$('.lf_starLine').css({
+							transition:'all linear 0.3s',
+							width:'60%'
+						});
+    				};
+    				if(star==4){
+    					$('.lf_starLine').css({
+							transition:'all linear 0.3s',
+							width:'65%'
+						});
+    				};
+    				if(star==5){
+    					$('.lf_starLine').css({
+							transition:'all linear 0.3s',
+							width:'85%'
+						});
+    				};
+    				if(star==6){
+    					$('.lf_starLine').css({
+							transition:'all linear 0.3s',
+							width:'92%'
+						});
+    				};
+
+    			}*/
+    			
+    		}else{
+    			console.log(req.massage);
+    		}
+        },
+        error:function(res){
+        	if(res.status!=undefined){
+        		if(res.status==404){
+	        		alert('接口不存在');
+	        	}
+	        	if(res.status==401 && res.responseText=='{"error":"token_expired"}'){
+	        		alert('请重新登录');
+	        		window.location.href='login.html';
+	        	}
+        	}else{
+        		console.log(res);
+        		alert('未知错误');
+        	}
+        }
+    });       
+</script>
+</html>

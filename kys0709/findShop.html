@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>找商家</title>
+<meta charset="utf-8"/>
+<meta name="author" content="yy"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK"/>
+<meta name="author" content="yy"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+<meta name="format-detection" content="telephone=no"/>
+<meta http-equiv="Expires" content="-1"/>
+<meta http-equiv="Cache-Control" content="no-cache"/>
+<meta http-equiv="Pragma" content="no-cache"/>
+<meta name="description" content="" />
+<meta name="Keywords" content="" />
+<link rel="stylesheet" href="css/swiper.min.css"/>
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+<link rel="stylesheet" type="text/css" href="fonts/iconfont.css"/>
+<link rel="stylesheet" href="css/lf_style.css"/>
+<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="js/swiper.min.js"></script>
+<script type="text/javascript" src="js/jquery.cookie.js"></script>
+<style type="text/css">
+	body{ background: #f5f5f5; }
+	input::-webkit-input-placeholder, textarea::-webkit-input-placeholder { 
+		color: #999; 
+	} 
+	input:-moz-placeholder, textarea:-moz-placeholder { 
+		color: #999; 
+	} 
+	input::-moz-placeholder, textarea::-moz-placeholder { 
+		color: #999; 
+	} 
+	input:-ms-input-placeholder, textarea:-ms-input-placeholder { 
+		color: #999; 
+	} 
+	em{
+		font-style:normal;
+	}
+</style>
+</head>
+<body>
+<div style="background-color:#f5f5f5" class="public_head">
+	<div class="lf_headSearch">
+		<input type="search" id="search" placeholder="搜索商店 Search the store"/>
+		<span class="iconfont searchBtn icon-sousuo"></span>
+	</div>
+	<a href="javascript:history.go(-1);" class="iconfont icon-back"></a>
+	<i class="iconfont filters icon-form1"></i>
+</div>
+<h2 class="lf_findShopTitle">A</h2>
+<div class="lf_content">
+	<div class="lf_shopBox">
+		<ul class="lf_shopBoxLists">
+			<!-- <li class="lf_shopBoxItem">
+				<a href="shopHomepage.html" class="lf_jump lf_borderBox lf_clearFloat">
+					<img src="images/lf_shopLogo.png" alt=""/>
+					<p class="lf_findshopName lf_borderBox">Adidas</p>
+				</a>
+			</li> -->
+		</ul>
+	</div>
+</div>
+<div class="lf_cebianlan">
+	<button type="button">A</button>
+	<button type="button">B</button>
+	<button type="button">C</button>
+	<button type="button">D</button>
+	<button type="button">E</button>
+	<button type="button">F</button>
+	<button type="button">G</button>
+	<button type="button">H</button>
+	<button type="button">I</button>
+	<button type="button">J</button>
+	<button type="button">K</button>
+	<button type="button">L</button>
+	<button type="button">M</button>
+	<button type="button">N</button>
+	<button type="button">O</button>
+	<button type="button">P</button>
+	<button type="button">Q</button>
+	<button type="button">R</button>
+	<button type="button">S</button>
+	<button type="button">T</button>
+	<button type="button">U</button>
+	<button type="button">V</button>
+	<button type="button">W</button>
+	<button type="button">X</button>
+	<button type="button">Y</button>
+	<button type="button">Z</button>
+	<button type="button">#</button>
+</div>
+<!-- 右导航弹窗 -->
+<!-- <div class="lf_tanchuang">
+	<div class="lf_tanBox">
+		<ul>
+			<li class="lf_jiangList lf_borderBox lf_jiangListOn">
+				<p class="lf_left">
+					<em>食品生鲜</em><span>Food and fresh</span>
+				</p>
+				<i class="iconfont lf_right icon-duihao"></i>
+			</li>
+			<li class="lf_jiangList lf_borderBox">
+				<p class="lf_left">
+					<em>水饮料</em>酒<span>Wines and drinks</span>
+				</p>
+				<i class="iconfont lf_right icon-duihao"></i>
+			</li>
+			<li class="lf_jiangList lf_borderBox">
+				<p class="lf_left">
+					<em>厨卫清洁</em><span>Kitchen cleaner</span>
+				</p>
+				<i class="iconfont lf_right icon-duihao"></i>
+			</li>
+			<li class="lf_jiangList lf_borderBox">
+				<p class="lf_left">
+					<em>母婴用品</em><span>Maternal and child supplies</span>
+				</p>
+				<i class="iconfont lf_right icon-duihao"></i>
+			</li>
+			<li class="lf_jiangList lf_borderBox">
+				<p class="lf_left">
+					<em>美容个护</em><span>Beauty a guard</span>
+				</p>
+				<i class="iconfont lf_right icon-duihao"></i>
+			</li>
+			<li class="lf_jiangList lf_borderBox">
+				<p class="lf_left">
+					<em>家居家纺</em><span>Household textile</span>
+				</p>
+				<i class="iconfont lf_right icon-duihao"></i>
+			</li>
+			<li class="lf_jiangList lf_borderBox">
+				<p class="lf_left">
+					<em>服饰内衣</em><span>Dress underwear</span>
+				</p>
+				<i class="iconfont lf_right icon-duihao"></i>
+			</li>
+			<li class="lf_jiangList lf_borderBox">
+				<p class="lf_left">
+					<em>箱包珠宝</em><span>Bags jewelry</span>
+				</p>
+				<i class="iconfont lf_right icon-duihao"></i>
+			</li>
+			<li class="lf_jiangList lf_borderBox">
+				<p class="lf_left">
+					<em>鞋靴运动</em><span>Shoe movement</span>
+				</p>
+				<i class="iconfont lf_right icon-duihao"></i>
+			</li>
+			<li class="lf_jiangList lf_borderBox">
+				<p class="lf_left">
+					<em>手机数码</em><span>Mobile digital</span>
+				</p>
+				<i class="iconfont lf_right icon-duihao"></i>
+			</li>
+			<li class="lf_jiangList lf_borderBox">
+				<p class="lf_left">
+					<em>家用家店</em><span>Household appliances</span>
+				</p>
+				<i class="iconfont lf_right icon-duihao"></i>
+			</li>
+			<li class="lf_jiangBtn lf_borderBox">
+				<button id="lf_jiangSure3" type="button">确定<br/><span>Confirm</span></button>
+			</li>
+		</ul>
+	</div>
+
+</div> -->
+</body>
+<script type="text/javascript">
+	//字母筛选
+	$('.lf_cebianlan button').on('click',function(){
+		var txt = $(this).html();
+		$('.lf_findShopTitle').text(txt);
+	})
+</script>
+<script>
+	/*弹窗内容*/
+	$('.filters').on('click',function(){
+		$('.lf_tanchuang').css('display','block');
+		$('.lf_jiangList').on('click',function(){
+			$('.lf_jiangList').removeClass('lf_jiangListOn');
+			$('.lf_jiangList').eq($(this).index()).addClass('lf_jiangListOn');
+		});
+		$('#lf_jiangSure3').on('click',function(){
+			$('.lf_tanchuang').css('display','none');
+		})
+	})
+	
+</script>
+<script type="text/javascript">
+	var _token = $.cookie('the_cookie');
+	$.ajax({
+		url:'http://api.icpkys.com/shop/list?token='+_token,
+		type:'get',
+		data:{},
+		success:function(req){
+			console.log(req);
+			if(req.status=='success'){
+				var _data = req.data;
+				var shopClass = $('.lf_shopBoxLists');
+				$.each(_data,function(index,value){
+					var _li = '<li class="lf_shopBoxItem">'
+							+ 	'<a href="shopHomepage.html?id='+value.id+'" class="lf_jump lf_borderBox lf_clearFloat">'
+							+		'<img src="http://api.icpkys.com' + value.logo + '" alt=""/>'
+							+		'<p class="lf_findshopName lf_borderBox">' + value.name + '</p>'
+							+ 	'</a>'
+						    + '</li>';
+					shopClass.append(_li); 
+				});
+				//搜索商店
+				$('.searchBtn').on('click',function(){
+					var search = $('#search').val();
+					$.ajax({
+						url:'http://api.icpkys.com/shop/list?token='+_token,
+						type:'get',
+						data:{
+							search:search
+						},
+						success:function(req){
+							console.log(req);
+							if(req.status=='success'){
+								var _data = req.data;
+								$('.lf_shopBoxLists').html('');
+								var shopClass = $('.lf_shopBoxLists');
+								$.each(_data,function(index,value){
+									var _li = '<li class="lf_shopBoxItem">'
+											+ 	'<a href="shopHomepage.html?id='+value.id+'" class="lf_jump lf_borderBox lf_clearFloat">'
+											+		'<img src="' + value.logo + '" alt=""/>'
+											+		'<p class="lf_findshopName lf_borderBox">' + value.name + '</p>'
+											+ 	'</a>'
+										    + '</li>';
+									shopClass.append(_li); 
+								});
+							}else{
+								alert(req.massage);
+							}
+						},
+						error:function(res){
+							if(res.status!=undefined){
+				        		if(res.status==404){
+					        		alert('接口不存在');
+					        	}
+					        	if(res.status==401 && res.responseText=='{"error":"token_expired"}'){
+					        		alert('请重新登录');
+					        		window.location.href='login.html';
+					        	}
+				        	}else{
+				        		console.log(res);
+				        		alert('未知错误');
+				        	}
+						}
+					})
+				});
+			}else{
+				alert(req.massage);
+			}
+		},
+		error:function(res){
+			if(res.status!=undefined){
+        		if(res.status==404){
+	        		alert('接口不存在');
+	        	}
+	        	if(res.status==401 && res.responseText=='{"error":"token_expired"}'){
+	        		alert('请重新登录');
+	        		window.location.href='login.html';
+	        	}
+        	}else{
+        		console.log(res);
+        		alert('未知错误');
+        	}
+		}
+	})
+</script>
+</html>

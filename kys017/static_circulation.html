@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>静态明细-流通健康金</title>
+<meta charset="utf-8">
+<meta name="author" content="yy">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="author" content="yy">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<meta http-equiv="Expires" content="-1">
+<meta http-equiv="Cache-Control" content="no-cache">
+<meta http-equiv="Pragma" content="no-cache">
+<meta name="description" content="" />
+<meta name="Keywords" content="" />
+<link rel="stylesheet" href="css/swiper.min.css">
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" type="text/css" href="fonts/iconfont.css">
+<script type="text/javascript" src="js/jquery-1.10.1.min.js"></script>
+<script type="text/javascript" src="js/swiper.min.js"></script>
+</head>
+<body>
+<div class="detail_head">
+	<ul>
+		<li class="detail_hover">动态明细<span>Dynamic detail</span></li>
+		<li>静态明细<span>Static detail</span></li>
+	</ul>
+	<a class="iconfont icon-back"></a>
+	<i class="iconfont icon-form"></i>
+</div>
+<div class="t"></div>
+<div class="detail_content" style="display: block;">
+	<div class="detail_1">
+		<div>总 金 额：<span>Total amount:</span></div>
+		<div>￥ 700.00<span>$ 100.00</span></div>
+	</div>
+	<div class="t"></div>
+	<div class="detail_2">
+		<div>
+			<p>推荐VIP会员</p>
+			<p>Recommend the VIP member</p>
+			<p>李木子</p>
+			<p>2017-03-29  09:55</p>
+		</div>
+		<div>
+			￥ 700.00<span>$ 100.00</span>
+		</div>
+	</div>
+	<div class="detail_2">
+		<div>
+			<p>推荐健康使者</p>
+			<p>Health envoy</p>
+			<p>李木子</p>
+			<p>2017-03-29  09:55</p>
+		</div>
+		<div>
+			￥ 700.00<span>$ 100.00</span>
+		</div>
+	</div>
+	<div class="detail_2">
+		<div>
+			<p>推荐G21商户</p>
+			<p>Recommend G21 mall</p>
+			<p>蓝海之谜</p>
+			<p>2017-03-29  09:55</p>
+		</div>
+		<div>
+			￥ 700.00<span>$ 100.00</span>
+		</div>
+	</div>
+</div>
+<div class="detail_content">
+	<div class="detail_1">
+		<div>流通健康金总额：<span>total amount of healthy gold in circulat</span></div>
+		<div>70000.00</div>
+	</div>
+	<div class="t"></div>
+	<div class="detail_3">
+		<div>
+			<p>购买服务</p>
+			<p>Purchasing service</p>
+			<p>2017-03-29  09:55</p>
+		</div>
+		<div>
+			- 700.00
+		</div>
+	</div>
+	<div class="detail_3">
+		<div>
+			<p>购买商品</p>
+			<p>Buy goods</p>
+			<p>2017-03-29  09:55</p>
+		</div>
+		<div>
+			+ 700.00
+		</div>
+	</div>
+	<div class="detail_3">
+		<div>
+			<p>余额冲入</p>
+			<p>The balance into</p>
+			<p>2017-03-29  09:55</p>
+		</div>
+		<div>
+			+ 700.00
+		</div>
+	</div>
+	<div class="detail_3">
+		<div>
+			<p>兑换余额</p>
+			<p>Converted into balance</p>
+			<p>2017-03-29  09:55</p>
+		</div>
+		<div>
+			+ 700.00
+		</div>
+	</div>
+	<div class="detail_3">
+		<div>
+			<p>兑换种子健康金</p>
+			<p>Change the health of the seeds</p>
+			<p>2017-03-29  09:55</p>
+		</div>
+		<div>
+			+ 700.00
+		</div>
+	</div>
+	<div class="detail_3">
+		<div>
+			<p>兑换激励健康金</p>
+			<p>Exchange incentives for healthy gold</p>
+			<p>2017-03-29  09:55</p>
+		</div>
+		<div>
+			+ 700.00
+		</div>
+	</div>
+	<div class="detail_3">
+		<div>
+			<p>兑换购物健康金</p>
+			<p>Exchange shopping health gold</p>
+			<p>2017-03-29  09:55</p>
+		</div>
+		<div>
+			+ 700.00
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	$(".detail_head ul li").click(function() {
+		var index = $(this).index();
+		$(this).addClass('detail_hover').siblings().removeClass('detail_hover');
+		$(".detail_content").eq(index).show().siblings(".detail_content").hide();
+	});
+</script>
+</body>
+</html>

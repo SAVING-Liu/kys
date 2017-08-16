@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>余额_在线充值</title>
+<meta charset="utf-8">
+<meta name="author" content="yy">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="author" content="yy">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<meta http-equiv="Expires" content="-1">
+<meta http-equiv="Cache-Control" content="no-cache">
+<meta http-equiv="Pragma" content="no-cache">
+<meta name="description" content="" />
+<meta name="Keywords" content="" />
+<link rel="stylesheet" href="css/swiper.min.css">
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" href="css/lf_style.css"/>
+<link rel="stylesheet" type="text/css" href="fonts/iconfont.css">
+<script type="text/javascript" src="js/jquery-1.10.1.min.js"></script>
+<script type="text/javascript" src="js/swiper.min.js"></script>
+<style>
+	.lf_meiyuan{
+		font-size:12px;
+		color:#666;
+	}
+	.lf_arrowXia{
+		margin-right: 10px;
+	    color: #999;
+	    margin-top: 3px;
+	}
+</style>
+</head>
+<body>
+<div class="public_head">
+	<h3>余额充值<br/><span>Prepaid recharge</span></h3>
+	<a href="javascript:history.go(-1)" class="iconfont icon-back"></a>
+</div>
+<div class="input_price">
+	<div class="dhje" contenteditable="true">请输入充值金额<br/><span>Please enter the prepaid amount</span></div>
+</div>
+<!-- <div class="usable_balance">
+	<div class="usable_title">我的余额<span>My balance</span></div>
+	<div class="usable_tatol">RMB 8888.00<br/><span class="lf_meiyuan">$111.00</span></div>
+</div> -->
+<div class="currency lf_clearFloat">
+	<div>付款方式<span>Payment method</span></div>
+	<span class="iconfont lf_right lf_arrowXia icon-xia"></span>
+</div>
+<div class="currency_select currency_select2">
+	<i class="iconfont icon-weixinzhifu"></i>
+	<label for="currency1">微信支付<span>WeChat payment</span></label>
+	<input type="radio" name="currency" id="currency1" checked="checked" />
+</div>
+<!-- <div class="skm">
+	<div class="skm_t">收 款 码<br/><span>Collection<br/>code</span></div>
+	<div class="skm_m"></div>
+	<div class="skm_sc">
+		<input type="button" name="upload" value="上传 UPLOAD" />
+		<p>注：请上传您的微信收款码<span>Note: please upload your WeChat collection code</span></p>
+	</div>
+</div> -->
+<input onclick="javascript:window.location.href='balance_rechargeRecord.html'" type="button" name="exchange" value="充值 Recharge" class="exchange"/>
+<script type="text/javascript">
+	$(".dhje").click(function() {
+		$(this).text(" ").css({
+			height: '36px',
+			lineHeight: '36px'
+		});
+	});
+	$(".dhje").blur(function() {
+		if($(this).text()==" "){
+			$(this).html("请输入充值金额<br/><span>Please enter the prepaid amount</span>").css({
+			height: '36px',
+			lineHeight: '18px'
+			});
+		}
+	});
+</script>
+</body>
+</html>

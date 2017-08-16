@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>健康使者订单</title>
+<meta charset="utf-8">
+<meta name="author" content="yy">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<meta name="author" content="yy">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<meta http-equiv="Expires" content="-1">
+<meta http-equiv="Cache-Control" content="no-cache">
+<meta http-equiv="Pragma" content="no-cache">
+<meta name="description" content="" />
+<meta name="Keywords" content="" />
+<link rel="stylesheet" href="css/swiper.min.css">
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" type="text/css" href="fonts/iconfont.css"/>
+<link rel="stylesheet" href="css/lf_style.css"/>
+<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="js/swiper.min.js"></script>
+<script type="text/javascript" src="js/jquery.cookie.js"></script>
+<style type="text/css">
+	body{ background: #f5f5f5; }
+</style>
+</head>
+<body>
+<div class="public_head">
+	<h3>健康使者订单<br/><span>Health envoy order</span></h3>
+	<a href="javascript:history.go(-1)" class="iconfont icon-back"></a>
+</div>
+<div class="level_con" style="display: block;">
+	<ul class="healthBox">
+		<!-- <li class="lf_clearFloat">
+			<div class="lf_orderTop lf_clearFloat">
+				<span class="lf_orderOrder">1</span>
+				<p class="lf_healthTime">2017-03-29   09：00</p>
+				<span class="lf_orderXing">2</span>
+			</div>
+			<div class="lf_orderBot lf_clearFloat">
+				<p class="lf_healthIndex">健康指数<span> Health index</span></p>
+				<p class="lf_indexNum">0.0000055</p>
+			</div>
+		</li> -->
+	</ul>
+</div>
+
+<script type="text/javascript">
+	var _token = $.cookie('the_cookie');
+	$.ajax({
+		url:'http://api.icpkys.com/health/record?token='+_token,
+		type:'get',
+		data:{},
+		success:function(req){
+			if(req.status=='success'){
+				var healthBox = $('.healthBox');
+				var data = req.data;
+				$.each(data,function(index,value){
+					var _li = '<li class="lf_clearFloat">'
+							+	'<div class="lf_orderTop lf_clearFloat">'
+							+		'<span class="lf_orderOrder">'+ (index+1) +'</span>'
+							+		'<p class="lf_healthTime">'+ value.created_at +'</p>'
+							+		'<span class="lf_orderXing">'+ value.grade +'</span>'
+							+	'</div>'
+							+	'<div class="lf_orderBot lf_clearFloat">'
+							+		'<p class="lf_healthIndex">健康指数<span> Health index</span></p>'
+							+		'<p class="lf_indexNum">'+ value.index +'</p>'
+							+	'</div>'
+							+ '</li>'
+					healthBox.append(_li);
+				})
+			}else{
+				alert(req.massage);
+			}
+		},
+		error:function(res){
+			if(res.status!=undefined){
+        		if(res.status==404){
+	        		alert('接口不存在');
+	        	}
+	        	if(res.status==401 && res.responseText=='{"error":"token_expired"}'){
+	        		alert('请重新登录');
+	        		window.location.href='login.html';
+	        	}
+        	}else{
+        		console.log(res);
+        		alert('未知错误');
+        	}
+		}
+
+	})
+</script>
+</body>
+</html>

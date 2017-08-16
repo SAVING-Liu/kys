@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>购物车</title>
+<meta charset="utf-8"/>
+<meta name="author" content="yy"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK"/>
+<meta name="author" content="yy"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+<meta name="format-detection" content="telephone=no"/>
+<meta http-equiv="Expires" content="-1"/>
+<meta http-equiv="Cache-Control" content="no-cache"/>
+<meta http-equiv="Pragma" content="no-cache"/>
+<meta name="description" content="" />
+<meta name="Keywords" content="" />
+<link rel="stylesheet" href="css/swiper.min.css"/>
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+<link rel="stylesheet" type="text/css" href="fonts/iconfont.css"/>
+<link rel="stylesheet" href="css/lf_style.css"/>
+<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="js/swiper.min.js"></script>
+<script src="js/jquery.cookie.js"></script>
+<style type="text/css">
+	body{ background: #f5f5f5; }
+	.public_head i{
+		right: 6px;
+	    line-height: 60px;
+	    font-size: 22px;
+	}
+	.public_head{
+		border-bottom:0;
+	}
+	.lf_footer{
+		height:50px;
+		padding:0 3.125%;
+		border-top:1px solid #d9d9d9;
+	}
+	.lf_all{
+		display:block;
+		float:left;
+		line-height:50px;
+		margin-right:10px;
+		font-size:18px;
+		color:#666;
+	}
+	i.icon-done{
+		color:#49d477;
+	}
+</style>
+</head>
+<body>
+<div class="public_head">
+	<h3>购物车<br/><span>Shopping cart</span></h3>
+	<a href="javascript:history.go(-1);" class="iconfont icon-back"></a>
+	<!-- <i class="iconfont icon-edit"></i> -->
+</div>
+<div class="lf_content" style="padding-bottom:60px">
+	<ul class="lf_goodsCarBox">
+		<!-- <li class="lf_goodsList lf_clearFloat">
+			<i class="iconfont lf_single icon-yuancircle46 icon-done"></i>
+			<img src="images/tu13.png" alt=""/>
+			<div class="lf_right lf_goodsCarDetail">
+				<p class="lf_mingzi">Faywish菲伊之心气垫BB粉底粉气垫BB粉底粉</p>
+				<div class="lf_goodsOldPrice lf_clearFloat">
+					<s class="lf_left">￥36.00</s>
+					<p class="lf_right lf_clearFloat">
+						<i class="iconfont icon-jianhao"></i>
+						<span class="lf_number">1</span>
+						<span class="iconfont icon-jiahao"></span>
+					</p>
+				</div>
+				<p class="lf_priceChange">
+					<span class="lf_rmbPrice">￥39.00</span><span class="lf_meiyuanPrice">$7.00</span>
+				</p>
+			</div>
+		</li> -->
+	</ul>
+</div>
+<footer class="lf_footer">
+		<i class="iconfont lf_all icon-yuancircle46"></i>
+		<p class="lf_left lf_total-P">
+			全选<span>Check all</span>
+		</p>
+		<p style="text-align:left;color:#1a1a1a;font-size:16px" class="lf_left lf_total-P" style="color:#fe7200">
+			￥ <b>0.00</b><span>$ 0.00</span>
+		</p>
+		<button class="lf_paymentBtn" type="button">付款<span>Payment</span></button>
+	</footer>
+	
+<script>
+	//动态加载商品
+	var goodsArr = [];
+	$.ajax({
+		type:"POST",
+		url:"http://api.icpkys.com/shop/cart/list?token=" + $.cookie("the_cookie"),
+		async:false,
+        crossDomain:true,
+        datatype: "json",
+        xhrFields: {  withCredentials: true  },
+    	crossDomain: true,
+		data: {
+		},
+		success: function (msg) {
+			var arr = msg.data;
+			var j = 0;
+			for (var i in arr) {
+				goodsArr[j] = {};
+				goodsArr[j].img = "http://api.icpkys.com" + arr[i].image;
+				goodsArr[j].title = arr[i].name;
+				goodsArr[j].s = arr[i].price.toFixed(2);
+				goodsArr[j].num = arr[i].num;
+				goodsArr[j].id = arr[i].id;
+				goodsArr[j].doller = (arr[i].price / 7).toFixed(2);
+				j++;
+			}
+		}
+	});
+</script>
+<script type="text/javascript">
+	$(".select_star ul li").click(function() {
+		$(this).addClass('ss_hover').siblings().removeClass('ss_hover');
+	});
+	//动态加载商品
+	// var goodsArr = [
+	// 	{img:'images/tu13.png',title:'Faywish菲伊之心气垫BB粉底粉气垫BB粉底粉',s:'￥36.00',num:'1'},
+	// 	{img:'images/tu13.png',title:'Faywish菲伊之心气垫BB粉底粉气垫BB粉底粉',s:'￥36.00',num:'1'},
+	// 	{img:'images/tu13.png',title:'Faywish菲伊之心气垫BB粉底粉气垫BB粉底粉',s:'￥36.00',num:'1'},
+	// 	{img:'images/tu13.png',title:'Faywish菲伊之心气垫BB粉底粉气垫BB粉底粉',s:'￥36.00',num:'1'},
+	// 	{img:'images/tu13.png',title:'Faywish菲伊之心气垫BB粉底粉气垫BB粉底粉',s:'￥36.00',num:'1'},
+	// 	{img:'images/tu13.png',title:'Faywish菲伊之心气垫BB粉底粉气垫BB粉底粉',s:'￥36.00',num:'1'}
+	// ];
+	function goodsFun(_array,divClass){
+		$.each(_array,function(index,value){
+			var _li = '<li class="lf_goodsList lf_clearFloat" data-id="' + value.id + '">'
+					+ 		'<i class="iconfont lf_single icon-yuancircle46"></i>'
+					+ 		'<img src="' + value.img + '""/>'
+					+		'<div class="lf_right lf_goodsCarDetail">'
+					+			'<p class="lf_mingzi">' + value.title + '</p>'
+					+			'<div class="lf_goodsOldPrice lf_clearFloat">'
+					+				'<s class="lf_left">￥' + value.s + '</s>'
+					+				'<p class="lf_right lf_clearFloat">'
+					+					'<i class="iconfont icon-jianhao"></i>'
+					+					'<span class="lf_number">' + value.num + '</span>'
+					+					'<span class="iconfont icon-jiahao"></span>'
+					+				'</p>'
+					+			'</div>'
+					+		'<p class="lf_priceChange">'
+					+			'<span class="lf_rmbPrice">￥<small>' + value.s + '</small></span><span class="lf_meiyuanPrice">$' + value.doller + '</span>'
+					+		'</p>'
+					+		'</div>'
+					+'</li>';
+			divClass.append(_li);
+		})
+	};
+	var goodsBox = $('.lf_goodsCarBox');
+	goodsFun(goodsArr,goodsBox);
+	//单选-选择每一项
+	$('.lf_goodsList').find('.lf_single').on('click',function(){
+		$(this).toggleClass('icon-done');
+		var _lengthLi = $('.lf_goodsCarBox li').length;
+		var _length = $('.lf_goodsCarBox li').find('.icon-done').length;
+
+
+		var shopParice = parseFloat($(this).parent().children(".lf_right").children(".lf_priceChange").children(".lf_rmbPrice").children("small").html());
+		var shopNum = parseInt($(this).parent().children(".lf_right").children(".lf_goodsOldPrice").children(".lf_right").children(".lf_number").html());
+		var shopAll = shopParice * shopNum;
+		var shopChange = parseFloat($(".lf_total-P").eq(1).children("b").html());
+
+
+		if(_length==_lengthLi){
+			$('.lf_all').addClass('icon-done');
+		}else{
+			$('.lf_all').removeClass('icon-done');
+		}
+
+
+		if ($(this).attr("class").split("icon-done")[1] == "") {
+			shopChange = (shopChange + shopAll).toFixed(2);
+		} else {
+			shopChange = (shopChange - shopAll).toFixed(2);
+		}
+
+		$(".lf_total-P").eq(1).children("b").html(shopChange);
+		$(".lf_total-P").eq(1).children("span").html((shopChange / 7).toFixed(2));
+
+	})
+	//全选
+	$('.lf_all').on('click',function(){
+		$('.lf_all').toggleClass('icon-done');
+		if($('.lf_all').hasClass('icon-done')){
+			$('.lf_goodsList').find('.lf_single').addClass('icon-done');
+			var list = $(".lf_goodsList");
+			var shopAll = 0;
+			for (var i = 0; i < list.length; i++) {
+				var shopParice = parseFloat(list.eq(i).children(".lf_right").children(".lf_priceChange").children(".lf_rmbPrice").children("small").html());
+				var shopNum = parseInt(list.eq(i).children(".lf_right").children(".lf_goodsOldPrice").children(".lf_right").children(".lf_number").html());
+				shopAll += shopParice * shopNum;
+			}
+			$(".lf_total-P").eq(1).children("b").html(shopAll.toFixed(2));
+			$(".lf_total-P").eq(1).children("span").html((shopAll / 7).toFixed(2));
+		}else{
+			$('.lf_goodsList').find('.lf_single').removeClass('icon-done');
+			$(".lf_total-P").eq(1).children("b").html("0.00");
+		$(".lf_total-P").eq(1).children("span").html("0.00");
+		}
+	});
+	//加减
+	$('.lf_goodsList').find('.icon-jiahao').on('click',function(){
+		var a = parseInt($(this).siblings('.lf_number').text());
+		a++;
+		$(this).siblings('.lf_number').text(a);
+		shopCarChange($(this));
+	});
+	$('.lf_goodsList').find('.icon-jianhao').on('click',function(){
+		var b = parseInt($(this).siblings('.lf_number').text());
+		var id = $(this).parent().parent().parent().parent()[0].dataset.id;
+		if(b>1){
+			b--;
+			$(this).siblings('.lf_number').text(b);
+			shopCarChange($(this));
+		}else{
+			var box = $(this);
+			if (confirm("是否从购物车删除该商品")) {
+				$.ajax({
+					type:"POST",
+					url:"http://api.icpkys.com/shop/cart/delete?token=" + $.cookie('the_cookie'),
+					async:false,
+			        crossDomain:true,
+			        datatype: "json",
+			        xhrFields: {  withCredentials: true  },
+			    	crossDomain: true,
+					data: {
+						goods_id: id,
+					},
+					success: function (msg) {
+						box.parent().parent().parent().parent().remove();
+						alert("删除成功");
+					}
+				});
+			} else {
+				$(this).parent().find('.lf_number').text('1');
+			}
+		}
+		
+	});
+	
+	function shopCarChange(it) {
+		//商品id
+		var id = it.parent().parent().parent().parent()[0].dataset.id;
+		var num = it.siblings('.lf_number').html();
+		$.ajax({
+			type:"POST",
+			url:"http://api.icpkys.com/shop/cart/update?token=" + $.cookie('the_cookie'),
+			async:true,
+	        crossDomain:true,
+	        datatype: "json",
+	        xhrFields: {  withCredentials: true  },
+	    	crossDomain: true,
+			data: {
+				goods_id: id,
+				goods_num: num
+			},
+			success: function (msg) {
+//				console.log(msg);
+			}
+		});
+	}
+</script>
+<script>
+	$(".lf_paymentBtn").on("touchstart", function () {
+		var shopCarPay = [];
+		var list = $(".icon-yuancircle46");
+		for (var i = 0; i < list.length; i++) {
+			if (list.eq(i).hasClass("icon-done")) {
+				if (list.eq(i).hasClass("lf_all")) {
+					continue;
+				}
+				var shop = {};
+				shop.name = list.eq(i).parent().children(".lf_right").children(".lf_mingzi").html();
+				shop.price1 = list.eq(i).parent().children(".lf_right").children(".lf_priceChange").children(".lf_rmbPrice").children("small").html();
+				shop.price2 = (shop.price1 / 7).toFixed(2);
+				shop.num = $(".lf_number").eq(i).html();
+				shop.img = list.eq(i).next("img").attr("src");
+				shop.id = list.eq(i).parent()[0].dataset.id;
+				shopCarPay.push(shop);
+			}
+		}
+		shopCarPay = JSON.stringify(shopCarPay);
+		sessionStorage.shopCarPay = shopCarPay;
+	}).on("touchend", function () {
+		if ($(".icon-done").length <= 0) {
+			return alert("未选择商品");
+		}
+		window.location.pathname = "purchaseGoods.html";
+		$.ajax({
+			url:"http://api.icpkys.com/shop/order/confirm?token=" + $.cookie('the_cookie'),
+			type:"POST",
+			async:false,
+			data: upData,
+	        crossDomain:true,
+	        datatype: "json",
+	        xhrFields: {  withCredentials: true  },
+	    	crossDomain: true,
+			success: function (msg) {
+				var x = JSON.stringify(msg.data);
+				if (msg.status == "success") {
+					window.location.href = "./payment_goods.html?rmb=" + $(".footer").children(".price").children(".span1").children("em").html() + "&dol=" + $(".footer").children(".price").children(".span2").children("em").html() + "&shopList=" + x;
+				}
+
+			}
+		});
+	});
+</script>
+</body>
+</html>
